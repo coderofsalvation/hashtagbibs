@@ -10,9 +10,11 @@
 <workgroup>Internet</workgroup>
 
 <abstract>
-<t>Tagbibs are tiny paperfriendly tags, which expand into multiple <eref target="https://en.wikipedia.org/wiki/BibTeX">BibTags</eref>.
-Using OCR, they're great for connecting scanned paper with online graphs.
-The goal of this document is twofold:</t>
+<t>Tagbibs are tiny paperfriendly tags, which expand into multiple <eref target="https://en.wikipedia.org/wiki/BibTeX">BibTags</eref>.<br />
+
+Using OCR, they're great for connecting scanned paper with online graphs.<br />
+
+The goal of this spec is three-fold:</t>
 
 <ul spacing="compact">
 <li>specify tagbibs: a terse tagdescription which expands into a reversed BibTag</li>
@@ -24,6 +26,23 @@ The goal of this document is twofold:</t>
 </front>
 
 <middle>
+
+<section anchor="definitions"><name>Definitions</name>
+<table>
+<thead>
+<tr>
+<th>term</th>
+<th>explanation</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>linear LUT</td>
+<td>array lookup table</td>
+</tr>
+</tbody>
+</table></section>
 
 <section anchor="what-are-tagbibs"><name>What are tagbibs</name>
 <t>&lt;img src=&quot;postit.jpg&quot; style=&quot;max-width:400px&quot;/&gt;</t>
@@ -49,11 +68,47 @@ The goal of this document is twofold:</t>
 </section>
 
 <section anchor="what-are-bibrulers"><name>What are bibrulers</name>
-</section>
+<t>Bibrulers are linebased separators, used by <eref target="https://visual-meta.info">visual-meta</eref> as a means of organizing BibTags:</t>
+
+<artwork>@{visual-meta-start}
+@{visual-meta-header-start}
+@visual-meta{
+ version = {1.1},
+ generator = {Author 7.6.2 (1064)},
+}
+@{visual-meta-header-end}
+@{visual-meta-bibtex-self-citation-start}
+@book{2021-12-08T10:57:03Z/TheFutureo,
+author = {Frode Alexander Hegland},
+editor = {Frode Alexander Hegland},
+title = {The Future of Text ||},
+...
+</artwork>
+<t>This snippet would get decoded to this unnested array:</t>
+
+<artwork>[
+  { ruler: `@{visual-meta-start}` },
+  { ruler: `@{visual-meta-header-start}` },
+  { tag: &quot;@visual-meta&quot;, props: { version: &quot;1.1&quot;, generator: &quot;Author 7.6.2 1064)&quot; } }
+  { ruler: `@{visual-meta-bibgtex-self-citation-start}` },
+  { tag: &quot;@book{2021-12-08T10:56:03Z/TheFutureo&quot;, ..... }
+  ...
+]
+</artwork>
+<t>Why not a nested tree-structure? This kneejerk reaction should always be considered 'a last option'.</t>
+<blockquote><t>Bibrulers don't try to re-invent XML, they are rather promoting dumb, unnested lists, which are much faster/simpler to traverse &amp; implement in all languages.</t>
+</blockquote></section>
 
 <section anchor="what-are-tagbibs-fragments"><name>What are tagbibs fragments</name>
-<t>`#@chores@todo</t>
-</section>
+<t>Just like regular <eref target="https://en.wikipedia.org/wiki/URI_fragment">URI Fragments</eref> they hint the browser to focus anything (Bib)Tagged:</t>
+
+<ul spacing="compact">
+<li><tt>https://website.com#@chores@todo</tt></li>
+<li><tt>https://mastodon.io/myprofile/#@chores@todo</tt></li>
+<li><tt>://3dworld.gltf#@chores@todo</tt></li>
+</ul>
+<blockquote><t>Format: <tt>#@&lt;bibtag&gt;[ + @&lt;bibtag&gt; + [ ... ] ]</tt></t>
+</blockquote></section>
 
 <section anchor="contact"><name>Contact</name>
 
