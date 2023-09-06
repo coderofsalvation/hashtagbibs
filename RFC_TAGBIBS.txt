@@ -196,8 +196,8 @@ Internet-Draft                   tagbibs                  September 2023
 
    |  One could argue that tagging a word like buy would create
    |  conflicts, but for most purposes this is really easy to spot /
-   |  workaround.  For serious, large bodies of text use expanded
-   |  BibTags instead.
+   |  workaround.  For serious, large bodies of text use (unique)
+   |  expanded BibTags instead.
 
 1.3.  Example javascript bibs expander
 

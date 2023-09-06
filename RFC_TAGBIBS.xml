@@ -133,7 +133,7 @@ buy the great gatsby
 <td></td>
 </tr>
 </tbody>
-</table><blockquote><t>One could argue that tagging a word like <tt>buy</tt> would create conflicts, but for most purposes this is really easy to spot / workaround. For serious, large bodies of text use expanded BibTags instead.</t>
+</table><blockquote><t>One could argue that tagging a word like <tt>buy</tt> would create conflicts, but for most purposes this is really easy to spot / workaround. For serious, large bodies of text use (unique) expanded BibTags instead.</t>
 </blockquote></section>
 
 <section anchor="example-javascript-bibs-expander"><name>Example javascript bibs expander</name>

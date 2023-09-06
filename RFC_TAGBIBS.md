@@ -112,7 +112,7 @@ If this text would be written on a paper, it could be scanned by a computer and 
 | buy milk  | finish paper | contact John     |
 |                          | buy great gatsby |
 
-> One could argue that tagging a word like `buy` would create conflicts, but for most purposes this is really easy to spot / workaround. For serious, large bodies of text use expanded BibTags instead.
+> One could argue that tagging a word like `buy` would create conflicts, but for most purposes this is really easy to spot / workaround. For serious, large bodies of text use (unique) expanded BibTags instead.
 
 ## Example javascript bibs expander
 
