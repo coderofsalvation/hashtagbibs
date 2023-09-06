@@ -24,6 +24,7 @@ fullname="L.R. van Kammen"
 
 Tagbibs (or simply: 'bibs') are tiny paperfriendly tags, which expand into multiple [BibTags](https://en.wikipedia.org/wiki/BibTeX).<br>
 Using OCR, they're great for connecting scanned paper with online graphs.<br>
+Think of it as the brother of hashtags: a command for tagging-this-with-that.<br>
 The goal of this spec is three-fold:
 
 * specify bibs: a terse tagdescription which expands into a reversed BibTag 

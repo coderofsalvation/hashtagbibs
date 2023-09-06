@@ -17,6 +17,8 @@ Abstract
    into multiple BibTags (https://en.wikipedia.org/wiki/BibTeX).
    Using OCR, they're great for connecting scanned paper with online
    graphs.
+   Think of it as the brother of hashtags: a command for tagging-this-
+   with-that.
    The goal of this spec is three-fold:
 
    *  specify bibs: a terse tagdescription which expands into a reversed
@@ -47,9 +49,7 @@ Copyright Notice
    Copyright (c) 2023 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to BCP 78 and the IETF Trust's Legal
-   Provisions Relating to IETF Documents (https://trustee.ietf.org/
-   license-info) in effect on the date of publication of this document.
+
 
 
 
@@ -58,6 +58,9 @@ van Kammen                Expires 9 March 2024                  [Page 1]
 Internet-Draft                   tagbibs                  September 2023
 
 
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents (https://trustee.ietf.org/
+   license-info) in effect on the date of publication of this document.
    Please review these documents carefully, as they describe your rights
    and restrictions with respect to this document.  Code Components
    extracted from this document must include Revised BSD License text as
@@ -103,9 +106,6 @@ Table of Contents
    |  the word laundry can now be highlighted in the human text. bibs
    |  are basically one step up from socialmedia hashtags, allowing mere
    |  mortals to connect words to other words using pencil or keyboard.
-
-
-
 
 
 
