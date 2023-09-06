@@ -55,12 +55,31 @@ The goal of this spec is three-fold:</t>
 <li><tt>@&lt;word&gt;[@tag[@anothertag[...]]]</tt></li>
 </ul>
 <blockquote><t>syntactically, bibs are (concatenated) emaildomains without an extension</t>
-</blockquote>
-<ul spacing="compact">
-<li>javascript regex: <tt>/(@[a-zA-Z0-9_@+]+)[^ \n]?/</tt></li>
-<li>shell: <tt>cat textwithbibs.txt | xargs -n1 | awk '/(@[a-zA-Z0-9_@+]+)[^ \n]?/ { print $0 }'</tt></li>
-</ul>
+</blockquote><table>
+<thead>
+<tr>
+<th>language</th>
+<th>example</th>
+</tr>
+</thead>
 
+<tbody>
+<tr>
+<td>javascript regex</td>
+<td><tt>/(@[a-zA-Z0-9_+]+@[a-zA-Z0-9_@]+)/g</tt></td>
+</tr>
+
+<tr>
+<td>shell grep</td>
+<td><tt>cat textwithbibs.txt | grep -oE '(@[a-zA-Z0-9_+]+@[a-zA-Z0-9_@]+)'</tt></td>
+</tr>
+
+<tr>
+<td>shell awk</td>
+<td><tt>cat textwithbibs.txt | xargs -n1 | awk '/(@[a-zA-Z0-9_+]+@[a-zA-Z0-9_@]+)/ { print $0 }'</tt></td>
+</tr>
+</tbody>
+</table>
 <ol spacing="compact">
 <li>at least <tt>@</tt> characters need to occur, to qualify as a bib</li>
 <li>last bib wins: overlapping bibs overwrite eachother (last tag(s) win)</li>
@@ -115,6 +134,19 @@ buy the great gatsby
 </tr>
 </tbody>
 </table><blockquote><t>One could argue that tagging a word like <tt>buy</tt> would create conflicts, but for most purposes this is really easy to spot / workaround. For serious, large bodies of text use expanded BibTags instead.</t>
+</blockquote></section>
+
+<section anchor="example-javascript-bibs-expander"><name>Example javascript bibs expander</name>
+
+<artwork>var bibs   = { regex: /(@[a-zA-Z0-9_+]+@[a-zA-Z0-9_@]+)/g, tags: {}}
+text.replace( bibs.regex , (m,k,v) =&gt; {
+   tok   = m.substr(1).split(&quot;@&quot;)
+   match = tok.shift()            
+   tok.map( (t) =&gt; bibs.tags[match] = `@${t}{${match},\n}\n` )
+})
+text = Object.values(bibs.tags).join('\n') + bibtex.replace( bibs.regex, '')
+</artwork>
+<blockquote><t>Tiny but powerful</t>
 </blockquote></section>
 
 <section anchor="merging-bibtagged-overlaps"><name>Merging (BibTagged) overlaps</name>

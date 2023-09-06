@@ -67,8 +67,11 @@ There's no precise predicates or properties (just 'this points to that', which e
 
 > syntactically, bibs are (concatenated) emaildomains without an extension 
 
-* javascript regex: `/(@[a-zA-Z0-9_@+]+)[^ \n]?/`
-* shell: `cat textwithbibs.txt | xargs -n1 | awk '/(@[a-zA-Z0-9_@+]+)[^ \n]?/ { print $0 }'`
+| language         | example                                                                                    |
+|------------------|--------------------------------------------------------------------------------------------|
+| javascript regex | `/(@[a-zA-Z0-9_+]+@[a-zA-Z0-9_@]+)/g`                                                      |
+| shell grep       | `cat textwithbibs.txt | grep -oE '(@[a-zA-Z0-9_+]+@[a-zA-Z0-9_@]+)'`                       | 
+| shell awk        | `cat textwithbibs.txt | xargs -n1 | awk '/(@[a-zA-Z0-9_+]+@[a-zA-Z0-9_@]+)/ { print $0 }'` |
 
 1. at least `@` characters need to occur, to qualify as a bib 
 1. last bib wins: overlapping bibs overwrite eachother (last tag(s) win)
@@ -110,6 +113,20 @@ If this text would be written on a paper, it could be scanned by a computer and 
 |                          | buy great gatsby |
 
 > One could argue that tagging a word like `buy` would create conflicts, but for most purposes this is really easy to spot / workaround. For serious, large bodies of text use expanded BibTags instead.
+
+## Example javascript bibs expander
+
+```
+var bibs   = { regex: /(@[a-zA-Z0-9_+]+@[a-zA-Z0-9_@]+)/g, tags: {}}
+text.replace( bibs.regex , (m,k,v) => {
+   tok   = m.substr(1).split("@")
+   match = tok.shift()            
+   tok.map( (t) => bibs.tags[match] = `@${t}{${match},\n}\n` )
+})
+text = Object.values(bibs.tags).join('\n') + bibtex.replace( bibs.regex, '')
+```
+
+> Tiny but powerful
 
 ## Merging (BibTagged) overlaps
 

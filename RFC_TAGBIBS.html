@@ -60,10 +60,31 @@ The goal of this spec is three-fold:</p>
 <p>syntactically, bibs are (concatenated) emaildomains without an extension</p>
 </blockquote>
 
-<ul>
-<li>javascript regex: <code>/(@[a-zA-Z0-9_@+]+)[^ \n]?/</code></li>
-<li>shell: <code>cat textwithbibs.txt | xargs -n1 | awk '/(@[a-zA-Z0-9_@+]+)[^ \n]?/ { print $0 }'</code></li>
-</ul>
+<table>
+<thead>
+<tr>
+<th>language</th>
+<th>example</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>javascript regex</td>
+<td><code>/(@[a-zA-Z0-9_+]+@[a-zA-Z0-9_@]+)/g</code></td>
+</tr>
+
+<tr>
+<td>shell grep</td>
+<td><code>cat textwithbibs.txt | grep -oE '(@[a-zA-Z0-9_+]+@[a-zA-Z0-9_@]+)'</code></td>
+</tr>
+
+<tr>
+<td>shell awk</td>
+<td><code>cat textwithbibs.txt | xargs -n1 | awk '/(@[a-zA-Z0-9_+]+@[a-zA-Z0-9_@]+)/ { print $0 }'</code></td>
+</tr>
+</tbody>
+</table>
 
 <ol>
 <li>at least <code>@</code> characters need to occur, to qualify as a bib</li>
@@ -124,6 +145,21 @@ buy the great gatsby
 
 <blockquote>
 <p>One could argue that tagging a word like <code>buy</code> would create conflicts, but for most purposes this is really easy to spot / workaround. For serious, large bodies of text use expanded BibTags instead.</p>
+</blockquote>
+
+<h2 id="example-javascript-bibs-expander">Example javascript bibs expander</h2>
+
+<pre><code>var bibs   = { regex: /(@[a-zA-Z0-9_+]+@[a-zA-Z0-9_@]+)/g, tags: {}}
+text.replace( bibs.regex , (m,k,v) =&gt; {
+   tok   = m.substr(1).split(&quot;@&quot;)
+   match = tok.shift()            
+   tok.map( (t) =&gt; bibs.tags[match] = `@${t}{${match},\n}\n` )
+})
+text = Object.values(bibs.tags).join('\n') + bibtex.replace( bibs.regex, '')
+</code></pre>
+
+<blockquote>
+<p>Tiny but powerful</p>
 </blockquote>
 
 <h2 id="merging-bibtagged-overlaps">Merging (BibTagged) overlaps</h2>
