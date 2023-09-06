@@ -22,8 +22,9 @@ fullname="L.R. van Kammen"
 
 .# Abstract
 
-Tagbibs (or simply: 'bibs') are tiny paperfriendly tags, which expand into multiple [BibTags](https://en.wikipedia.org/wiki/BibTeX).<br>
+Tagbibs (or simply: 'bibs') are tiny paper/voice-friendly tags, which expand into multiple [BibTags](https://en.wikipedia.org/wiki/BibTeX).<br>
 Using OCR, they're great for connecting scanned paper with online graphs.<br>
+But also using voice-recognition or Text in XR.<br>
 Think of it as the brother of hashtags: a command for tagging-this-with-that.<br>
 The goal of this spec is three-fold:
 

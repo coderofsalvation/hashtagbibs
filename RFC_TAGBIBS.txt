@@ -13,10 +13,11 @@ Expires: 9 March 2024
 
 Abstract
 
-   Tagbibs (or simply: 'bibs') are tiny paperfriendly tags, which expand
-   into multiple BibTags (https://en.wikipedia.org/wiki/BibTeX).
+   Tagbibs (or simply: 'bibs') are tiny paper/voice-friendly tags, which
+   expand into multiple BibTags (https://en.wikipedia.org/wiki/BibTeX).
    Using OCR, they're great for connecting scanned paper with online
    graphs.
+   But also using voice-recognition or Text in XR.
    Think of it as the brother of hashtags: a command for tagging-this-
    with-that.
    The goal of this spec is three-fold:
@@ -48,7 +49,6 @@ Copyright Notice
 
    Copyright (c) 2023 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
-
 
 
 
