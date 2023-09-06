@@ -63,9 +63,30 @@ The goal of this spec is three-fold:</t>
 
 }
 </artwork>
-<blockquote><t>tagbibs are basically one step up from socialmedia hashtags, allowing mere mortals to tag things with pencil or keyboard.</t>
-</blockquote><t>There's no precise predicates or properties, which allows citizen annotation (an essential precursor of RDF).</t>
+<blockquote><t>tagbibs are basically one step up from socialmedia hashtags, allowing mere mortals to connect words to other words using pencil or keyboard.</t>
+</blockquote><t>There's no precise predicates or properties, which empowers citizen annotation (an essential precursor of RDF).</t>
+
+<ul spacing="compact">
+<li>format: <tt>@sometag[@anothertag[@...]]</tt></li>
+</ul>
+<blockquote><t>syntactically, tagbibs are (concatenated) emaildomains without an extension</t>
+</blockquote>
+<ul spacing="compact">
+<li>javascript regex: <tt>/(@[a-zA-Z0-9_@]+)[^ \n]?/</tt></li>
+<li>shell: <tt>cat textwithtagbibs.txt | xargs -n1 | awk '/(@[a-zA-Z0-9_@]+)[^ \n]?/ { print $0 }'</tt></li>
+</ul>
 </section>
+
+<section anchor="what-are-tagbibs-fragments"><name>What are tagbibs fragments</name>
+<t>Just like regular <eref target="https://en.wikipedia.org/wiki/URI_fragment">URI Fragments</eref> they hint the browser to focus anything (Bib)Tagged:</t>
+
+<ul spacing="compact">
+<li><tt>https://website.com#@chores@todo</tt></li>
+<li><tt>https://mastodon.io/myprofile/#@chores@todo</tt></li>
+<li><tt>://3dworld.gltf#@chores@todo</tt></li>
+</ul>
+<blockquote><t>Format: <tt>#@&lt;bibtag&gt;[ + @&lt;bibtag&gt; + [ ... ] ]</tt></t>
+</blockquote></section>
 
 <section anchor="what-are-bibrulers"><name>What are bibrulers</name>
 <t>Bibrulers are linebased separators, used by <eref target="https://visual-meta.info">visual-meta</eref> as a means of organizing BibTags:</t>
@@ -97,17 +118,6 @@ title = {The Future of Text ||},
 </artwork>
 <t>Why not a nested tree-structure? This kneejerk reaction should always be considered 'a last option'.</t>
 <blockquote><t>Bibrulers don't try to re-invent XML, they are rather promoting dumb, unnested lists, which are much faster/simpler to traverse &amp; implement in all languages.</t>
-</blockquote></section>
-
-<section anchor="what-are-tagbibs-fragments"><name>What are tagbibs fragments</name>
-<t>Just like regular <eref target="https://en.wikipedia.org/wiki/URI_fragment">URI Fragments</eref> they hint the browser to focus anything (Bib)Tagged:</t>
-
-<ul spacing="compact">
-<li><tt>https://website.com#@chores@todo</tt></li>
-<li><tt>https://mastodon.io/myprofile/#@chores@todo</tt></li>
-<li><tt>://3dworld.gltf#@chores@todo</tt></li>
-</ul>
-<blockquote><t>Format: <tt>#@&lt;bibtag&gt;[ + @&lt;bibtag&gt; + [ ... ] ]</tt></t>
 </blockquote></section>
 
 <section anchor="contact"><name>Contact</name>

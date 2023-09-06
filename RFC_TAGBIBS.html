@@ -63,10 +63,37 @@ The goal of this spec is three-fold:</p>
 </code></pre>
 
 <blockquote>
-<p>tagbibs are basically one step up from socialmedia hashtags, allowing mere mortals to tag things with pencil or keyboard.</p>
+<p>tagbibs are basically one step up from socialmedia hashtags, allowing mere mortals to connect words to other words using pencil or keyboard.</p>
 </blockquote>
 
-<p>There&rsquo;s no precise predicates or properties, which allows citizen annotation (an essential precursor of RDF).</p>
+<p>There&rsquo;s no precise predicates or properties, which empowers citizen annotation (an essential precursor of RDF).</p>
+
+<ul>
+<li>format: <code>@sometag[@anothertag[@...]]</code></li>
+</ul>
+
+<blockquote>
+<p>syntactically, tagbibs are (concatenated) emaildomains without an extension</p>
+</blockquote>
+
+<ul>
+<li>javascript regex: <code>/(@[a-zA-Z0-9_@]+)[^ \n]?/</code></li>
+<li>shell: <code>cat textwithtagbibs.txt | xargs -n1 | awk '/(@[a-zA-Z0-9_@]+)[^ \n]?/ { print $0 }'</code></li>
+</ul>
+
+<h1 id="what-are-tagbibs-fragments">What are tagbibs fragments</h1>
+
+<p>Just like regular <a href="https://en.wikipedia.org/wiki/URI_fragment">URI Fragments</a> they hint the browser to focus anything (Bib)Tagged:</p>
+
+<ul>
+<li><code>https://website.com#@chores@todo</code></li>
+<li><code>https://mastodon.io/myprofile/#@chores@todo</code></li>
+<li><code>://3dworld.gltf#@chores@todo</code></li>
+</ul>
+
+<blockquote>
+<p>Format: <code>#@&lt;bibtag&gt;[ + @&lt;bibtag&gt; + [ ... ] ]</code></p>
+</blockquote>
 
 <h1 id="what-are-bibrulers">What are bibrulers</h1>
 
@@ -103,20 +130,6 @@ title = {The Future of Text ||},
 
 <blockquote>
 <p>Bibrulers don&rsquo;t try to re-invent XML, they are rather promoting dumb, unnested lists, which are much faster/simpler to traverse &amp; implement in all languages.</p>
-</blockquote>
-
-<h1 id="what-are-tagbibs-fragments">What are tagbibs fragments</h1>
-
-<p>Just like regular <a href="https://en.wikipedia.org/wiki/URI_fragment">URI Fragments</a> they hint the browser to focus anything (Bib)Tagged:</p>
-
-<ul>
-<li><code>https://website.com#@chores@todo</code></li>
-<li><code>https://mastodon.io/myprofile/#@chores@todo</code></li>
-<li><code>://3dworld.gltf#@chores@todo</code></li>
-</ul>
-
-<blockquote>
-<p>Format: <code>#@&lt;bibtag&gt;[ + @&lt;bibtag&gt; + [ ... ] ]</code></p>
 </blockquote>
 
 <h1 id="contact">Contact</h1>

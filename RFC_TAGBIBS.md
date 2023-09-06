@@ -63,9 +63,26 @@ Please get out the laundry
 }
 ```
 
-> tagbibs are basically one step up from socialmedia hashtags, allowing mere mortals to tag things with pencil or keyboard. 
+> tagbibs are basically one step up from socialmedia hashtags, allowing mere mortals to connect words to other words using pencil or keyboard. 
 
-There's no precise predicates or properties, which allows citizen annotation (an essential precursor of RDF).
+There's no precise predicates or properties, which empowers citizen annotation (an essential precursor of RDF).
+
+* format: `@sometag[@anothertag[@...]]` 
+
+> syntactically, tagbibs are (concatenated) emaildomains without an extension 
+
+* javascript regex: `/(@[a-zA-Z0-9_@]+)[^ \n]?/`
+* shell: `cat textwithtagbibs.txt | xargs -n1 | awk '/(@[a-zA-Z0-9_@]+)[^ \n]?/ { print $0 }'`
+
+# What are tagbibs fragments
+
+Just like regular [URI Fragments](https://en.wikipedia.org/wiki/URI_fragment) they hint the browser to focus anything (Bib)Tagged:
+
+* `https://website.com#@chores@todo`
+* `https://mastodon.io/myprofile/#@chores@todo`
+* `://3dworld.gltf#@chores@todo`
+
+> Format: `#@<bibtag>[ + @<bibtag> + [ ... ] ]`
 
 # What are bibrulers
 
@@ -103,17 +120,6 @@ This snippet would get decoded to this unnested array:
 Why not a nested tree-structure? This kneejerk reaction should always be considered 'a last option'.
 
 > Bibrulers don't try to re-invent XML, they are rather promoting dumb, unnested lists, which are much faster/simpler to traverse & implement in all languages.
-
-
-# What are tagbibs fragments
-
-Just like regular [URI Fragments](https://en.wikipedia.org/wiki/URI_fragment) they hint the browser to focus anything (Bib)Tagged:
-
-* `https://website.com#@chores@todo`
-* `https://mastodon.io/myprofile/#@chores@todo`
-* `://3dworld.gltf#@chores@todo`
-
-> Format: `#@<bibtag>[ + @<bibtag> + [ ... ] ]`
 
 # Contact
 
