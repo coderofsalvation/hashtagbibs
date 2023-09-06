@@ -80,7 +80,7 @@ Just like regular [URI Fragments](https://en.wikipedia.org/wiki/URI_fragment) th
 
 * `https://website.com#@chores@todo`
 * `https://mastodon.io/myprofile/#@chores@todo`
-* `://3dworld.gltf#@chores@todo`
+* `://xrworld.org/3dscene.gltf#@chores@todo`
 
 > Format: `#@<bibtag>[ + @<bibtag> + [ ... ] ]`
 

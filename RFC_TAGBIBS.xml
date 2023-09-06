@@ -83,7 +83,7 @@ The goal of this spec is three-fold:</t>
 <ul spacing="compact">
 <li><tt>https://website.com#@chores@todo</tt></li>
 <li><tt>https://mastodon.io/myprofile/#@chores@todo</tt></li>
-<li><tt>://3dworld.gltf#@chores@todo</tt></li>
+<li><tt>://xrworld.org/3dscene.gltf#@chores@todo</tt></li>
 </ul>
 <blockquote><t>Format: <tt>#@&lt;bibtag&gt;[ + @&lt;bibtag&gt; + [ ... ] ]</tt></t>
 </blockquote></section>

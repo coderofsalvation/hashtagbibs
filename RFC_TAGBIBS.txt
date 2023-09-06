@@ -137,7 +137,7 @@ Internet-Draft                   tagbibs                  September 2023
 
    *  https://website.com#@chores@todo
    *  https://mastodon.io/myprofile/#@chores@todo
-   *  ://3dworld.gltf#@chores@todo
+   *  ://xrworld.org/3dscene.gltf#@chores@todo
 
    |  Format: #@<bibtag>[ + @<bibtag> + [ ... ] ]
 
