@@ -22,27 +22,21 @@ fullname="L.R. van Kammen"
 
 .# Abstract
 
-Tagbibs are tiny paperfriendly tags, which expand into multiple [BibTags](https://en.wikipedia.org/wiki/BibTeX).<br>
+Tagbibs (or simply: 'bibs') are tiny paperfriendly tags, which expand into multiple [BibTags](https://en.wikipedia.org/wiki/BibTeX).<br>
 Using OCR, they're great for connecting scanned paper with online graphs.<br>
 The goal of this spec is three-fold:
 
-* specify tagbibs: a terse tagdescription which expands into a reversed BibTag 
-* specify tagbibs URI fragments: a way to hint browsers to jump to (bib)tagged content
+* specify bibs: a terse tagdescription which expands into a reversed BibTag 
+* specify bibs as URI fragment: a way to hint browsers to jump to (bib)tagged content
 * specify bibrulers: dumb line-based separators for bibtags
 
 {mainmatter}
-
-# Definitions
-
-| term              | explanation              |
-|-------------------|--------------------------|
-| linear LUT        | array lookup table       |
 
 # What are tagbibs
 
 <img src="postit.jpg" style="max-width:400px"/>
 
-tagbibs allow non-technical humans to write reversed BibTags in a short-form (on paper):
+bibs allow non-technical humans to write reversed BibTags in a short-form (on paper):
 
 ```
 Please get out the laundry 
@@ -50,7 +44,7 @@ Please get out the laundry
 @laundry@chores@todo
 ```
 
-These tagbibs basically tag 'laundry' by expanding into the following BibTags (during parsing/OCR-scanning):
+These bibs basically tag 'laundry' with 'chores' and 'todo', by expanding into the following BibTags:
 
 ```
 Please get out the laundry 
@@ -63,18 +57,72 @@ Please get out the laundry
 }
 ```
 
-> tagbibs are basically one step up from socialmedia hashtags, allowing mere mortals to connect words to other words using pencil or keyboard. 
+> the word `laundry` can now be highlighted in the human text. bibs are basically one step up from socialmedia hashtags, allowing mere mortals to connect words to other words using pencil or keyboard. 
 
-There's no precise predicates or properties, which empowers citizen annotation (an essential precursor of RDF).
+There's no precise predicates or properties (just 'this points to that', which empowers citizen annotation (an essential precursor of RDF).
 
-* format: `@sometag[@anothertag[@...]]` 
+## format
 
-> syntactically, tagbibs are (concatenated) emaildomains without an extension 
+* `@<word>[@tag[@anothertag[...]]]` 
 
-* javascript regex: `/(@[a-zA-Z0-9_@]+)[^ \n]?/`
-* shell: `cat textwithtagbibs.txt | xargs -n1 | awk '/(@[a-zA-Z0-9_@]+)[^ \n]?/ { print $0 }'`
+> syntactically, bibs are (concatenated) emaildomains without an extension 
 
-# What are tagbibs fragments
+* javascript regex: `/(@[a-zA-Z0-9_@+]+)[^ \n]?/`
+* shell: `cat textwithbibs.txt | xargs -n1 | awk '/(@[a-zA-Z0-9_@+]+)[^ \n]?/ { print $0 }'`
+
+1. at least `@` characters need to occur, to qualify as a bib 
+1. last bib wins: overlapping bibs overwrite eachother (last tag(s) win)
+1. spaces are not allowed, maximum by using `+` to represents spaces (`the+bill@todo` e.g.)
+
+```
+great+gatsby@book@readinglist
+great+gatsby@book
+```
+
+would only expand to:
+
+```
+@book{great+gatsby
+
+}
+```
+
+## Example: an textual kanban using tags
+
+```
+buy milk
+finish paper
+contact John
+buy the great gatsby
+
+@milk@todo
+@contact@doing
+@contact@done
+@gatsby@done
+@finish+paper@doing
+```
+
+If this text would be written on a paper, it could be scanned by a computer and represented spatially like so:
+
+| todo      | doing        | done             |
+|-----------|--------------|------------------|
+| buy milk  | finish paper | contact John     |
+|                          | buy great gatsby |
+
+> One could argue that tagging a word like `buy` would create conflicts, but for most purposes this is really easy to spot / workaround. For serious, large bodies of text use expanded BibTags instead.
+
+## Merging (BibTagged) overlaps
+
+When a bib (`great+gatsby@book` is copy-pasted into another document (a PDF or Textfile with a [visual-meta](https://visual-meta.info) appendix e.g.):
+
+1. the editor should check for the existence of `@book{great+gatsby`
+1. if exist: do nothing, leave target document as is
+1. if not: create the expanded BibTag 
+1. optionally, the editor can offer to add properties (as bibs are propertyless)
+
+> propertyless bibs, are a great way as a 'process later'-medium ("I wrote down `great+gatsby@readinglist` on a papertowel/email, to scan/copy-paste it later)
+
+# What are bibs in a URI fragment
 
 Just like regular [URI Fragments](https://en.wikipedia.org/wiki/URI_fragment) they hint the browser to focus anything (Bib)Tagged:
 

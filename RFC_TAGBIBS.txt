@@ -13,15 +13,15 @@ Expires: 9 March 2024
 
 Abstract
 
-   Tagbibs are tiny paperfriendly tags, which expand into multiple
-   BibTags (https://en.wikipedia.org/wiki/BibTeX).
+   Tagbibs (or simply: 'bibs') are tiny paperfriendly tags, which expand
+   into multiple BibTags (https://en.wikipedia.org/wiki/BibTeX).
    Using OCR, they're great for connecting scanned paper with online
    graphs.
    The goal of this spec is three-fold:
 
-   *  specify tagbibs: a terse tagdescription which expands into a
-      reversed BibTag
-   *  specify tagbibs URI fragments: a way to hint browsers to jump to
+   *  specify bibs: a terse tagdescription which expands into a reversed
+      BibTag
+   *  specify bibs as URI fragment: a way to hint browsers to jump to
       (bib)tagged content
    *  specify bibrulers: dumb line-based separators for bibtags
 
@@ -66,37 +66,29 @@ Internet-Draft                   tagbibs                  September 2023
 
 Table of Contents
 
-   1.  Definitions . . . . . . . . . . . . . . . . . . . . . . . . .   2
-   2.  What are tagbibs  . . . . . . . . . . . . . . . . . . . . . .   2
-   3.  What are tagbibs fragments  . . . . . . . . . . . . . . . . .   3
-   4.  What are bibrulers  . . . . . . . . . . . . . . . . . . . . .   3
-   5.  Contact . . . . . . . . . . . . . . . . . . . . . . . . . . .   4
-   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   4
-   7.  Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .   4
+   1.  What are tagbibs  . . . . . . . . . . . . . . . . . . . . . .   2
+     1.1.  format  . . . . . . . . . . . . . . . . . . . . . . . . .   3
+     1.2.  Example: an textual kanban using tags . . . . . . . . . .   3
+     1.3.  Merging (BibTagged) overlaps  . . . . . . . . . . . . . .   4
+   2.  What are bibs in a URI fragment . . . . . . . . . . . . . . .   4
+   3.  What are bibrulers  . . . . . . . . . . . . . . . . . . . . .   4
+   4.  Contact . . . . . . . . . . . . . . . . . . . . . . . . . . .   5
+   5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   5
+   6.  Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .   5
 
-1.  Definitions
-
-                    +============+====================+
-                    | term       | explanation        |
-                    +============+====================+
-                    | linear LUT | array lookup table |
-                    +------------+--------------------+
-
-                                  Table 1
-
-2.  What are tagbibs
+1.  What are tagbibs
 
    <img src="postit.jpg" style="max-width:400px"/>
 
-   tagbibs allow non-technical humans to write reversed BibTags in a
-   short-form (on paper):
+   bibs allow non-technical humans to write reversed BibTags in a short-
+   form (on paper):
 
    Please get out the laundry
 
    @laundry@chores@todo
 
-   These tagbibs basically tag 'laundry' by expanding into the following
-   BibTags (during parsing/OCR-scanning):
+   These bibs basically tag 'laundry' with 'chores' and 'todo', by
+   expanding into the following BibTags:
 
    Please get out the laundry
 
@@ -107,6 +99,14 @@ Table of Contents
 
    }
 
+   |  the word laundry can now be highlighted in the human text. bibs
+   |  are basically one step up from socialmedia hashtags, allowing mere
+   |  mortals to connect words to other words using pencil or keyboard.
+
+   There's no precise predicates or properties (just 'this points to
+   that', which empowers citizen annotation (an essential precursor of
+   RDF).
+
 
 
 van Kammen                Expires 9 March 2024                  [Page 2]
@@ -114,23 +114,94 @@ van Kammen                Expires 9 March 2024                  [Page 2]
 Internet-Draft                   tagbibs                  September 2023
 
 
-   |  tagbibs are basically one step up from socialmedia hashtags,
-   |  allowing mere mortals to connect words to other words using pencil
-   |  or keyboard.
+1.1.  format
 
-   There's no precise predicates or properties, which empowers citizen
-   annotation (an essential precursor of RDF).
+   *  @<word>[@tag[@anothertag[...]]]
 
-   *  format: @sometag[@anothertag[@...]]
-
-   |  syntactically, tagbibs are (concatenated) emaildomains without an
+   |  syntactically, bibs are (concatenated) emaildomains without an
    |  extension
 
-   *  javascript regex: /(@[a-zA-Z0-9_@]+)[^ \n]?/
-   *  shell: cat textwithtagbibs.txt | xargs -n1 | awk '/(@[a-zA-
-      Z0-9_@]+)[^ \n]?/ { print $0 }'
+   *  javascript regex: /(@[a-zA-Z0-9_@+]+)[^ \n]?/
+   *  shell: cat textwithbibs.txt | xargs -n1 | awk '/(@[a-zA-
+      Z0-9_@+]+)[^ \n]?/ { print $0 }'
 
-3.  What are tagbibs fragments
+   1.  at least @ characters need to occur, to qualify as a bib
+   2.  last bib wins: overlapping bibs overwrite eachother (last tag(s)
+       win)
+   3.  spaces are not allowed, maximum by using + to represents spaces
+       (the+bill@todo e.g.)
+
+   great+gatsby@book@readinglist
+   great+gatsby@book
+
+   would only expand to:
+
+   @book{great+gatsby
+
+   }
+
+1.2.  Example: an textual kanban using tags
+
+   buy milk
+   finish paper
+   contact John
+   buy the great gatsby
+
+   @milk@todo
+   @contact@doing
+   @contact@done
+   @gatsby@done
+   @finish+paper@doing
+
+   If this text would be written on a paper, it could be scanned by a
+   computer and represented spatially like so:
+
+
+
+
+
+
+
+
+
+
+van Kammen                Expires 9 March 2024                  [Page 3]
+
+Internet-Draft                   tagbibs                  September 2023
+
+
+              +==========+==================+==============+
+              | todo     | doing            | done         |
+              +==========+==================+==============+
+              | buy milk | finish paper     | contact John |
+              +----------+------------------+--------------+
+              |          | buy great gatsby |              |
+              +----------+------------------+--------------+
+
+                                 Table 1
+
+   |  One could argue that tagging a word like buy would create
+   |  conflicts, but for most purposes this is really easy to spot /
+   |  workaround.  For serious, large bodies of text use expanded
+   |  BibTags instead.
+
+1.3.  Merging (BibTagged) overlaps
+
+   When a bib (great+gatsby@book is copy-pasted into another document (a
+   PDF or Textfile with a visual-meta (https://visual-meta.info)
+   appendix e.g.):
+
+   1.  the editor should check for the existence of @book{great+gatsby
+   2.  if exist: do nothing, leave target document as is
+   3.  if not: create the expanded BibTag
+   4.  optionally, the editor can offer to add properties (as bibs are
+       propertyless)
+
+   |  propertyless bibs, are a great way as a 'process later'-medium ("I
+   |  wrote down great+gatsby@readinglist on a papertowel/email, to
+   |  scan/copy-paste it later)
+
+2.  What are bibs in a URI fragment
 
    Just like regular URI Fragments (https://en.wikipedia.org/wiki/
    URI_fragment) they hint the browser to focus anything (Bib)Tagged:
@@ -141,10 +212,19 @@ Internet-Draft                   tagbibs                  September 2023
 
    |  Format: #@<bibtag>[ + @<bibtag> + [ ... ] ]
 
-4.  What are bibrulers
+3.  What are bibrulers
 
    Bibrulers are linebased separators, used by visual-meta
    (https://visual-meta.info) as a means of organizing BibTags:
+
+
+
+
+
+van Kammen                Expires 9 March 2024                  [Page 4]
+
+Internet-Draft                   tagbibs                  September 2023
+
 
    @{visual-meta-start}
    @{visual-meta-header-start}
@@ -162,14 +242,6 @@ Internet-Draft                   tagbibs                  September 2023
 
    This snippet would get decoded to this unnested array:
 
-
-
-
-van Kammen                Expires 9 March 2024                  [Page 3]
-
-Internet-Draft                   tagbibs                  September 2023
-
-
 [
   { ruler: `@{visual-meta-start}` },
   { ruler: `@{visual-meta-header-start}` },
@@ -186,15 +258,15 @@ Internet-Draft                   tagbibs                  September 2023
    |  dumb, unnested lists, which are much faster/simpler to traverse &
    |  implement in all languages.
 
-5.  Contact
+4.  Contact
 
    *  leonvankammen|gmail.com
 
-6.  IANA Considerations
+5.  IANA Considerations
 
    This document has no IANA actions.
 
-7.  Acknowledgments
+6.  Acknowledgments
 
    TODO acknowledge.
 
@@ -205,20 +277,4 @@ Internet-Draft                   tagbibs                  September 2023
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-van Kammen                Expires 9 March 2024                  [Page 4]
+van Kammen                Expires 9 March 2024                  [Page 5]

@@ -10,15 +10,15 @@
 <workgroup>Internet</workgroup>
 
 <abstract>
-<t>Tagbibs are tiny paperfriendly tags, which expand into multiple <eref target="https://en.wikipedia.org/wiki/BibTeX">BibTags</eref>.<br />
+<t>Tagbibs (or simply: 'bibs') are tiny paperfriendly tags, which expand into multiple <eref target="https://en.wikipedia.org/wiki/BibTeX">BibTags</eref>.<br />
 
 Using OCR, they're great for connecting scanned paper with online graphs.<br />
 
 The goal of this spec is three-fold:</t>
 
 <ul spacing="compact">
-<li>specify tagbibs: a terse tagdescription which expands into a reversed BibTag</li>
-<li>specify tagbibs URI fragments: a way to hint browsers to jump to (bib)tagged content</li>
+<li>specify bibs: a terse tagdescription which expands into a reversed BibTag</li>
+<li>specify bibs as URI fragment: a way to hint browsers to jump to (bib)tagged content</li>
 <li>specify bibrulers: dumb line-based separators for bibtags</li>
 </ul>
 </abstract>
@@ -27,32 +27,15 @@ The goal of this spec is three-fold:</t>
 
 <middle>
 
-<section anchor="definitions"><name>Definitions</name>
-<table>
-<thead>
-<tr>
-<th>term</th>
-<th>explanation</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>linear LUT</td>
-<td>array lookup table</td>
-</tr>
-</tbody>
-</table></section>
-
 <section anchor="what-are-tagbibs"><name>What are tagbibs</name>
 <t>&lt;img src=&quot;postit.jpg&quot; style=&quot;max-width:400px&quot;/&gt;</t>
-<t>tagbibs allow non-technical humans to write reversed BibTags in a short-form (on paper):</t>
+<t>bibs allow non-technical humans to write reversed BibTags in a short-form (on paper):</t>
 
 <artwork>Please get out the laundry 
 
 @laundry@chores@todo
 </artwork>
-<t>These tagbibs basically tag 'laundry' by expanding into the following BibTags (during parsing/OCR-scanning):</t>
+<t>These bibs basically tag 'laundry' with 'chores' and 'todo', by expanding into the following BibTags:</t>
 
 <artwork>Please get out the laundry 
 
@@ -63,21 +46,91 @@ The goal of this spec is three-fold:</t>
 
 }
 </artwork>
-<blockquote><t>tagbibs are basically one step up from socialmedia hashtags, allowing mere mortals to connect words to other words using pencil or keyboard.</t>
-</blockquote><t>There's no precise predicates or properties, which empowers citizen annotation (an essential precursor of RDF).</t>
+<blockquote><t>the word <tt>laundry</tt> can now be highlighted in the human text. bibs are basically one step up from socialmedia hashtags, allowing mere mortals to connect words to other words using pencil or keyboard.</t>
+</blockquote><t>There's no precise predicates or properties (just 'this points to that', which empowers citizen annotation (an essential precursor of RDF).</t>
+
+<section anchor="format"><name>format</name>
 
 <ul spacing="compact">
-<li>format: <tt>@sometag[@anothertag[@...]]</tt></li>
+<li><tt>@&lt;word&gt;[@tag[@anothertag[...]]]</tt></li>
 </ul>
-<blockquote><t>syntactically, tagbibs are (concatenated) emaildomains without an extension</t>
+<blockquote><t>syntactically, bibs are (concatenated) emaildomains without an extension</t>
 </blockquote>
 <ul spacing="compact">
-<li>javascript regex: <tt>/(@[a-zA-Z0-9_@]+)[^ \n]?/</tt></li>
-<li>shell: <tt>cat textwithtagbibs.txt | xargs -n1 | awk '/(@[a-zA-Z0-9_@]+)[^ \n]?/ { print $0 }'</tt></li>
+<li>javascript regex: <tt>/(@[a-zA-Z0-9_@+]+)[^ \n]?/</tt></li>
+<li>shell: <tt>cat textwithbibs.txt | xargs -n1 | awk '/(@[a-zA-Z0-9_@+]+)[^ \n]?/ { print $0 }'</tt></li>
 </ul>
+
+<ol spacing="compact">
+<li>at least <tt>@</tt> characters need to occur, to qualify as a bib</li>
+<li>last bib wins: overlapping bibs overwrite eachother (last tag(s) win)</li>
+<li>spaces are not allowed, maximum by using <tt>+</tt> to represents spaces (<tt>the+bill@todo</tt> e.g.)</li>
+</ol>
+
+<artwork>great+gatsby@book@readinglist
+great+gatsby@book
+</artwork>
+<t>would only expand to:</t>
+
+<artwork>@book{great+gatsby
+
+}
+</artwork>
 </section>
 
-<section anchor="what-are-tagbibs-fragments"><name>What are tagbibs fragments</name>
+<section anchor="example-an-textual-kanban-using-tags"><name>Example: an textual kanban using tags</name>
+
+<artwork>buy milk
+finish paper
+contact John
+buy the great gatsby
+
+@milk@todo
+@contact@doing
+@contact@done
+@gatsby@done
+@finish+paper@doing
+</artwork>
+<t>If this text would be written on a paper, it could be scanned by a computer and represented spatially like so:</t>
+<table>
+<thead>
+<tr>
+<th>todo</th>
+<th>doing</th>
+<th>done</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>buy milk</td>
+<td>finish paper</td>
+<td>contact John</td>
+</tr>
+
+<tr>
+<td></td>
+<td>buy great gatsby</td>
+<td></td>
+</tr>
+</tbody>
+</table><blockquote><t>One could argue that tagging a word like <tt>buy</tt> would create conflicts, but for most purposes this is really easy to spot / workaround. For serious, large bodies of text use expanded BibTags instead.</t>
+</blockquote></section>
+
+<section anchor="merging-bibtagged-overlaps"><name>Merging (BibTagged) overlaps</name>
+<t>When a bib (<tt>great+gatsby@book</tt> is copy-pasted into another document (a PDF or Textfile with a <eref target="https://visual-meta.info">visual-meta</eref> appendix e.g.):</t>
+
+<ol spacing="compact">
+<li>the editor should check for the existence of <tt>@book{great+gatsby</tt></li>
+<li>if exist: do nothing, leave target document as is</li>
+<li>if not: create the expanded BibTag</li>
+<li>optionally, the editor can offer to add properties (as bibs are propertyless)</li>
+</ol>
+<blockquote><t>propertyless bibs, are a great way as a 'process later'-medium (&quot;I wrote down <tt>great+gatsby@readinglist</tt> on a papertowel/email, to scan/copy-paste it later)</t>
+</blockquote></section>
+</section>
+
+<section anchor="what-are-bibs-in-a-uri-fragment"><name>What are bibs in a URI fragment</name>
 <t>Just like regular <eref target="https://en.wikipedia.org/wiki/URI_fragment">URI Fragments</eref> they hint the browser to focus anything (Bib)Tagged:</t>
 
 <ul spacing="compact">
