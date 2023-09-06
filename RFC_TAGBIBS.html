@@ -23,7 +23,7 @@ The goal of this spec is three-fold:</p>
 <li>specify bibrulers: dumb line-based separators for bibtags</li>
 </ul>
 <section data-matter="main">
-<h1 id="what-are-tagbibs">What are tagbibs</h1>
+<h1 id="what-are-bibs">What are bibs</h1>
 
 <p><img src="postit.jpg" style="max-width:400px"/></p>
 
@@ -34,7 +34,9 @@ The goal of this spec is three-fold:</p>
 @laundry@chores@todo
 </code></pre>
 
-<p>These bibs basically tag &lsquo;laundry&rsquo; with &lsquo;chores&rsquo; and &lsquo;todo&rsquo;, by expanding into the following BibTags:</p>
+<blockquote>
+<p>Basically means: <code>add</code> laundry to tag <code>@chores</code> and tag <code>@todo</code>, by expanding into the following BibTags:</p>
+</blockquote>
 
 <pre><code>Please get out the laundry 
 
@@ -215,16 +217,16 @@ title = {The Future of Text ||},
 <p>This snippet would get decoded to this unnested array:</p>
 
 <pre><code>[
-  { ruler: `@{visual-meta-start}` },
-  { ruler: `@{visual-meta-header-start}` },
-  { tag: &quot;@visual-meta&quot;, props: { version: &quot;1.1&quot;, generator: &quot;Author 7.6.2 1064)&quot; } }
-  { ruler: `@{visual-meta-bibgtex-self-citation-start}` },
-  { tag: &quot;@book{2021-12-08T10:56:03Z/TheFutureo&quot;, ..... }
+  { ruler: `{visual-meta-start}` },
+  { ruler: `{visual-meta-header-start}` },
+  { k: &quot;visual-meta&quot;, v: { version: &quot;1.1&quot;, generator: &quot;Author 7.6.2 1064)&quot; } }
+  { ruler: `{visual-meta-bibgtex-self-citation-start}` },
+  { k: &quot;book{2021-12-08T10:56:03Z/TheFutureo&quot;, v: { author: &quot;Frode ...&quot;, ... } }
   ...
 ]
 </code></pre>
 
-<p>Why not a nested tree-structure? This kneejerk reaction should always be considered &lsquo;a last option&rsquo;.</p>
+<p>Why not a nested tree-structure? This kneejerk reaction should always be considered &lsquo;a temporary conversion&rsquo;.</p>
 
 <blockquote>
 <p>Bibrulers don&rsquo;t try to re-invent XML, they are rather promoting dumb, unnested lists, which are much faster/simpler to traverse &amp; implement in all languages.</p>

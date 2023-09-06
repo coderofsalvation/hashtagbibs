@@ -69,7 +69,7 @@ Internet-Draft                   tagbibs                  September 2023
 
 Table of Contents
 
-   1.  What are tagbibs  . . . . . . . . . . . . . . . . . . . . . .   2
+   1.  What are bibs . . . . . . . . . . . . . . . . . . . . . . . .   2
      1.1.  format  . . . . . . . . . . . . . . . . . . . . . . . . .   3
      1.2.  Example: an textual kanban using tags . . . . . . . . . .   3
      1.3.  Example javascript bibs expander  . . . . . . . . . . . .   4
@@ -80,7 +80,7 @@ Table of Contents
    5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   6
    6.  Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .   6
 
-1.  What are tagbibs
+1.  What are bibs
 
    <img src="postit.jpg" style="max-width:400px"/>
 
@@ -91,8 +91,8 @@ Table of Contents
 
    @laundry@chores@todo
 
-   These bibs basically tag 'laundry' with 'chores' and 'todo', by
-   expanding into the following BibTags:
+   |  Basically means: add laundry to tag @chores and tag @todo, by
+   |  expanding into the following BibTags:
 
    Please get out the laundry
 
@@ -283,16 +283,16 @@ Internet-Draft                   tagbibs                  September 2023
 
 
 [
-  { ruler: `@{visual-meta-start}` },
-  { ruler: `@{visual-meta-header-start}` },
-  { tag: "@visual-meta", props: { version: "1.1", generator: "Author 7.6.2 1064)" } }
-  { ruler: `@{visual-meta-bibgtex-self-citation-start}` },
-  { tag: "@book{2021-12-08T10:56:03Z/TheFutureo", ..... }
+  { ruler: `{visual-meta-start}` },
+  { ruler: `{visual-meta-header-start}` },
+  { k: "visual-meta", v: { version: "1.1", generator: "Author 7.6.2 1064)" } }
+  { ruler: `{visual-meta-bibgtex-self-citation-start}` },
+  { k: "book{2021-12-08T10:56:03Z/TheFutureo", v: { author: "Frode ...", ... } }
   ...
 ]
 
    Why not a nested tree-structure?  This kneejerk reaction should
-   always be considered 'a last option'.
+   always be considered 'a temporary conversion'.
 
    |  Bibrulers don't try to re-invent XML, they are rather promoting
    |  dumb, unnested lists, which are much faster/simpler to traverse &

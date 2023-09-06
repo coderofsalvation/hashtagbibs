@@ -31,7 +31,7 @@ The goal of this spec is three-fold:</t>
 
 <middle>
 
-<section anchor="what-are-tagbibs"><name>What are tagbibs</name>
+<section anchor="what-are-bibs"><name>What are bibs</name>
 <t>&lt;img src=&quot;postit.jpg&quot; style=&quot;max-width:400px&quot;/&gt;</t>
 <t>bibs allow non-technical humans to write reversed BibTags in a short-form (on paper):</t>
 
@@ -39,8 +39,8 @@ The goal of this spec is three-fold:</t>
 
 @laundry@chores@todo
 </artwork>
-<t>These bibs basically tag 'laundry' with 'chores' and 'todo', by expanding into the following BibTags:</t>
-
+<blockquote><t>Basically means: <tt>add</tt> laundry to tag <tt>@chores</tt> and tag <tt>@todo</tt>, by expanding into the following BibTags:</t>
+</blockquote>
 <artwork>Please get out the laundry 
 
 @chores{laundry,
@@ -197,15 +197,15 @@ title = {The Future of Text ||},
 <t>This snippet would get decoded to this unnested array:</t>
 
 <artwork>[
-  { ruler: `@{visual-meta-start}` },
-  { ruler: `@{visual-meta-header-start}` },
-  { tag: &quot;@visual-meta&quot;, props: { version: &quot;1.1&quot;, generator: &quot;Author 7.6.2 1064)&quot; } }
-  { ruler: `@{visual-meta-bibgtex-self-citation-start}` },
-  { tag: &quot;@book{2021-12-08T10:56:03Z/TheFutureo&quot;, ..... }
+  { ruler: `{visual-meta-start}` },
+  { ruler: `{visual-meta-header-start}` },
+  { k: &quot;visual-meta&quot;, v: { version: &quot;1.1&quot;, generator: &quot;Author 7.6.2 1064)&quot; } }
+  { ruler: `{visual-meta-bibgtex-self-citation-start}` },
+  { k: &quot;book{2021-12-08T10:56:03Z/TheFutureo&quot;, v: { author: &quot;Frode ...&quot;, ... } }
   ...
 ]
 </artwork>
-<t>Why not a nested tree-structure? This kneejerk reaction should always be considered 'a last option'.</t>
+<t>Why not a nested tree-structure? This kneejerk reaction should always be considered 'a temporary conversion'.</t>
 <blockquote><t>Bibrulers don't try to re-invent XML, they are rather promoting dumb, unnested lists, which are much faster/simpler to traverse &amp; implement in all languages.</t>
 </blockquote></section>
 

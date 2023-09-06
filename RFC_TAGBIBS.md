@@ -175,16 +175,16 @@ This snippet would get decoded to this unnested array:
 
 ```
 [
-  { ruler: `@{visual-meta-start}` },
-  { ruler: `@{visual-meta-header-start}` },
-  { tag: "@visual-meta", props: { version: "1.1", generator: "Author 7.6.2 1064)" } }
-  { ruler: `@{visual-meta-bibgtex-self-citation-start}` },
-  { tag: "@book{2021-12-08T10:56:03Z/TheFutureo", ..... }
+  { ruler: `{visual-meta-start}` },
+  { ruler: `{visual-meta-header-start}` },
+  { k: "visual-meta", v: { version: "1.1", generator: "Author 7.6.2 1064)" } }
+  { ruler: `{visual-meta-bibgtex-self-citation-start}` },
+  { k: "book{2021-12-08T10:56:03Z/TheFutureo", v: { author: "Frode ...", ... } }
   ...
 ]
 ```
 
-Why not a nested tree-structure? This kneejerk reaction should always be considered 'a last option'.
+Why not a nested tree-structure? This kneejerk reaction should always be considered 'a temporary conversion'.
 
 > Bibrulers don't try to re-invent XML, they are rather promoting dumb, unnested lists, which are much faster/simpler to traverse & implement in all languages.
 
