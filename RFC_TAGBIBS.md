@@ -34,7 +34,7 @@ The goal of this spec is three-fold:
 
 {mainmatter}
 
-# What are tagbibs
+# What are bibs
 
 <img src="postit.jpg" style="max-width:400px"/>
 
@@ -46,7 +46,7 @@ Please get out the laundry
 @laundry@chores@todo
 ```
 
-These bibs basically tag 'laundry' with 'chores' and 'todo', by expanding into the following BibTags:
+> Basically means: `add` laundry to tag `@chores` and tag `@todo`, by expanding into the following BibTags:
 
 ```
 Please get out the laundry 
