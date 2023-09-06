@@ -200,14 +200,23 @@ title = {The Future of Text ||},
   { ruler: `{visual-meta-start}` },
   { ruler: `{visual-meta-header-start}` },
   { k: &quot;visual-meta&quot;, v: { version: &quot;1.1&quot;, generator: &quot;Author 7.6.2 1064)&quot; } }
+  { ruler: `{visual-meta-header-end}` },
   { ruler: `{visual-meta-bibgtex-self-citation-start}` },
   { k: &quot;book{2021-12-08T10:56:03Z/TheFutureo&quot;, v: { author: &quot;Frode ...&quot;, ... } }
   ...
 ]
 </artwork>
-<t>Why not a nested tree-structure? This kneejerk reaction should always be considered 'a temporary conversion'.</t>
-<blockquote><t>Bibrulers don't try to re-invent XML, they are rather promoting dumb, unnested lists, which are much faster/simpler to traverse &amp; implement in all languages.</t>
-</blockquote></section>
+<t>Why not a nested tree-structure? This kneejerk reaction should always be considered 'a temporary option'.<br />
+
+Bibrulers:</t>
+
+<ol spacing="compact">
+<li>don't try to re-invent XML or JSON</li>
+<li>don't promote traversing graphs (instead: just a list with tags)</li>
+<li>they promote rather dumb, unnested lists</li>
+<li>they  are much faster/simpler to lookup, implement, (de)serialize in low- and hihglevel languages.</li>
+</ol>
+</section>
 
 <section anchor="contact"><name>Contact</name>
 
