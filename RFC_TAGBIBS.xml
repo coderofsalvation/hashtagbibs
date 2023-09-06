@@ -85,7 +85,7 @@ The goal of this spec is three-fold:</t>
 </tbody>
 </table>
 <ol spacing="compact">
-<li>at least <tt>@</tt> characters need to occur, to qualify as a bib</li>
+<li>at least 2 <tt>@</tt> characters need to occur, to qualify as a bib</li>
 <li>last bib wins: overlapping bibs overwrite eachother (last tag(s) win)</li>
 <li>spaces are not allowed, maximum by using <tt>+</tt> to represents spaces (<tt>the+bill@todo</tt> e.g.)</li>
 </ol>

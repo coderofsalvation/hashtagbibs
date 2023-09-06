@@ -145,7 +145,7 @@ Internet-Draft                   tagbibs                  September 2023
 
                                   Table 1
 
-   1.  at least @ characters need to occur, to qualify as a bib
+   1.  at least 2 @ characters need to occur, to qualify as a bib
    2.  last bib wins: overlapping bibs overwrite eachother (last tag(s)
        win)
    3.  spaces are not allowed, maximum by using + to represents spaces

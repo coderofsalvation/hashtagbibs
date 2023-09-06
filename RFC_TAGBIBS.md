@@ -75,7 +75,7 @@ There's no precise predicates or properties (just 'this points to that', which e
 | shell grep       | `cat textwithbibs.txt | grep -oE '(@[a-zA-Z0-9_+]+@[a-zA-Z0-9_@]+)'`                       | 
 | shell awk        | `cat textwithbibs.txt | xargs -n1 | awk '/(@[a-zA-Z0-9_+]+@[a-zA-Z0-9_@]+)/ { print $0 }'` |
 
-1. at least `@` characters need to occur, to qualify as a bib 
+1. at least 2 `@` characters need to occur, to qualify as a bib 
 1. last bib wins: overlapping bibs overwrite eachother (last tag(s) win)
 1. spaces are not allowed, maximum by using `+` to represents spaces (`the+bill@todo` e.g.)
 
