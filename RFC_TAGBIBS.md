@@ -22,7 +22,7 @@ fullname="L.R. van Kammen"
 
 .# Abstract
 
-Tagbibs is a tiny paperfriendly tags, which expand into multiple BibTags [BibTex](https://en.wikipedia.org/wiki/BibTeX).
+Tagbibs are tiny paperfriendly tags, which expand into multiple [BibTags](https://en.wikipedia.org/wiki/BibTeX).
 Using OCR, they're great for connecting scanned paper with online graphs.
 The goal of this document is twofold:
 

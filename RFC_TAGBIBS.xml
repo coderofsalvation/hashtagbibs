@@ -10,7 +10,7 @@
 <workgroup>Internet</workgroup>
 
 <abstract>
-<t>Tagbibs is a tiny paperfriendly tags, which expand into multiple BibTags <eref target="https://en.wikipedia.org/wiki/BibTeX">BibTex</eref>.
+<t>Tagbibs are tiny paperfriendly tags, which expand into multiple <eref target="https://en.wikipedia.org/wiki/BibTeX">BibTags</eref>.
 Using OCR, they're great for connecting scanned paper with online graphs.
 The goal of this document is twofold:</t>
 
