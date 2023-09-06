@@ -1,0 +1,168 @@
+
+
+
+
+Internet                                                 L.R. van Kammen
+Internet-Draft                                          6 September 2023
+Intended status: Informational                                          
+Expires: 9 March 2024
+
+
+                                tagbibs
+                     draft-tagbibs-leonvankammen-00
+
+Abstract
+
+   Tagbibs is a tiny paperfriendly tags, which expand into multiple
+   BibTags BibTex (https://en.wikipedia.org/wiki/BibTeX).  Using OCR,
+   they're great for connecting scanned paper with online graphs.  The
+   goal of this document is twofold:
+
+   *  specify tagbibs: a terse tagdescription which expands into a
+      reversed BibTag
+   *  specify tagbibs URI fragments: a way to hint browsers to jump to
+      (bib)tagged content
+   *  specify bibrulers: dumb line-based separators for bibtags
+
+Status of This Memo
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at https://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on 9 March 2024.
+
+Copyright Notice
+
+   Copyright (c) 2023 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents (https://trustee.ietf.org/
+   license-info) in effect on the date of publication of this document.
+   Please review these documents carefully, as they describe your rights
+
+
+
+van Kammen                Expires 9 March 2024                  [Page 1]
+
+Internet-Draft                   tagbibs                  September 2023
+
+
+   and restrictions with respect to this document.  Code Components
+   extracted from this document must include Revised BSD License text as
+   described in Section 4.e of the Trust Legal Provisions and are
+   provided without warranty as described in the Revised BSD License.
+
+Table of Contents
+
+   1.  What are tagbibs  . . . . . . . . . . . . . . . . . . . . . .   2
+   2.  What are bibrulers  . . . . . . . . . . . . . . . . . . . . .   3
+   3.  What are tagbibs fragments  . . . . . . . . . . . . . . . . .   3
+   4.  Contact . . . . . . . . . . . . . . . . . . . . . . . . . . .   3
+   5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   3
+   6.  Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .   3
+
+1.  What are tagbibs
+
+   <img src="postit.jpg" style="max-width:400px"/>
+
+   tagbibs allow non-technical humans to write reversed BibTags in a
+   short-form (on paper):
+
+   Please get out the laundry
+
+   @laundry@chores@todo
+
+   These tagbibs basically tag 'laundry' by expanding into the following
+   BibTags:
+
+   Please get out the laundry
+
+   @chores{laundry,
+
+   }
+   @todo{laundry,
+
+   }
+
+   |  tagbibs are basically one step up from socialmedia hashtags,
+   |  allowing mere mortals to tag things with pencil or keyboard.
+
+   There's no precise predicates or properties, which allows citizen
+   annotation (an essential precursor of RDF).
+
+
+
+
+
+
+
+
+
+van Kammen                Expires 9 March 2024                  [Page 2]
+
+Internet-Draft                   tagbibs                  September 2023
+
+
+2.  What are bibrulers
+
+3.  What are tagbibs fragments
+
+   `#@chores@todo
+
+4.  Contact
+
+   *  leonvankammen|gmail.com
+
+5.  IANA Considerations
+
+   This document has no IANA actions.
+
+6.  Acknowledgments
+
+   TODO acknowledge.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+van Kammen                Expires 9 March 2024                  [Page 3]

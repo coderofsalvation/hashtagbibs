@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- name="GENERATOR" content="github.com/mmarkdown/mmark Mmark Markdown Processor - mmark.miek.nl" -->
+<rfc version="3" ipr="trust200902" docName="draft-tagbibs-leonvankammen-00" submissionType="IETF" category="info" xml:lang="en" xmlns:xi="http://www.w3.org/2001/XInclude" indexInclude="true" consensus="true">
+
+<front>
+<title>tagbibs</title><seriesInfo value="draft-tagbibs-leonvankammen-00" stream="IETF" status="informational" name="tagbibs"></seriesInfo>
+<author initials="L.R." surname="van Kammen" fullname="L.R. van Kammen"><organization></organization><address><postal><street></street>
+</postal></address></author><date/>
+<area>Internet</area>
+<workgroup>Internet</workgroup>
+
+<abstract>
+<t>Tagbibs is a tiny paperfriendly tags, which expand into multiple BibTags <eref target="https://en.wikipedia.org/wiki/BibTeX">BibTex</eref>.
+Using OCR, they're great for connecting scanned paper with online graphs.
+The goal of this document is twofold:</t>
+
+<ul spacing="compact">
+<li>specify tagbibs: a terse tagdescription which expands into a reversed BibTag</li>
+<li>specify tagbibs URI fragments: a way to hint browsers to jump to (bib)tagged content</li>
+<li>specify bibrulers: dumb line-based separators for bibtags</li>
+</ul>
+</abstract>
+
+</front>
+
+<middle>
+
+<section anchor="what-are-tagbibs"><name>What are tagbibs</name>
+<t>&lt;img src=&quot;postit.jpg&quot; style=&quot;max-width:400px&quot;/&gt;</t>
+<t>tagbibs allow non-technical humans to write reversed BibTags in a short-form (on paper):</t>
+
+<artwork>Please get out the laundry 
+
+@laundry@chores@todo
+</artwork>
+<t>These tagbibs basically tag 'laundry' by expanding into the following BibTags:</t>
+
+<artwork>Please get out the laundry 
+
+@chores{laundry,
+  
+}
+@todo{laundry,
+
+}
+</artwork>
+<blockquote><t>tagbibs are basically one step up from socialmedia hashtags, allowing mere mortals to tag things with pencil or keyboard.</t>
+</blockquote><t>There's no precise predicates or properties, which allows citizen annotation (an essential precursor of RDF).</t>
+</section>
+
+<section anchor="what-are-bibrulers"><name>What are bibrulers</name>
+</section>
+
+<section anchor="what-are-tagbibs-fragments"><name>What are tagbibs fragments</name>
+<t>`#@chores@todo</t>
+</section>
+
+<section anchor="contact"><name>Contact</name>
+
+<ul spacing="compact">
+<li>leonvankammen|gmail.com</li>
+</ul>
+</section>
+
+<section anchor="iana-considerations"><name>IANA Considerations</name>
+<t>This document has no IANA actions.</t>
+</section>
+
+<section anchor="acknowledgments"><name>Acknowledgments</name>
+<t>TODO acknowledge.</t>
+</section>
+
+</middle>
+
+</rfc>

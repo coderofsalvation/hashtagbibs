@@ -1,0 +1,6 @@
+#!/bin/sh 
+set -e
+mmark RFC_TAGBIBS.md         > RFC_TAGBIBS.xml 
+mmark --html RFC_TAGBIBS.md  > RFC_TAGBIBS.html 
+xml2rfc --v3 RFC_TAGBIBS.xml # RFC_TAGBIBS.txt
+sed 's/<title>.*//g' -i README.md 
