@@ -50,7 +50,7 @@ Please get out the laundry
 @laundry@chores@todo
 ```
 
-These tagbibs basically tag 'laundry' by expanding into the following BibTags:
+These tagbibs basically tag 'laundry' by expanding into the following BibTags (during parsing/OCR-scanning):
 
 ```
 Please get out the laundry 

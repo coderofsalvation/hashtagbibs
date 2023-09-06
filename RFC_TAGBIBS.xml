@@ -52,7 +52,7 @@ The goal of this spec is three-fold:</t>
 
 @laundry@chores@todo
 </artwork>
-<t>These tagbibs basically tag 'laundry' by expanding into the following BibTags:</t>
+<t>These tagbibs basically tag 'laundry' by expanding into the following BibTags (during parsing/OCR-scanning):</t>
 
 <artwork>Please get out the laundry 
 

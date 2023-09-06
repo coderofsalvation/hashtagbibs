@@ -96,7 +96,7 @@ Table of Contents
    @laundry@chores@todo
 
    These tagbibs basically tag 'laundry' by expanding into the following
-   BibTags:
+   BibTags (during parsing/OCR-scanning):
 
    Please get out the laundry
 
