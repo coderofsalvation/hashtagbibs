@@ -22,9 +22,9 @@ fullname="L.R. van Kammen"
 
 .# Abstract
 
-Tagbibs (or simply: 'bibs') are tiny paper/voice-friendly tags, which expand into multiple [BibTags](https://en.wikipedia.org/wiki/BibTeX).<br>
-Using OCR, they're great for connecting scanned paper with online graphs.<br>
-But also using voice-recognition or Text in XR.<br>
+Tagbibs (or simply: 'bibs') are tiny tags, allowing mere mortals to connect words to other words using pencil, voice or keyboard.<br>
+They expand into multiple [BibTags](https://en.wikipedia.org/wiki/BibTeX).<br>
+For example, using OCR, scanned paper can 'connect' with online graphs.<br>
 Think of it as the brother of hashtags: a command for tagging-this-with-that.<br>
 The goal of this spec is three-fold:
 
@@ -59,7 +59,7 @@ Please get out the laundry
 }
 ```
 
-> the word `laundry` can now be highlighted in the human text. bibs are basically one step up from socialmedia hashtags, allowing mere mortals to connect words to other words using pencil or keyboard. 
+> the word `laundry` can now be highlighted in the human text. bibs are basically one step up from socialmedia hashtags, allowing mere mortals to connect words to other words using pencil, voice or keyboard. 
 
 There's no precise predicates or properties (just 'this points to that', which empowers citizen annotation (an essential precursor of RDF).
 
