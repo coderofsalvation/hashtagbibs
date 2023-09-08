@@ -12,9 +12,9 @@
 <abstract>
 <t><strong>hashtagbibs</strong> (or simply: <strong>'bibs'</strong>) are tiny tags, allowing mere mortals to connect words to other words using pencil, voice or keyboard.<br />
 
-They expand into multiple <eref target="https://en.wikipedia.org/wiki/BibTeX">BibTags</eref> snippets.<br />
+They expand into multiple (reversed) <eref target="https://en.wikipedia.org/wiki/BibTeX">BibTags</eref>, JSON or XML snippets.<br />
 
-For example, using OCR, scanned paper can 'connect' with online graphs.<br />
+For example, using OCR, scanned paper can now easily 'connect' with online graphs.<br />
 
 Think of it as the brother of hashtags: a command for tagging-this-with-that.<br />
 
@@ -33,7 +33,7 @@ The goal of this spec is three-fold:</t>
 
 <section anchor="what-are-bibs"><name>What are bibs</name>
 <t>&lt;img src=&quot;postit.jpg&quot; style=&quot;max-width:400px&quot;/&gt;</t>
-<t>bibs allow non-technical humans to write reversed BibTags in a short-form (on paper):</t>
+<t>bibs allow non-technical humans to write (reversed) BibTags, JSON or XML, in a short-form (on paper):</t>
 
 <artwork>John please get out the laundry 
 
@@ -44,31 +44,34 @@ The goal of this spec is three-fold:</t>
 </blockquote>
 <ul spacing="compact">
 <li><strong>tag</strong> <tt>john</tt> with tagname <tt>john</tt></li>
-<li><strong>tag</strong> <tt>laundry</tt> with tagname <tt>chores</tt> and <tt>todo</tt>, by expanding into the following BibTags:</li>
+<li><strong>tag</strong> <tt>laundry</tt> with tagname <tt>chores</tt> and <tt>todo</tt></li>
 </ul>
+<t>and expanding into the following formats:</t>
 
-<artwork>John please get out the laundry 
+<artwork>BibTeX             JSON                                   XML
+======             ====                                   ===
 
-@john{john,
-
+@john{john,        { &quot;tag&quot;:&quot;john&quot;, &quot;match&quot;:&quot;john&quot;}        &lt;tag name=&quot;john&quot;&gt;john&lt;/tag&gt;
+                     
 }
 
-@chores{laundry,
+@chores{laundry,   { &quot;tag&quot;:&quot;chores&quot;, &quot;match&quot;:&quot;laundry&quot;}   &lt;tag name=&quot;chores&quot;&gt;laundry&lt;/tag&gt;
   
 }
-@todo{laundry,
+@todo{laundry,     { &quot;tag&quot;:&quot;todo&quot;, &quot;match&quot;: &quot;laundry&quot;}    &lt;tag name=&quot;todo&quot;&gt;laundry&lt;/tag&gt;
 
 }
 </artwork>
 <blockquote><t>the word and <tt>john</tt> <tt>laundry</tt> can now be highlighted in the human text (or 3D object can be shown when their objectname matches). bibs are basically one step up from socialmedia hashtags, allowing mere mortals to connect words to other things using pencil, voice or keyboard.</t>
-</blockquote><t>There's no precise predicates or properties (just 'this points to that', which empowers citizen annotation (an essential precursor of RDF).</t>
-
+</blockquote><t>There's no precise predicates or properties, just simply 'this points to that', which empowers citizen annotation (an essential precursor of RDF).</t>
+<blockquote><t>NOTE: in the rest of this article, we use focus on BibTex for convenience (as it is the most terse outputformat of hashtagbibs).</t>
+</blockquote>
 <section anchor="format"><name>format</name>
 
 <ul spacing="compact">
-<li><tt>@&lt;word&gt;[@tag[@anothertag[...]]]</tt></li>
+<li><tt>#&lt;textpattern&gt;[@tag[@anothertag[...]]]</tt></li>
 </ul>
-<blockquote><t>syntactically, bibs are (concatenated) emaildomains without an extension</t>
+<blockquote><t>syntactically, bibs are hashtags with (concatenated) emaildomains without an extension</t>
 </blockquote><table>
 <thead>
 <tr>
@@ -80,22 +83,22 @@ The goal of this spec is three-fold:</t>
 <tbody>
 <tr>
 <td>javascript regex</td>
-<td><tt>/(@[a-zA-Z0-9_+]+@[a-zA-Z0-9_@]+)/g</tt></td>
+<td><tt>/(#[a-zA-Z0-9_+@\-]+(#)?)/g</tt></td>
 </tr>
 
 <tr>
 <td>shell grep</td>
-<td><tt>cat textwithbibs.txt | grep -oE '(@[a-zA-Z0-9_+]+@[a-zA-Z0-9_@]+)'</tt></td>
+<td><tt>cat textwithbibs.txt | grep -oE '/(#[a-zA-Z0-9_+@\-]+(#)?)/'</tt></td>
 </tr>
 
 <tr>
 <td>shell awk</td>
-<td><tt>cat textwithbibs.txt | xargs -n1 | awk '/(@[a-zA-Z0-9_+]+@[a-zA-Z0-9_@]+)/ { print $0 }'</tt></td>
+<td><tt>cat textwithbibs.txt | xargs -n1 | awk '/(#[a-zA-Z0-9_+@\-]+(#)?)/ { print $0 }'</tt></td>
 </tr>
 </tbody>
 </table>
 <ol spacing="compact">
-<li>to qualify as a bib, a word should start with a hashtag, and contain at least 1 <tt>@</tt> character</li>
+<li>to qualify as a bib, a word should start with a hashtag, and (optionally) contain on or more <tt>@</tt> characters</li>
 <li>last bib wins: overlapping bibs overwrite eachother (last tag(s) win)</li>
 <li>spaces are not allowed, maximum by using <tt>+</tt> to represents spaces (<tt>the+bill@todo</tt> e.g.)</li>
 </ol>
@@ -151,17 +154,43 @@ buy the great gatsby
 </blockquote></section>
 
 <section anchor="example-javascript-bibs-expander"><name>Example javascript bibs expander</name>
+<t>Tiny but powerful implications:</t>
 
-<artwork>var bibs   = { regex: /(@[a-zA-Z0-9_+]+@[a-zA-Z0-9_@]+)/g, tags: {}}
-text.replace( bibs.regex , (m,k,v) =&gt; {
-   tok   = m.substr(1).split(&quot;@&quot;)
-   match = tok.shift()            
-   tok.map( (t) =&gt; bibs.tags[match] = `@${t}{${match},\n}\n` )
-})
-text = Object.values(bibs.tags).join('\n') + bibtex.replace( bibs.regex, '')
+<artwork>expandBibs = (text) =&gt; {
+    let bibs   = { regex: /(#[a-zA-Z0-9_+@\-]+(#)?)/g, tags: {}}
+    text.replace( bibs.regex , (m,k,v) =&gt; {
+       tok   = m.substr(1).split(&quot;@&quot;)
+       match = tok.shift()
+       console.log(match)
+       if( tok.length ) tok.map( (t) =&gt; bibs.tags[t] = `@${t}{${match},\n}` ) 
+       else if( match.substr(-1) == '#' ) 
+          bibs.tags[match] = `@{${match.replace(/#/,'')}}`
+       else bibs.tags[match] = `@${match}{${match},\n}`
+    })
+    return text.replace( bibs.regex, '') + Object.values(bibs.tags).join('\n')
+}
+
+t = expandBibs(`john, could you feed the cat?
+
+  #john
+  #laundry@chores@todo
+  #some-scope#
+`)
 </artwork>
-<blockquote><t>Tiny but powerful</t>
-</blockquote></section>
+<t>BibTeX OUTPUT:</t>
+
+<artwork> john, could you feed the cat?
+ 
+ 
+ @john{john,
+ }
+ @chores{laundry,
+ }
+ @todo{laundry,
+ }
+ @{some-scope}
+</artwork>
+</section>
 
 <section anchor="merging-bibtagged-overlaps"><name>Merging (BibTagged) overlaps</name>
 <t>When a bib (<tt>#great+gatsby@book</tt> is copy-pasted into another document (a PDF or Textfile with a <eref target="https://visual-meta.info">visual-meta</eref> appendix e.g.):</t>
@@ -186,160 +215,6 @@ text = Object.values(bibs.tags).join('\n') + bibtex.replace( bibs.regex, '')
 </ul>
 <blockquote><t>Format: <tt>#@&lt;bibtag&gt;[ + @&lt;bibtag&gt; + [ ... ] ]</tt></t>
 </blockquote></section>
-
-<section anchor="why-bibtex"><name>Why BibTex</name>
-<t>The combination of Bibs and BibTex makes a great lowest common denominator for linking data:</t>
-<blockquote><t>&quot;When a car breaks down, the ones <strong>without</strong> turbosupercharger are easier to fix&quot;</t>
-</blockquote><t>Unlike XML or JSON, the typeless, unnested, everything-is-text nature of BibTeX tags is a great advantage for introspection.<br />
-<br />
-It's a missing sensemaking precursor to extrospective RDF.<br />
-
-BibTeX-appendices are already used in the digital AND physical world (academic books, <eref target="https://visual-meta.info">visual-meta</eref>), perhaps due to its terseness &amp; simplicity.<br />
-<br />
-In that sense, it's one step up from the <tt>.ini</tt> fileformat (which has never leaked into the physical world like BibTex):</t>
-
-<ol spacing="compact">
-<li>&lt;b id=&quot;frictionless-copy-paste&quot;&gt;frictionless copy/pasting&lt;/b&gt; (by humans) of (unobtrusive) content AND metadata</li>
-<li>an introspective 'sketchpad' for metadata, which can (optionally) mature into RDF later<br />
-</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th>characteristic</th>
-<th>UTF8 Plain Text (with BibTeX)</th>
-<th>RDF</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>perspective</td>
-<td>introspective</td>
-<td>extrospective</td>
-</tr>
-
-<tr>
-<td>structure</td>
-<td>fuzzy (sensemaking)</td>
-<td>precise</td>
-</tr>
-
-<tr>
-<td>space/scope</td>
-<td>local</td>
-<td>world</td>
-</tr>
-
-<tr>
-<td>everything is text (string)</td>
-<td>yes</td>
-<td>no</td>
-</tr>
-
-<tr>
-<td>voice/paper-friendly</td>
-<td><eref target="https://github.com/coderofsalvation/tagbibs">bibs</eref></td>
-<td>no</td>
-</tr>
-
-<tr>
-<td>leaves (dictated) text intact</td>
-<td>yes</td>
-<td>no</td>
-</tr>
-
-<tr>
-<td>markup language</td>
-<td>just an appendix</td>
-<td>~4 different</td>
-</tr>
-
-<tr>
-<td>polyglot format</td>
-<td>no</td>
-<td>yes</td>
-</tr>
-
-<tr>
-<td>easy to copy/paste content+metadata</td>
-<td>yes</td>
-<td>up to application</td>
-</tr>
-
-<tr>
-<td>easy to write/repair for layman</td>
-<td>yes</td>
-<td>depends</td>
-</tr>
-
-<tr>
-<td>easy to (de)serialize</td>
-<td>yes (fits on A4 paper)</td>
-<td>depends</td>
-</tr>
-
-<tr>
-<td>infrastructure</td>
-<td>selfcontained (plain text)</td>
-<td>(semi)networked</td>
-</tr>
-
-<tr>
-<td>freeform tagging/annotation</td>
-<td>yes, terse</td>
-<td>yes, verbose</td>
-</tr>
-
-<tr>
-<td>can be appended to text-content</td>
-<td>yes</td>
-<td>up to application</td>
-</tr>
-
-<tr>
-<td>copy-paste text preserves metadata</td>
-<td>yes</td>
-<td>up to application</td>
-</tr>
-
-<tr>
-<td>emoji</td>
-<td>yes</td>
-<td>depends on encoding</td>
-</tr>
-
-<tr>
-<td>predicates</td>
-<td>free</td>
-<td>semi pre-determined</td>
-</tr>
-
-<tr>
-<td>implementation/network overhead</td>
-<td>no</td>
-<td>depends</td>
-</tr>
-
-<tr>
-<td>used in (physical) books/PDF</td>
-<td>yes (visual-meta)</td>
-<td>no</td>
-</tr>
-
-<tr>
-<td>terse non-verb predicates</td>
-<td>yes</td>
-<td>no</td>
-</tr>
-
-<tr>
-<td>nested structures</td>
-<td>no (but: BibTex rulers)</td>
-<td>yes</td>
-</tr>
-</tbody>
-</table></section>
 
 <section anchor="bibrulers-bibtex-microformats"><name>BibRulers (BibTex microformats)</name>
 <t>The following allows for microformats:</t>
