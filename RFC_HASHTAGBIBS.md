@@ -121,7 +121,7 @@ This mimetype indicates that bibs and their expanded format occuring in plain te
 * automatically create/detect links between textual/spatial objects within the document (see [XR Fragments](https://xfragment.org))
 * detect opiniated bibtag microformats ([visual-meta](https://visual-meta.info) e.g.)
 
-> This significantly expands expressiveness and portability of human tagged text, by **postponing machine-concerns to the end of the human text** in contrast to literal interweaving of content and markupsymbols (
+> This significantly expands expressiveness and portability of human tagged text, by **postponing machine-concerns to the end of the human text** in contrast to literal interweaving of content and markupsymbols (like markdown/HTML/XML/JSON etc)
 
 ## Example: an textual kanban using tags
 

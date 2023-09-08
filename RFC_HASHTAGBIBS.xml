@@ -150,7 +150,7 @@ Think of it as the brother of hashtags: a command for tagging-this-with-that.</t
 <li>automatically create/detect links between textual/spatial objects within the document (see <eref target="https://xfragment.org">XR Fragments</eref>)</li>
 <li>detect opiniated bibtag microformats (<eref target="https://visual-meta.info">visual-meta</eref> e.g.)</li>
 </ul>
-<blockquote><t>This significantly expands expressiveness and portability of human tagged text, by <strong>postponing machine-concerns to the end of the human text</strong> in contrast to literal interweaving of content and markupsymbols (</t>
+<blockquote><t>This significantly expands expressiveness and portability of human tagged text, by <strong>postponing machine-concerns to the end of the human text</strong> in contrast to literal interweaving of content and markupsymbols (like markdown/HTML/XML/JSON etc)</t>
 </blockquote>
 <section anchor="example-an-textual-kanban-using-tags"><name>Example: an textual kanban using tags</name>
 
