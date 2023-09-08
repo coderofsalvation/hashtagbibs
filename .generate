@@ -3,4 +3,4 @@ set -e
 mmark RFC_HASHTAGBIBS.md         > RFC_HASHTAGBIBS.xml 
 mmark --html RFC_HASHTAGBIBS.md  > RFC_HASHTAGBIBS.html 
 xml2rfc --v3 RFC_HASHTAGBIBS.xml # RFC_HASHTAGBIBS.txt
-sed 's/<title>.*//g' -i RFC_HASHTAGBIBS.md 
+sed 's/<title>.*//g' -i RFC_HASHTAGBIBS.html 
