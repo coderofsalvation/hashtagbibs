@@ -29,8 +29,8 @@ They expand into multiple (reversed) [BibTags](https://en.wikipedia.org/wiki/Bib
 
 The goal of this spec is three-fold:
 
-* specify bibs: a terse tagdescription which expands into a reversed BibTag 
-* specify bibs as URI fragment: a way to hint browsers to jump to (bib)tagged content
+* specify bibs: a plaintext tagging DSL which expands into various languages
+* specify bibs as URI fragment: a way to hint browsers to filter a document on certain tag(s)
 * specify bibrulers: to specify bibtags microformats like [visual-meta](https://visual-meta.info)
 
 {mainmatter}
@@ -209,7 +209,7 @@ Just like regular [URI Fragments](https://en.wikipedia.org/wiki/URI_fragment) th
 
 > Format: `#@<bibtag>[ + @<bibtag> + [ ... ] ]`
 
-# BibRulers (BibTex microformats)
+# Rulers (microformats)
 
 The following allows for microformats:
 
@@ -221,17 +221,20 @@ Apples, cinnamon, sugar and dough make a great applepie.
 #recipe-stop#
 ```
 
-expands into the following BibTex
+expands into the following:
 
 ```
-${recipe-start}
-@todo{applepie,
+BibTex             JSON                                HTML
+======             ====                                ====
 
+${recipe-start}    { "ruler":"recipe-start" }          <ruler name="recipe-start"/>
+@todo{applepie,    { "tag":"todo", "match":applepie"}  <tag name="todo">applepie</tag>
+              
 }
-${recipe-stop}
+${recipe-stop}     { "ruler":"recipe-stop" }           <ruler name="recipe-stop"/>
 ```
 
-BibTex microformats have been pioneered by the [visual-meta](https://visual-meta.info) microformat as a means of organizing BibTags:
+BibTex rulers have been pioneered by the [visual-meta](https://visual-meta.info) microformat as a means of organizing BibTags:
 
 ```
 @{visual-meta-start}
@@ -268,8 +271,8 @@ Don't forget that Bibrulers are simply rulers (not blocks):
 
 1. don't try to re-invent XML or JSON
 1. don't promote traversing graphs (instead: just a list with tags)
-1. they promote rather dumb, unnested lists
-1. they  are much faster/simpler to lookup, implement, (de)serialize in low- and hihglevel languages.
+1. they promote rather dumb, unnested, streamable lists (unlike HTML/XML/JSON) adhering to JSONLines/CSV
+1. they are much faster/simpler to lookup, implement, (de)serialize in low- and hihglevel languages.
 
 # Contact
 
