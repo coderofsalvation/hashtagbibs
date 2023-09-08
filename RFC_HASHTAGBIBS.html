@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>tagbibs</title>
+  <title>hashtagbibs</title>
   <meta name="GENERATOR" content="github.com/mmarkdown/mmark Mmark Markdown Processor - mmark.miek.nl">
   <meta charset="utf-8">
 </head>
@@ -11,8 +11,8 @@
 
 <h1 class="special" id="abstract">Abstract</h1>
 
-<p>HashTagBibs (or simply: <strong>&lsquo;bibs&rsquo;</strong>) are tiny tags, allowing mere mortals to connect words to other words using pencil, voice or keyboard.<br>
-They expand into multiple <a href="https://en.wikipedia.org/wiki/BibTeX">BibTags</a>.<br>
+<p><strong>hashtagbibs</strong> (or simply: <strong>&lsquo;bibs&rsquo;</strong>) are tiny tags, allowing mere mortals to connect words to other words using pencil, voice or keyboard.<br>
+They expand into multiple <a href="https://en.wikipedia.org/wiki/BibTeX">BibTags</a> snippets.<br>
 For example, using OCR, scanned paper can &lsquo;connect&rsquo; with online graphs.<br>
 Think of it as the brother of hashtags: a command for tagging-this-with-that.<br>
 The goal of this spec is three-fold:</p>
@@ -205,9 +205,184 @@ text = Object.values(bibs.tags).join('\n') + bibtex.replace( bibs.regex, '')
 <p>Format: <code>#@&lt;bibtag&gt;[ + @&lt;bibtag&gt; + [ ... ] ]</code></p>
 </blockquote>
 
-<h1 id="what-are-bibrulers">What are bibrulers</h1>
+<h1 id="why-bibtex">Why BibTex</h1>
 
-<p>Bibrulers are linebased separators, used by <a href="https://visual-meta.info">visual-meta</a> as a means of organizing BibTags:</p>
+<p>The combination of Bibs and BibTex makes a great lowest common denominator for linking data:</p>
+
+<blockquote>
+<p>&ldquo;When a car breaks down, the ones <strong>without</strong> turbosupercharger are easier to fix&rdquo;</p>
+</blockquote>
+
+<p>Unlike XML or JSON, the typeless, unnested, everything-is-text nature of BibTeX tags is a great advantage for introspection.<br><br>
+It&rsquo;s a missing sensemaking precursor to extrospective RDF.<br>
+BibTeX-appendices are already used in the digital AND physical world (academic books, <a href="https://visual-meta.info">visual-meta</a>), perhaps due to its terseness &amp; simplicity.<br><br>
+In that sense, it&rsquo;s one step up from the <code>.ini</code> fileformat (which has never leaked into the physical world like BibTex):</p>
+
+<ol>
+<li><b id="frictionless-copy-paste">frictionless copy/pasting</b> (by humans) of (unobtrusive) content AND metadata</li>
+<li>an introspective &lsquo;sketchpad&rsquo; for metadata, which can (optionally) mature into RDF later<br>
+</li>
+</ol>
+
+<table>
+<thead>
+<tr>
+<th>characteristic</th>
+<th>UTF8 Plain Text (with BibTeX)</th>
+<th>RDF</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>perspective</td>
+<td>introspective</td>
+<td>extrospective</td>
+</tr>
+
+<tr>
+<td>structure</td>
+<td>fuzzy (sensemaking)</td>
+<td>precise</td>
+</tr>
+
+<tr>
+<td>space/scope</td>
+<td>local</td>
+<td>world</td>
+</tr>
+
+<tr>
+<td>everything is text (string)</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+
+<tr>
+<td>voice/paper-friendly</td>
+<td><a href="https://github.com/coderofsalvation/tagbibs">bibs</a></td>
+<td>no</td>
+</tr>
+
+<tr>
+<td>leaves (dictated) text intact</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+
+<tr>
+<td>markup language</td>
+<td>just an appendix</td>
+<td>~4 different</td>
+</tr>
+
+<tr>
+<td>polyglot format</td>
+<td>no</td>
+<td>yes</td>
+</tr>
+
+<tr>
+<td>easy to copy/paste content+metadata</td>
+<td>yes</td>
+<td>up to application</td>
+</tr>
+
+<tr>
+<td>easy to write/repair for layman</td>
+<td>yes</td>
+<td>depends</td>
+</tr>
+
+<tr>
+<td>easy to (de)serialize</td>
+<td>yes (fits on A4 paper)</td>
+<td>depends</td>
+</tr>
+
+<tr>
+<td>infrastructure</td>
+<td>selfcontained (plain text)</td>
+<td>(semi)networked</td>
+</tr>
+
+<tr>
+<td>freeform tagging/annotation</td>
+<td>yes, terse</td>
+<td>yes, verbose</td>
+</tr>
+
+<tr>
+<td>can be appended to text-content</td>
+<td>yes</td>
+<td>up to application</td>
+</tr>
+
+<tr>
+<td>copy-paste text preserves metadata</td>
+<td>yes</td>
+<td>up to application</td>
+</tr>
+
+<tr>
+<td>emoji</td>
+<td>yes</td>
+<td>depends on encoding</td>
+</tr>
+
+<tr>
+<td>predicates</td>
+<td>free</td>
+<td>semi pre-determined</td>
+</tr>
+
+<tr>
+<td>implementation/network overhead</td>
+<td>no</td>
+<td>depends</td>
+</tr>
+
+<tr>
+<td>used in (physical) books/PDF</td>
+<td>yes (visual-meta)</td>
+<td>no</td>
+</tr>
+
+<tr>
+<td>terse non-verb predicates</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+
+<tr>
+<td>nested structures</td>
+<td>no (but: BibTex rulers)</td>
+<td>yes</td>
+</tr>
+</tbody>
+</table>
+
+<h1 id="bibrulers-bibtex-microformats">BibRulers (BibTex microformats)</h1>
+
+<p>The following allows for microformats:</p>
+
+<pre><code>Apples, cinnamon, sugar and dough make a great applepie.
+
+#recipe-start#
+#applepie@todo
+#recipe-stop#
+</code></pre>
+
+<p>expands into the following BibTex</p>
+
+<pre><code>${recipe-start}
+@todo{applepie,
+
+}
+${recipe-stop}
+</code></pre>
+
+<p>BibTex microformats have been pioneered by the <a href="https://visual-meta.info">visual-meta</a> microformat as a means of organizing BibTags:</p>
 
 <pre><code>@{visual-meta-start}
 @{visual-meta-header-start}
@@ -238,7 +413,7 @@ title = {The Future of Text ||},
 </code></pre>
 
 <p>Why not a nested tree-structure? This kneejerk reaction should always be considered &lsquo;a temporary option&rsquo;.<br>
-Bibrulers:</p>
+Don&rsquo;t forget that Bibrulers are simply rulers (not blocks):</p>
 
 <ol>
 <li>don&rsquo;t try to re-invent XML or JSON</li>

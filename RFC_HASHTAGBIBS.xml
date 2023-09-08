@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- name="GENERATOR" content="github.com/mmarkdown/mmark Mmark Markdown Processor - mmark.miek.nl" -->
-<rfc version="3" ipr="trust200902" docName="draft-tagbibs-leonvankammen-00" submissionType="IETF" category="info" xml:lang="en" xmlns:xi="http://www.w3.org/2001/XInclude" indexInclude="true" consensus="true">
+<rfc version="3" ipr="trust200902" docName="draft-hashtagbibs-leonvankammen-00" submissionType="IETF" category="info" xml:lang="en" xmlns:xi="http://www.w3.org/2001/XInclude" indexInclude="true" consensus="true">
 
 <front>
-<title>tagbibs</title><seriesInfo value="draft-tagbibs-leonvankammen-00" stream="IETF" status="informational" name="tagbibs"></seriesInfo>
+<title>hashtagbibs</title><seriesInfo value="draft-hashtagbibs-leonvankammen-00" stream="IETF" status="informational" name="hashtagbibs"></seriesInfo>
 <author initials="L.R." surname="van Kammen" fullname="L.R. van Kammen"><organization></organization><address><postal><street></street>
 </postal></address></author><date/>
 <area>Internet</area>
 <workgroup>Internet</workgroup>
 
 <abstract>
-<t>HashTagBibs (or simply: <strong>'bibs'</strong>) are tiny tags, allowing mere mortals to connect words to other words using pencil, voice or keyboard.<br />
+<t><strong>hashtagbibs</strong> (or simply: <strong>'bibs'</strong>) are tiny tags, allowing mere mortals to connect words to other words using pencil, voice or keyboard.<br />
 
-They expand into multiple <eref target="https://en.wikipedia.org/wiki/BibTeX">BibTags</eref>.<br />
+They expand into multiple <eref target="https://en.wikipedia.org/wiki/BibTeX">BibTags</eref> snippets.<br />
 
 For example, using OCR, scanned paper can 'connect' with online graphs.<br />
 
@@ -187,8 +187,178 @@ text = Object.values(bibs.tags).join('\n') + bibtex.replace( bibs.regex, '')
 <blockquote><t>Format: <tt>#@&lt;bibtag&gt;[ + @&lt;bibtag&gt; + [ ... ] ]</tt></t>
 </blockquote></section>
 
-<section anchor="what-are-bibrulers"><name>What are bibrulers</name>
-<t>Bibrulers are linebased separators, used by <eref target="https://visual-meta.info">visual-meta</eref> as a means of organizing BibTags:</t>
+<section anchor="why-bibtex"><name>Why BibTex</name>
+<t>The combination of Bibs and BibTex makes a great lowest common denominator for linking data:</t>
+<blockquote><t>&quot;When a car breaks down, the ones <strong>without</strong> turbosupercharger are easier to fix&quot;</t>
+</blockquote><t>Unlike XML or JSON, the typeless, unnested, everything-is-text nature of BibTeX tags is a great advantage for introspection.<br />
+<br />
+It's a missing sensemaking precursor to extrospective RDF.<br />
+
+BibTeX-appendices are already used in the digital AND physical world (academic books, <eref target="https://visual-meta.info">visual-meta</eref>), perhaps due to its terseness &amp; simplicity.<br />
+<br />
+In that sense, it's one step up from the <tt>.ini</tt> fileformat (which has never leaked into the physical world like BibTex):</t>
+
+<ol spacing="compact">
+<li>&lt;b id=&quot;frictionless-copy-paste&quot;&gt;frictionless copy/pasting&lt;/b&gt; (by humans) of (unobtrusive) content AND metadata</li>
+<li>an introspective 'sketchpad' for metadata, which can (optionally) mature into RDF later<br />
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>characteristic</th>
+<th>UTF8 Plain Text (with BibTeX)</th>
+<th>RDF</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>perspective</td>
+<td>introspective</td>
+<td>extrospective</td>
+</tr>
+
+<tr>
+<td>structure</td>
+<td>fuzzy (sensemaking)</td>
+<td>precise</td>
+</tr>
+
+<tr>
+<td>space/scope</td>
+<td>local</td>
+<td>world</td>
+</tr>
+
+<tr>
+<td>everything is text (string)</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+
+<tr>
+<td>voice/paper-friendly</td>
+<td><eref target="https://github.com/coderofsalvation/tagbibs">bibs</eref></td>
+<td>no</td>
+</tr>
+
+<tr>
+<td>leaves (dictated) text intact</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+
+<tr>
+<td>markup language</td>
+<td>just an appendix</td>
+<td>~4 different</td>
+</tr>
+
+<tr>
+<td>polyglot format</td>
+<td>no</td>
+<td>yes</td>
+</tr>
+
+<tr>
+<td>easy to copy/paste content+metadata</td>
+<td>yes</td>
+<td>up to application</td>
+</tr>
+
+<tr>
+<td>easy to write/repair for layman</td>
+<td>yes</td>
+<td>depends</td>
+</tr>
+
+<tr>
+<td>easy to (de)serialize</td>
+<td>yes (fits on A4 paper)</td>
+<td>depends</td>
+</tr>
+
+<tr>
+<td>infrastructure</td>
+<td>selfcontained (plain text)</td>
+<td>(semi)networked</td>
+</tr>
+
+<tr>
+<td>freeform tagging/annotation</td>
+<td>yes, terse</td>
+<td>yes, verbose</td>
+</tr>
+
+<tr>
+<td>can be appended to text-content</td>
+<td>yes</td>
+<td>up to application</td>
+</tr>
+
+<tr>
+<td>copy-paste text preserves metadata</td>
+<td>yes</td>
+<td>up to application</td>
+</tr>
+
+<tr>
+<td>emoji</td>
+<td>yes</td>
+<td>depends on encoding</td>
+</tr>
+
+<tr>
+<td>predicates</td>
+<td>free</td>
+<td>semi pre-determined</td>
+</tr>
+
+<tr>
+<td>implementation/network overhead</td>
+<td>no</td>
+<td>depends</td>
+</tr>
+
+<tr>
+<td>used in (physical) books/PDF</td>
+<td>yes (visual-meta)</td>
+<td>no</td>
+</tr>
+
+<tr>
+<td>terse non-verb predicates</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+
+<tr>
+<td>nested structures</td>
+<td>no (but: BibTex rulers)</td>
+<td>yes</td>
+</tr>
+</tbody>
+</table></section>
+
+<section anchor="bibrulers-bibtex-microformats"><name>BibRulers (BibTex microformats)</name>
+<t>The following allows for microformats:</t>
+
+<artwork>Apples, cinnamon, sugar and dough make a great applepie.
+
+#recipe-start#
+#applepie@todo
+#recipe-stop#
+</artwork>
+<t>expands into the following BibTex</t>
+
+<artwork>${recipe-start}
+@todo{applepie,
+
+}
+${recipe-stop}
+</artwork>
+<t>BibTex microformats have been pioneered by the <eref target="https://visual-meta.info">visual-meta</eref> microformat as a means of organizing BibTags:</t>
 
 <artwork>@{visual-meta-start}
 @{visual-meta-header-start}
@@ -218,7 +388,7 @@ title = {The Future of Text ||},
 </artwork>
 <t>Why not a nested tree-structure? This kneejerk reaction should always be considered 'a temporary option'.<br />
 
-Bibrulers:</t>
+Don't forget that Bibrulers are simply rulers (not blocks):</t>
 
 <ol spacing="compact">
 <li>don't try to re-invent XML or JSON</li>

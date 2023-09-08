@@ -8,16 +8,16 @@ Intended status: Informational
 Expires: 11 March 2024
 
 
-                                tagbibs
-                     draft-tagbibs-leonvankammen-00
+                              hashtagbibs
+                   draft-hashtagbibs-leonvankammen-00
 
 Abstract
 
-   HashTagBibs (or simply: *'bibs'*) are tiny tags, allowing mere
+   *hashtagbibs* (or simply: *'bibs'*) are tiny tags, allowing mere
    mortals to connect words to other words using pencil, voice or
    keyboard.
    They expand into multiple BibTags (https://en.wikipedia.org/wiki/
-   BibTeX).
+   BibTeX) snippets.
    For example, using OCR, scanned paper can 'connect' with online
    graphs.
    Think of it as the brother of hashtags: a command for tagging-this-
@@ -55,7 +55,7 @@ Status of This Memo
 
 van Kammen                Expires 11 March 2024                 [Page 1]
 
-Internet-Draft                   tagbibs                  September 2023
+Internet-Draft                 hashtagbibs                September 2023
 
 
 Copyright Notice
@@ -80,10 +80,11 @@ Table of Contents
      1.3.  Example javascript bibs expander  . . . . . . . . . . . .   4
      1.4.  Merging (BibTagged) overlaps  . . . . . . . . . . . . . .   5
    2.  What are bibs in a URI fragment . . . . . . . . . . . . . . .   5
-   3.  What are bibrulers  . . . . . . . . . . . . . . . . . . . . .   5
-   4.  Contact . . . . . . . . . . . . . . . . . . . . . . . . . . .   6
-   5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   6
-   6.  Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .   6
+   3.  Why BibTex  . . . . . . . . . . . . . . . . . . . . . . . . .   5
+   4.  BibRulers (BibTex microformats) . . . . . . . . . . . . . . .   7
+   5.  Contact . . . . . . . . . . . . . . . . . . . . . . . . . . .   8
+   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   9
+   7.  Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .   9
 
 1.  What are bibs
 
@@ -108,10 +109,9 @@ Table of Contents
 
 
 
-
 van Kammen                Expires 11 March 2024                 [Page 2]
 
-Internet-Draft                   tagbibs                  September 2023
+Internet-Draft                 hashtagbibs                September 2023
 
 
    John please get out the laundry
@@ -167,7 +167,7 @@ Internet-Draft                   tagbibs                  September 2023
 
 van Kammen                Expires 11 March 2024                 [Page 3]
 
-Internet-Draft                   tagbibs                  September 2023
+Internet-Draft                 hashtagbibs                September 2023
 
 
    2.  last bib wins: overlapping bibs overwrite eachother (last tag(s)
@@ -223,7 +223,7 @@ Internet-Draft                   tagbibs                  September 2023
 
 van Kammen                Expires 11 March 2024                 [Page 4]
 
-Internet-Draft                   tagbibs                  September 2023
+Internet-Draft                 hashtagbibs                September 2023
 
 
 var bibs   = { regex: /(@[a-zA-Z0-9_+]+@[a-zA-Z0-9_@]+)/g, tags: {}}
@@ -263,24 +263,146 @@ text = Object.values(bibs.tags).join('\n') + bibtex.replace( bibs.regex, '')
 
    |  Format: #@<bibtag>[ + @<bibtag> + [ ... ] ]
 
-3.  What are bibrulers
+3.  Why BibTex
 
-   Bibrulers are linebased separators, used by visual-meta
-   (https://visual-meta.info) as a means of organizing BibTags:
+   The combination of Bibs and BibTex makes a great lowest common
+   denominator for linking data:
 
+   |  "When a car breaks down, the ones *without* turbosupercharger are
+   |  easier to fix"
 
-
-
-
-
+   Unlike XML or JSON, the typeless, unnested, everything-is-text nature
+   of BibTeX tags is a great advantage for introspection.
 
 
 
 
 van Kammen                Expires 11 March 2024                 [Page 5]
 
-Internet-Draft                   tagbibs                  September 2023
+Internet-Draft                 hashtagbibs                September 2023
 
+
+   It's a missing sensemaking precursor to extrospective RDF.
+   BibTeX-appendices are already used in the digital AND physical world
+   (academic books, visual-meta (https://visual-meta.info)), perhaps due
+   to its terseness & simplicity.
+
+   In that sense, it's one step up from the .ini fileformat (which has
+   never leaked into the physical world like BibTex):
+
+   1.  <b id="frictionless-copy-paste">frictionless copy/pasting</b> (by
+       humans) of (unobtrusive) content AND metadata
+   2.  an introspective 'sketchpad' for metadata, which can (optionally)
+       mature into RDF later
+
+   +================+=====================================+===============+
+   |characteristic  |UTF8 Plain Text (with BibTeX)        |RDF            |
+   +================+=====================================+===============+
+   |perspective     |introspective                        |extrospective  |
+   +----------------+-------------------------------------+---------------+
+   |structure       |fuzzy (sensemaking)                  |precise        |
+   +----------------+-------------------------------------+---------------+
+   |space/scope     |local                                |world          |
+   +----------------+-------------------------------------+---------------+
+   |everything is   |yes                                  |no             |
+   |text (string)   |                                     |               |
+   +----------------+-------------------------------------+---------------+
+   |voice/paper-    |bibs                                 |no             |
+   |friendly        |(https://github.com/coderofsalvation/|               |
+   |                |tagbibs)                             |               |
+   +----------------+-------------------------------------+---------------+
+   |leaves          |yes                                  |no             |
+   |(dictated) text |                                     |               |
+   |intact          |                                     |               |
+   +----------------+-------------------------------------+---------------+
+   |markup language |just an appendix                     |~4 different   |
+   +----------------+-------------------------------------+---------------+
+   |polyglot format |no                                   |yes            |
+   +----------------+-------------------------------------+---------------+
+   |easy to copy/   |yes                                  |up to          |
+   |paste           |                                     |application    |
+   |content+metadata|                                     |               |
+   +----------------+-------------------------------------+---------------+
+   |easy to write/  |yes                                  |depends        |
+   |repair for      |                                     |               |
+   |layman          |                                     |               |
+   +----------------+-------------------------------------+---------------+
+   |easy to         |yes (fits on A4 paper)               |depends        |
+   |(de)serialize   |                                     |               |
+   +----------------+-------------------------------------+---------------+
+
+
+
+van Kammen                Expires 11 March 2024                 [Page 6]
+
+Internet-Draft                 hashtagbibs                September 2023
+
+
+   |infrastructure  |selfcontained (plain text)           |(semi)networked|
+   +----------------+-------------------------------------+---------------+
+   |freeform        |yes, terse                           |yes, verbose   |
+   |tagging/        |                                     |               |
+   |annotation      |                                     |               |
+   +----------------+-------------------------------------+---------------+
+   |can be appended |yes                                  |up to          |
+   |to text-content |                                     |application    |
+   +----------------+-------------------------------------+---------------+
+   |copy-paste text |yes                                  |up to          |
+   |preserves       |                                     |application    |
+   |metadata        |                                     |               |
+   +----------------+-------------------------------------+---------------+
+   |emoji           |yes                                  |depends on     |
+   |                |                                     |encoding       |
+   +----------------+-------------------------------------+---------------+
+   |predicates      |free                                 |semi pre-      |
+   |                |                                     |determined     |
+   +----------------+-------------------------------------+---------------+
+   |implementation/ |no                                   |depends        |
+   |network overhead|                                     |               |
+   +----------------+-------------------------------------+---------------+
+   |used in         |yes (visual-meta)                    |no             |
+   |(physical)      |                                     |               |
+   |books/PDF       |                                     |               |
+   +----------------+-------------------------------------+---------------+
+   |terse non-verb  |yes                                  |no             |
+   |predicates      |                                     |               |
+   +----------------+-------------------------------------+---------------+
+   |nested          |no (but: BibTex rulers)              |yes            |
+   |structures      |                                     |               |
+   +----------------+-------------------------------------+---------------+
+
+                                  Table 3
+
+4.  BibRulers (BibTex microformats)
+
+   The following allows for microformats:
+
+   Apples, cinnamon, sugar and dough make a great applepie.
+
+   #recipe-start#
+   #applepie@todo
+   #recipe-stop#
+
+   expands into the following BibTex
+
+
+
+
+
+van Kammen                Expires 11 March 2024                 [Page 7]
+
+Internet-Draft                 hashtagbibs                September 2023
+
+
+   ${recipe-start}
+   @todo{applepie,
+
+   }
+   ${recipe-stop}
+
+   BibTex microformats have been pioneered by the visual-meta
+   (https://visual-meta.info) microformat as a means of organizing
+   BibTags:
 
    @{visual-meta-start}
    @{visual-meta-header-start}
@@ -310,7 +432,7 @@ Internet-Draft                   tagbibs                  September 2023
 
    Why not a nested tree-structure?  This kneejerk reaction should
    always be considered 'a temporary option'.
-   Bibrulers:
+   Don't forget that Bibrulers are simply rulers (not blocks):
 
    1.  don't try to re-invent XML or JSON
    2.  don't promote traversing graphs (instead: just a list with tags)
@@ -318,19 +440,65 @@ Internet-Draft                   tagbibs                  September 2023
    4.  they are much faster/simpler to lookup, implement, (de)serialize
        in low- and hihglevel languages.
 
-4.  Contact
+5.  Contact
+
+
+
+
+van Kammen                Expires 11 March 2024                 [Page 8]
+
+Internet-Draft                 hashtagbibs                September 2023
+
 
    *  leonvankammen|gmail.com
 
-5.  IANA Considerations
+6.  IANA Considerations
 
    This document has no IANA actions.
 
-6.  Acknowledgments
+7.  Acknowledgments
 
    TODO acknowledge.
 
 
 
 
-van Kammen                Expires 11 March 2024                 [Page 6]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+van Kammen                Expires 11 March 2024                 [Page 9]

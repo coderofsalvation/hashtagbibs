@@ -1,6 +1,6 @@
 #!/bin/sh 
 set -e
-mmark RFC_TAGBIBS.md         > RFC_TAGBIBS.xml 
-mmark --html RFC_TAGBIBS.md  > RFC_TAGBIBS.html 
-xml2rfc --v3 RFC_TAGBIBS.xml # RFC_TAGBIBS.txt
-sed 's/<title>.*//g' -i RFC_TAGBIBS.md 
+mmark RFC_HASHTAGBIBS.md         > RFC_HASHTAGBIBS.xml 
+mmark --html RFC_HASHTAGBIBS.md  > RFC_HASHTAGBIBS.html 
+xml2rfc --v3 RFC_HASHTAGBIBS.xml # RFC_HASHTAGBIBS.txt
+sed 's/<title>.*//g' -i RFC_HASHTAGBIBS.md 

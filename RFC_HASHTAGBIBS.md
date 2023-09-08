@@ -1,11 +1,11 @@
 %%%
-Title = "tagbibs"
+Title = "hashtagbibs"
 area = "Internet"
 workgroup = "Internet"
 
 [seriesInfo]
-name = "tagbibs"
-value = "draft-tagbibs-leonvankammen-00"
+name = "hashtagbibs"
+value = "draft-hashtagbibs-leonvankammen-00"
 stream = "IETF"
 status = "informational"
 
@@ -22,8 +22,8 @@ fullname="L.R. van Kammen"
 
 .# Abstract
 
-HashTagBibs (or simply: **'bibs'**) are tiny tags, allowing mere mortals to connect words to other words using pencil, voice or keyboard.<br>
-They expand into multiple [BibTags](https://en.wikipedia.org/wiki/BibTeX).<br>
+**hashtagbibs** (or simply: **'bibs'**) are tiny tags, allowing mere mortals to connect words to other words using pencil, voice or keyboard.<br>
+They expand into multiple [BibTags](https://en.wikipedia.org/wiki/BibTeX) snippets.<br>
 For example, using OCR, scanned paper can 'connect' with online graphs.<br>
 Think of it as the brother of hashtags: a command for tagging-this-with-that.<br>
 The goal of this spec is three-fold:
@@ -159,9 +159,67 @@ Just like regular [URI Fragments](https://en.wikipedia.org/wiki/URI_fragment) th
 
 > Format: `#@<bibtag>[ + @<bibtag> + [ ... ] ]`
 
-# What are bibrulers
+# Why BibTex
 
-Bibrulers are linebased separators, used by [visual-meta](https://visual-meta.info) as a means of organizing BibTags:
+The combination of Bibs and BibTex makes a great lowest common denominator for linking data:
+
+> "When a car breaks down, the ones **without** turbosupercharger are easier to fix"                                                                                                                                
+
+Unlike XML or JSON, the typeless, unnested, everything-is-text nature of BibTeX tags is a great advantage for introspection.<br>                                                                                    
+It's a missing sensemaking precursor to extrospective RDF.<br>
+BibTeX-appendices are already used in the digital AND physical world (academic books, [visual-meta](https://visual-meta.info)), perhaps due to its terseness & simplicity.<br>                                      
+In that sense, it's one step up from the `.ini` fileformat (which has never leaked into the physical world like BibTex):                                                                                            
+
+1. <b id="frictionless-copy-paste">frictionless copy/pasting</b> (by humans) of (unobtrusive) content AND metadata
+1. an introspective 'sketchpad' for metadata, which can (optionally) mature into RDF later                                                                                                                          
+
+| characteristic                     | UTF8 Plain Text (with BibTeX) | RDF                       |
+|------------------------------------|-------------------------------|---------------------------|   
+| perspective                        | introspective                 | extrospective             |   
+| structure                          | fuzzy (sensemaking)           | precise                   |   
+| space/scope                        | local                         | world                     |   
+| everything is text (string)        | yes                           | no                        |
+| voice/paper-friendly               | [bibs](https://github.com/coderofsalvation/tagbibs) | no  |   
+| leaves (dictated) text intact      | yes                           | no                        |   
+| markup language                    | just an appendix              | ~4 different              |                               
+| polyglot format                    | no                            | yes                       |   
+| easy to copy/paste content+metadata| yes                           | up to application         |   
+| easy to write/repair for layman    | yes                           | depends                   |   
+| easy to (de)serialize              | yes (fits on A4 paper)        | depends                   |   
+| infrastructure                     | selfcontained (plain text)    | (semi)networked           |   
+| freeform tagging/annotation        | yes, terse                    | yes, verbose              |   
+| can be appended to text-content    | yes                           | up to application         |   
+| copy-paste text preserves metadata | yes                           | up to application         |   
+| emoji                              | yes                           | depends on encoding       |   
+| predicates                         | free                          | semi pre-determined       |   
+| implementation/network overhead    | no                            | depends                   |   
+| used in (physical) books/PDF       | yes (visual-meta)             | no                        |   
+| terse non-verb predicates          | yes                           | no                        |   
+| nested structures                  | no (but: BibTex rulers)       | yes                       | 
+
+# BibRulers (BibTex microformats)
+
+The following allows for microformats:
+
+```
+Apples, cinnamon, sugar and dough make a great applepie.
+
+#recipe-start#
+#applepie@todo
+#recipe-stop#
+```
+
+expands into the following BibTex
+
+```
+${recipe-start}
+@todo{applepie,
+
+}
+${recipe-stop}
+```
+
+BibTex microformats have been pioneered by the [visual-meta](https://visual-meta.info) microformat as a means of organizing BibTags:
 
 ```
 @{visual-meta-start}
@@ -194,7 +252,7 @@ This snippet would get decoded to this unnested array:
 ```
 
 Why not a nested tree-structure? This kneejerk reaction should always be considered 'a temporary option'.<br>
-Bibrulers:
+Don't forget that Bibrulers are simply rulers (not blocks):
 
 1. don't try to re-invent XML or JSON
 1. don't promote traversing graphs (instead: just a list with tags)
