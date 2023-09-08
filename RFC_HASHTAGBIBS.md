@@ -24,13 +24,14 @@ fullname="L.R. van Kammen"
 
 **hashtagbibs** (or simply: **'bibs'**) are tiny tags, allowing mere mortals to connect words to other words using pencil, voice or keyboard.<br>
 They expand into multiple (reversed) [BibTags](https://en.wikipedia.org/wiki/BibTeX), JSON or XML snippets.<br>
-For example, using OCR, scanned paper can now easily 'connect' with online graphs.<br>
-Think of it as the brother of hashtags: a command for tagging-this-with-that.<br>
+
+> For example, using OCR, scanned paper can now easily 'connect' with online graphs.<br>Think of it as the brother of hashtags: a command for tagging-this-with-that.
+
 The goal of this spec is three-fold:
 
 * specify bibs: a terse tagdescription which expands into a reversed BibTag 
 * specify bibs as URI fragment: a way to hint browsers to jump to (bib)tagged content
-* specify bibrulers: dumb line-based separators for bibtags
+* specify bibrulers: to specify bibtags microformats like [visual-meta](https://visual-meta.info)
 
 {mainmatter}
 

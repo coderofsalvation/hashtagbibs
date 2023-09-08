@@ -18,17 +18,20 @@ Abstract
    keyboard.
    They expand into multiple (reversed) BibTags
    (https://en.wikipedia.org/wiki/BibTeX), JSON or XML snippets.
+
    For example, using OCR, scanned paper can now easily 'connect' with
    online graphs.
    Think of it as the brother of hashtags: a command for tagging-this-
    with-that.
+
    The goal of this spec is three-fold:
 
    *  specify bibs: a terse tagdescription which expands into a reversed
       BibTag
    *  specify bibs as URI fragment: a way to hint browsers to jump to
       (bib)tagged content
-   *  specify bibrulers: dumb line-based separators for bibtags
+   *  specify bibrulers: to specify bibtags microformats like visual-
+      meta (https://visual-meta.info)
 
 Status of This Memo
 
@@ -46,9 +49,6 @@ Status of This Memo
    material or to cite them other than as "work in progress."
 
    This Internet-Draft will expire on 11 March 2024.
-
-
-
 
 
 
