@@ -11,7 +11,7 @@
 
 <h1 class="special" id="abstract">Abstract</h1>
 
-<p>Tagbibs (or simply: &lsquo;bibs&rsquo;) are tiny tags, allowing mere mortals to connect words to other words using pencil, voice or keyboard.<br>
+<p>HashTagBibs (or simply: <strong>&lsquo;bibs&rsquo;</strong>) are tiny tags, allowing mere mortals to connect words to other words using pencil, voice or keyboard.<br>
 They expand into multiple <a href="https://en.wikipedia.org/wiki/BibTeX">BibTags</a>.<br>
 For example, using OCR, scanned paper can &lsquo;connect&rsquo; with online graphs.<br>
 Think of it as the brother of hashtags: a command for tagging-this-with-that.<br>
@@ -29,16 +29,26 @@ The goal of this spec is three-fold:</p>
 
 <p>bibs allow non-technical humans to write reversed BibTags in a short-form (on paper):</p>
 
-<pre><code>Please get out the laundry 
+<pre><code>John please get out the laundry 
 
-@laundry@chores@todo
+#john
+#laundry@chores@todo
 </code></pre>
 
 <blockquote>
-<p>Basically means: <code>add</code> laundry to tag <code>@chores</code> and tag <code>@todo</code>, by expanding into the following BibTags:</p>
+<p>This basically means:</p>
 </blockquote>
 
-<pre><code>Please get out the laundry 
+<ul>
+<li><strong>tag</strong> <code>john</code> with tagname <code>john</code></li>
+<li><strong>tag</strong> <code>laundry</code> with tagname <code>chores</code> and <code>todo</code>, by expanding into the following BibTags:</li>
+</ul>
+
+<pre><code>John please get out the laundry 
+
+@john{john,
+
+}
 
 @chores{laundry,
   
@@ -49,7 +59,7 @@ The goal of this spec is three-fold:</p>
 </code></pre>
 
 <blockquote>
-<p>the word <code>laundry</code> can now be highlighted in the human text. bibs are basically one step up from socialmedia hashtags, allowing mere mortals to connect words to other words using pencil, voice or keyboard.</p>
+<p>the word and <code>john</code> <code>laundry</code> can now be highlighted in the human text (or 3D object can be shown when their objectname matches). bibs are basically one step up from socialmedia hashtags, allowing mere mortals to connect words to other things using pencil, voice or keyboard.</p>
 </blockquote>
 
 <p>There&rsquo;s no precise predicates or properties (just &lsquo;this points to that&rsquo;, which empowers citizen annotation (an essential precursor of RDF).</p>
@@ -91,13 +101,13 @@ The goal of this spec is three-fold:</p>
 </table>
 
 <ol>
-<li>at least 2 <code>@</code> characters need to occur, to qualify as a bib</li>
+<li>to qualify as a bib, a word should start with a hashtag, and contain at least 1 <code>@</code> character</li>
 <li>last bib wins: overlapping bibs overwrite eachother (last tag(s) win)</li>
 <li>spaces are not allowed, maximum by using <code>+</code> to represents spaces (<code>the+bill@todo</code> e.g.)</li>
 </ol>
 
-<pre><code>great+gatsby@book@readinglist
-great+gatsby@book
+<pre><code>#great+gatsby@book@readinglist
+#great+gatsby@book
 </code></pre>
 
 <p>would only expand to:</p>
@@ -114,11 +124,11 @@ finish paper
 contact John
 buy the great gatsby
 
-@milk@todo
-@contact@doing
-@contact@done
-@gatsby@done
-@finish+paper@doing
+#milk@todo
+#contact@doing
+#contact@done
+#gatsby@done
+#finish+paper@doing
 </code></pre>
 
 <p>If this text would be written on a paper, it could be scanned by a computer and represented spatially like so:</p>
@@ -168,7 +178,7 @@ text = Object.values(bibs.tags).join('\n') + bibtex.replace( bibs.regex, '')
 
 <h2 id="merging-bibtagged-overlaps">Merging (BibTagged) overlaps</h2>
 
-<p>When a bib (<code>great+gatsby@book</code> is copy-pasted into another document (a PDF or Textfile with a <a href="https://visual-meta.info">visual-meta</a> appendix e.g.):</p>
+<p>When a bib (<code>#great+gatsby@book</code> is copy-pasted into another document (a PDF or Textfile with a <a href="https://visual-meta.info">visual-meta</a> appendix e.g.):</p>
 
 <ol>
 <li>the editor should check for the existence of <code>@book{great+gatsby</code></li>
