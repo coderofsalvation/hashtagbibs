@@ -53,7 +53,7 @@ John please get out the laundry
 * **tag** `john` with tagname `john`
 * **tag** `laundry` with tagname `chores` and `todo`
 
-and expanding into the following formats:
+and expands into the following formats:
 
 ```
 BibTeX             JSON                                   XML
@@ -75,7 +75,7 @@ BibTeX             JSON                                   XML
 
 There's no precise predicates or properties, just simply 'this points to that', which empowers citizen annotation (an essential precursor of RDF).
 
-> NOTE: in the rest of this article, we use focus on BibTex for convenience (as it is the most terse outputformat of hashtagbibs).
+> NOTE: in the rest of this article, we use focus on BibTex for convenience (as it is the most terse, easiest to write/repair/speak outputformat).
 
 ## format
 

@@ -102,7 +102,7 @@ Table of Contents
    *  *tag* john with tagname john
    *  *tag* laundry with tagname chores and todo
 
-   and expanding into the following formats:
+   and expands into the following formats:
 
 
 
@@ -139,7 +139,8 @@ BibTeX             JSON                                   XML
    of RDF).
 
    |  NOTE: in the rest of this article, we use focus on BibTex for
-   |  convenience (as it is the most terse outputformat of hashtagbibs).
+   |  convenience (as it is the most terse, easiest to write/repair/
+   |  speak outputformat).
 
 1.1.  format
 
@@ -161,7 +162,6 @@ BibTeX             JSON                                   XML
      +------------------+-------------------------------------------+
 
                                  Table 1
-
 
 
 

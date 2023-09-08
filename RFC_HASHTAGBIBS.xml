@@ -44,7 +44,7 @@ Think of it as the brother of hashtags: a command for tagging-this-with-that.</t
 <li><strong>tag</strong> <tt>john</tt> with tagname <tt>john</tt></li>
 <li><strong>tag</strong> <tt>laundry</tt> with tagname <tt>chores</tt> and <tt>todo</tt></li>
 </ul>
-<t>and expanding into the following formats:</t>
+<t>and expands into the following formats:</t>
 
 <artwork>BibTeX             JSON                                   XML
 ======             ====                                   ===
@@ -62,7 +62,7 @@ Think of it as the brother of hashtags: a command for tagging-this-with-that.</t
 </artwork>
 <blockquote><t>the word and <tt>john</tt> <tt>laundry</tt> can now be highlighted in the human text (or 3D object can be shown when their objectname matches). bibs are basically one step up from socialmedia hashtags, allowing mere mortals to connect words to other things using pencil, voice or keyboard.</t>
 </blockquote><t>There's no precise predicates or properties, just simply 'this points to that', which empowers citizen annotation (an essential precursor of RDF).</t>
-<blockquote><t>NOTE: in the rest of this article, we use focus on BibTex for convenience (as it is the most terse outputformat of hashtagbibs).</t>
+<blockquote><t>NOTE: in the rest of this article, we use focus on BibTex for convenience (as it is the most terse, easiest to write/repair/speak outputformat).</t>
 </blockquote>
 <section anchor="format"><name>format</name>
 
