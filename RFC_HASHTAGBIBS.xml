@@ -111,7 +111,47 @@ Think of it as the brother of hashtags: a command for tagging-this-with-that.</t
 }
 </artwork>
 </section>
+</section>
 
+<section anchor="hashtagbib-mimetypes"><name>hashtagbib mimetypes</name>
+<table>
+<thead>
+<tr>
+<th>mimetype</th>
+<th>expand bibs to format</th>
+<th>hides in document</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><tt>text/plain;charset=utf-8;bib=^@</tt></td>
+<td>BibTex</td>
+<td>any BibTex</td>
+</tr>
+
+<tr>
+<td><tt>text/plain;charset=utf-8;bib=^{</tt></td>
+<td>JSON</td>
+<td>any JSON</td>
+</tr>
+
+<tr>
+<td><tt>text/plain;charset=utf-8;bib=^&lt;</tt></td>
+<td>HTML</td>
+<td>any HTML</td>
+</tr>
+</tbody>
+</table><t>This mimetype indicates that bibs and their expanded format occuring in plain text, are automatically hidden and expanded by browsers.<br />
+</t>
+<blockquote><t>For example <tt>bib=^@</tt> means that lines matching regex <tt>^@</tt> (BibTex) will automatically get filtered out, in order for software to:</t>
+</blockquote>
+<ul spacing="compact">
+<li>automatically create/detect links between textual/spatial objects within the document (see <eref target="https://xfragment.org">XR Fragments</eref>)</li>
+<li>detect opiniated bibtag microformats (<eref target="https://visual-meta.info">visual-meta</eref> e.g.)</li>
+</ul>
+<blockquote><t>This significantly expands expressiveness and portability of human tagged text, by <strong>postponing machine-concerns to the end of the human text</strong> in contrast to literal interweaving of content and markupsymbols (</t>
+</blockquote>
 <section anchor="example-an-textual-kanban-using-tags"><name>Example: an textual kanban using tags</name>
 
 <artwork>buy milk
@@ -159,7 +199,6 @@ buy the great gatsby
     text.replace( bibs.regex , (m,k,v) =&gt; {
        tok   = m.substr(1).split(&quot;@&quot;)
        match = tok.shift()
-       console.log(match)
        if( tok.length ) tok.map( (t) =&gt; bibs.tags[t] = `@${t}{${match},\n}` ) 
        else if( match.substr(-1) == '#' ) 
           bibs.tags[match] = `@{${match.replace(/#/,'')}}`

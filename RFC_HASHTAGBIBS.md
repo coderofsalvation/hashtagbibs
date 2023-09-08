@@ -106,6 +106,23 @@ would only expand to:
 }
 ```
 
+# hashtagbib mimetypes
+
+| mimetype                          | expand bibs to format| hides in document |
+|-----------------------------------|----------------------|-------------------|
+| `text/plain;charset=utf-8;bib=^@` | BibTex               | any BibTex        |
+| `text/plain;charset=utf-8;bib=^{` | JSON                 | any JSON          |
+| `text/plain;charset=utf-8;bib=^<` | HTML                 | any HTML          |
+
+This mimetype indicates that bibs and their expanded format occuring in plain text, are automatically hidden and expanded by browsers.<br>
+
+> For example `bib=^@` means that lines matching regex `^@` (BibTex) will automatically get filtered out, in order for software to:
+
+* automatically create/detect links between textual/spatial objects within the document (see [XR Fragments](https://xfragment.org))
+* detect opiniated bibtag microformats ([visual-meta](https://visual-meta.info) e.g.)
+
+> This significantly expands expressiveness and portability of human tagged text, by **postponing machine-concerns to the end of the human text** in contrast to literal interweaving of content and markupsymbols (
+
 ## Example: an textual kanban using tags
 
 ```
@@ -140,7 +157,6 @@ expandBibs = (text) => {
     text.replace( bibs.regex , (m,k,v) => {
        tok   = m.substr(1).split("@")
        match = tok.shift()
-       console.log(match)
        if( tok.length ) tok.map( (t) => bibs.tags[t] = `@${t}{${match},\n}` ) 
        else if( match.substr(-1) == '#' ) 
           bibs.tags[match] = `@{${match.replace(/#/,'')}}`

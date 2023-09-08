@@ -127,6 +127,52 @@ They expand into multiple (reversed) <a href="https://en.wikipedia.org/wiki/BibT
 }
 </code></pre>
 
+<h1 id="hashtagbib-mimetypes">hashtagbib mimetypes</h1>
+
+<table>
+<thead>
+<tr>
+<th>mimetype</th>
+<th>expand bibs to format</th>
+<th>hides in document</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>text/plain;charset=utf-8;bib=^@</code></td>
+<td>BibTex</td>
+<td>any BibTex</td>
+</tr>
+
+<tr>
+<td><code>text/plain;charset=utf-8;bib=^{</code></td>
+<td>JSON</td>
+<td>any JSON</td>
+</tr>
+
+<tr>
+<td><code>text/plain;charset=utf-8;bib=^&lt;</code></td>
+<td>HTML</td>
+<td>any HTML</td>
+</tr>
+</tbody>
+</table>
+<p>This mimetype indicates that bibs and their expanded format occuring in plain text, are automatically hidden and expanded by browsers.<br></p>
+
+<blockquote>
+<p>For example <code>bib=^@</code> means that lines matching regex <code>^@</code> (BibTex) will automatically get filtered out, in order for software to:</p>
+</blockquote>
+
+<ul>
+<li>automatically create/detect links between textual/spatial objects within the document (see <a href="https://xfragment.org">XR Fragments</a>)</li>
+<li>detect opiniated bibtag microformats (<a href="https://visual-meta.info">visual-meta</a> e.g.)</li>
+</ul>
+
+<blockquote>
+<p>This significantly expands expressiveness and portability of human tagged text, by <strong>postponing machine-concerns to the end of the human text</strong> in contrast to literal interweaving of content and markupsymbols (</p>
+</blockquote>
+
 <h2 id="example-an-textual-kanban-using-tags">Example: an textual kanban using tags</h2>
 
 <pre><code>buy milk
@@ -180,7 +226,6 @@ buy the great gatsby
     text.replace( bibs.regex , (m,k,v) =&gt; {
        tok   = m.substr(1).split(&quot;@&quot;)
        match = tok.shift()
-       console.log(match)
        if( tok.length ) tok.map( (t) =&gt; bibs.tags[t] = `@${t}{${match},\n}` ) 
        else if( match.substr(-1) == '#' ) 
           bibs.tags[match] = `@{${match.replace(/#/,'')}}`
