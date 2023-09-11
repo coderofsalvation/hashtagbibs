@@ -59,14 +59,14 @@ and expands into the following formats:
 BibTeX             JSON                                   XML
 ======             ====                                   ===
 
-@john{john,        { "tag":"john", "match":"john"}        <tag name="john">john</tag>
+@john{john,        { "tag":"john", "match":"john"}        <tag name="john" match="john"/>
                      
 }
 
-@chores{laundry,   { "tag":"chores", "match":"laundry"}   <tag name="chores">laundry</tag>
+@chores{laundry,   { "tag":"chores", "match":"laundry"}   <tag name="chores" match="laundry"/>
   
 }
-@todo{laundry,     { "tag":"todo", "match": "laundry"}    <tag name="todo">laundry</tag>
+@todo{laundry,     { "tag":"todo", "match": "laundry"}    <tag name="todo" match="laundry"/>
 
 }
 ```
@@ -267,7 +267,7 @@ BibTex             JSON                                HTML
 ======             ====                                ====
 
 ${recipe-start}    { "ruler":"recipe-start" }          <ruler name="recipe-start"/>
-@todo{applepie,    { "tag":"todo", "match":applepie"}  <tag name="todo">applepie</tag>
+@todo{applepie,    { "tag":"todo", "match":applepie"}  <tag name="todo" match="applepie"/>
               
 }
 ${recipe-stop}     { "ruler":"recipe-stop" }           <ruler name="recipe-stop"/>
