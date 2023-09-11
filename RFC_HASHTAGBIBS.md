@@ -98,9 +98,7 @@ There's no precise predicates or properties, just simply 'this points to that', 
 would only expand to:
 
 ```
-@book{great+gatsby
-
-}
+@book{great+gatsby}
 ```
 
 # hashtagbib mimetypes
@@ -115,8 +113,8 @@ This mimetype indicates that bibs and their expanded format occuring in plain te
 
 > For example `bib=^@` means that:
 
-1. lines matching regex `^@` (BibTex) will not be rendered verbatim by default, in order for software to:
-1. expand bibs (starting with a hashtag) to BibTex
+1. lines starting with `@` (regex `^@`) will not be rendered verbatim by default, in order for software to:
+1. expand bibs (starting with a hashtag) into, and interpret BibTex
 
 * automatically create/detect links between textual/spatial objects within the document (see [XR Fragments](https://xfragment.org))
 * detect opiniated bibtag microformats ([visual-meta](https://visual-meta.info) e.g.)
@@ -283,9 +281,7 @@ BibTex             JSON                                HTML
 ======             ====                                ====
 
 ${recipe-start}    { "ruler":"recipe-start" }          <ruler that="recipe-start"/>
-@todo{applepie,    { "that":"todo", "this":applepie"}  <tag that="todo" this="applepie"/>
-              
-}
+@todo{applepie}    { "that":"todo", "this":applepie"}  <tag that="todo" this="applepie"/>
 ${recipe-stop}     { "ruler":"recipe-stop" }           <ruler that="recipe-stop"/>
 ```
 

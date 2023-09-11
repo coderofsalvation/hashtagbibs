@@ -103,9 +103,7 @@ There's no precise predicates or properties, just simply 'this points to that', 
 </artwork>
 <t>would only expand to:</t>
 
-<artwork>@book{great+gatsby
-
-}
+<artwork>@book{great+gatsby}
 </artwork>
 </section>
 </section>
@@ -144,8 +142,8 @@ There's no precise predicates or properties, just simply 'this points to that', 
 <blockquote><t>For example <tt>bib=^@</tt> means that:</t>
 </blockquote>
 <ol spacing="compact">
-<li>lines matching regex <tt>^@</tt> (BibTex) will not be rendered verbatim by default, in order for software to:</li>
-<li>expand bibs (starting with a hashtag) to BibTex</li>
+<li>lines starting with <tt>@</tt> (regex <tt>^@</tt>) will not be rendered verbatim by default, in order for software to:</li>
+<li>expand bibs (starting with a hashtag) into, and interpret BibTex</li>
 </ol>
 
 <ul spacing="compact">
@@ -438,9 +436,7 @@ In that sense, it's one step up from the <tt>.ini</tt> fileformat (which has nev
 ======             ====                                ====
 
 ${recipe-start}    { &quot;ruler&quot;:&quot;recipe-start&quot; }          &lt;ruler that=&quot;recipe-start&quot;/&gt;
-@todo{applepie,    { &quot;that&quot;:&quot;todo&quot;, &quot;this&quot;:applepie&quot;}  &lt;tag that=&quot;todo&quot; this=&quot;applepie&quot;/&gt;
-              
-}
+@todo{applepie}    { &quot;that&quot;:&quot;todo&quot;, &quot;this&quot;:applepie&quot;}  &lt;tag that=&quot;todo&quot; this=&quot;applepie&quot;/&gt;
 ${recipe-stop}     { &quot;ruler&quot;:&quot;recipe-stop&quot; }           &lt;ruler that=&quot;recipe-stop&quot;/&gt;
 </artwork>
 <t>BibTex rulers have been pioneered by the <eref target="https://visual-meta.info">visual-meta</eref> microformat as a means of organizing BibTags:</t>

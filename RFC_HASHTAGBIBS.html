@@ -121,9 +121,7 @@ There&rsquo;s no precise predicates or properties, just simply &lsquo;this point
 
 <p>would only expand to:</p>
 
-<pre><code>@book{great+gatsby
-
-}
+<pre><code>@book{great+gatsby}
 </code></pre>
 
 <h1 id="hashtagbib-mimetypes">hashtagbib mimetypes</h1>
@@ -164,8 +162,8 @@ There&rsquo;s no precise predicates or properties, just simply &lsquo;this point
 </blockquote>
 
 <ol>
-<li>lines matching regex <code>^@</code> (BibTex) will not be rendered verbatim by default, in order for software to:</li>
-<li>expand bibs (starting with a hashtag) to BibTex</li>
+<li>lines starting with <code>@</code> (regex <code>^@</code>) will not be rendered verbatim by default, in order for software to:</li>
+<li>expand bibs (starting with a hashtag) into, and interpret BibTex</li>
 </ol>
 
 <ul>
@@ -477,9 +475,7 @@ In that sense, it&rsquo;s one step up from the <code>.ini</code> fileformat (whi
 ======             ====                                ====
 
 ${recipe-start}    { &quot;ruler&quot;:&quot;recipe-start&quot; }          &lt;ruler that=&quot;recipe-start&quot;/&gt;
-@todo{applepie,    { &quot;that&quot;:&quot;todo&quot;, &quot;this&quot;:applepie&quot;}  &lt;tag that=&quot;todo&quot; this=&quot;applepie&quot;/&gt;
-              
-}
+@todo{applepie}    { &quot;that&quot;:&quot;todo&quot;, &quot;this&quot;:applepie&quot;}  &lt;tag that=&quot;todo&quot; this=&quot;applepie&quot;/&gt;
 ${recipe-stop}     { &quot;ruler&quot;:&quot;recipe-stop&quot; }           &lt;ruler that=&quot;recipe-stop&quot;/&gt;
 </code></pre>
 
