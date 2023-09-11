@@ -93,8 +93,8 @@ Table of Contents
 
    <img src="postit.jpg" style="max-width:400px"/>
 
-   bibs allow non-technical humans to write (reversed) BibTags, JSON or
-   XML, in a short-form (on paper):
+   bibs allow non-technical humans to specify: *THIS POINTS TO THAT*. In
+   other words: compressed (reversed) BibTags, JSON or XML like so:
 
    John please get out the laundry
 
@@ -119,11 +119,11 @@ Internet-Draft                 hashtagbibs                September 2023
 BibTeX             JSON                                   XML
 ======             ====                                   ===
 
-@john{john}        { "tag":"john", "match":"john"}        <tag name="john" match="john"/>
+@john{john}        { "tag":"john",   "match":"john"}        <tag name="john" match="john"/>
 
 @chores{laundry}   { "tag":"chores", "match":"laundry"}   <tag name="chores" match="laundry"/>
 
-@todo{laundry}     { "tag":"todo", "match": "laundry"}    <tag name="todo" match="laundry"/>
+@todo{laundry}     { "tag":"todo",   "match": "laundry"}    <tag name="todo" match="laundry"/>
 
    |  the word and john laundry can now be highlighted in the human text
    |  (or 3D object can be shown when their objectname matches). bibs
@@ -131,6 +131,8 @@ BibTeX             JSON                                   XML
    |  mortals to connect words to other things using pencil, voice or
    |  keyboard.
 
+   Bibs generalizes the BibTex author/title-semantics (author{title}) as
+   *this* points to *that* (this{that}).
    There's no precise predicates or properties, just simply 'this points
    to that', which empowers citizen annotation (an essential precursor
    of RDF).
@@ -160,8 +162,6 @@ BibTeX             JSON                                   XML
 
                                  Table 1
 
-   1.  to qualify as a bib, a word should start with a hashtag, and
-       (optionally) contain on or more @ characters
 
 
 
@@ -170,6 +170,8 @@ van Kammen                Expires 14 March 2024                 [Page 3]
 Internet-Draft                 hashtagbibs                September 2023
 
 
+   1.  to qualify as a bib, a word should start with a hashtag, and
+       (optionally) contain on or more @ characters
    2.  last bib wins: overlapping bibs overwrite eachother (last tag(s)
        win)
    3.  spaces are not allowed, maximum by using + to represents spaces
@@ -215,8 +217,6 @@ Internet-Draft                 hashtagbibs                September 2023
       within the document (see XR Fragments (https://xfragment.org))
    *  detect opiniated bibtag microformats (visual-meta (https://visual-
       meta.info) e.g.)
-
-
 
 
 
@@ -316,7 +316,7 @@ t = expandBibs(`john, could you feed the cat?
     john, could you feed the cat?
 
 
-    @john{john
+    @john{john,
     }
     @chores{laundry,
     }

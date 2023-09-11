@@ -39,7 +39,8 @@ The goal of this spec is three-fold:
 
 <img src="postit.jpg" style="max-width:400px"/>
 
-bibs allow non-technical humans to write (reversed) BibTags, JSON or XML, in a short-form (on paper):
+bibs allow non-technical humans to specify: **THIS POINTS TO THAT**.
+In other words: compressed (reversed) BibTags, JSON or XML like so:
 
 ```
 John please get out the laundry 
@@ -59,15 +60,16 @@ and expands into the following formats:
 BibTeX             JSON                                   XML
 ======             ====                                   ===
 
-@john{john}        { "tag":"john", "match":"john"}        <tag name="john" match="john"/>
+@john{john}        { "tag":"john",   "match":"john"}        <tag name="john" match="john"/>
 
 @chores{laundry}   { "tag":"chores", "match":"laundry"}   <tag name="chores" match="laundry"/>
   
-@todo{laundry}     { "tag":"todo", "match": "laundry"}    <tag name="todo" match="laundry"/>
+@todo{laundry}     { "tag":"todo",   "match": "laundry"}    <tag name="todo" match="laundry"/>
 ```
 
 > the word and `john` `laundry` can now be highlighted in the human text (or 3D object can be shown when their objectname matches). bibs are basically one step up from socialmedia hashtags, allowing mere mortals to connect words to other things using pencil, voice or keyboard. 
 
+Bibs generalizes the BibTex author/title-semantics (`author{title}`) as **this** points to **that** (`this{that}`).<br>
 There's no precise predicates or properties, just simply 'this points to that', which empowers citizen annotation (an essential precursor of RDF).
 
 > NOTE: in the rest of this article, we use focus on BibTex for convenience (as it is the most terse, easiest to write/repair/speak outputformat).
@@ -193,7 +195,7 @@ BibTeX OUTPUT:
  john, could you feed the cat?
  
  
- @john{john
+ @john{john,
  }
  @chores{laundry,
  }

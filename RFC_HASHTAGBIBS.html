@@ -30,7 +30,8 @@ They allow <strong>polyglot tagging</strong> by expanding into multiple (reverse
 
 <p><img src="postit.jpg" style="max-width:400px"/></p>
 
-<p>bibs allow non-technical humans to write (reversed) BibTags, JSON or XML, in a short-form (on paper):</p>
+<p>bibs allow non-technical humans to specify: <strong>THIS POINTS TO THAT</strong>.
+In other words: compressed (reversed) BibTags, JSON or XML like so:</p>
 
 <pre><code>John please get out the laundry 
 
@@ -54,18 +55,19 @@ They allow <strong>polyglot tagging</strong> by expanding into multiple (reverse
 <pre><code>BibTeX             JSON                                   XML
 ======             ====                                   ===
 
-@john{john}        { &quot;tag&quot;:&quot;john&quot;, &quot;match&quot;:&quot;john&quot;}        &lt;tag name=&quot;john&quot; match=&quot;john&quot;/&gt;
+@john{john}        { &quot;tag&quot;:&quot;john&quot;,   &quot;match&quot;:&quot;john&quot;}        &lt;tag name=&quot;john&quot; match=&quot;john&quot;/&gt;
 
 @chores{laundry}   { &quot;tag&quot;:&quot;chores&quot;, &quot;match&quot;:&quot;laundry&quot;}   &lt;tag name=&quot;chores&quot; match=&quot;laundry&quot;/&gt;
   
-@todo{laundry}     { &quot;tag&quot;:&quot;todo&quot;, &quot;match&quot;: &quot;laundry&quot;}    &lt;tag name=&quot;todo&quot; match=&quot;laundry&quot;/&gt;
+@todo{laundry}     { &quot;tag&quot;:&quot;todo&quot;,   &quot;match&quot;: &quot;laundry&quot;}    &lt;tag name=&quot;todo&quot; match=&quot;laundry&quot;/&gt;
 </code></pre>
 
 <blockquote>
 <p>the word and <code>john</code> <code>laundry</code> can now be highlighted in the human text (or 3D object can be shown when their objectname matches). bibs are basically one step up from socialmedia hashtags, allowing mere mortals to connect words to other things using pencil, voice or keyboard.</p>
 </blockquote>
 
-<p>There&rsquo;s no precise predicates or properties, just simply &lsquo;this points to that&rsquo;, which empowers citizen annotation (an essential precursor of RDF).</p>
+<p>Bibs generalizes the BibTex author/title-semantics (<code>author{title}</code>) as <strong>this</strong> points to <strong>that</strong> (<code>this{that}</code>).<br>
+There&rsquo;s no precise predicates or properties, just simply &lsquo;this points to that&rsquo;, which empowers citizen annotation (an essential precursor of RDF).</p>
 
 <blockquote>
 <p>NOTE: in the rest of this article, we use focus on BibTex for convenience (as it is the most terse, easiest to write/repair/speak outputformat).</p>
@@ -263,7 +265,7 @@ t = expandBibs(`john, could you feed the cat?
 <pre><code> john, could you feed the cat?
  
  
- @john{john
+ @john{john,
  }
  @chores{laundry,
  }
