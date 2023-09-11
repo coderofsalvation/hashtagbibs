@@ -3,9 +3,9 @@
 
 
 Internet                                                 L.R. van Kammen
-Internet-Draft                                          8 September 2023
+Internet-Draft                                         11 September 2023
 Intended status: Informational                                          
-Expires: 11 March 2024
+Expires: 14 March 2024
 
 
                               hashtagbibs
@@ -48,12 +48,12 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 11 March 2024.
+   This Internet-Draft will expire on 14 March 2024.
 
 
 
 
-van Kammen                Expires 11 March 2024                 [Page 1]
+van Kammen                Expires 14 March 2024                 [Page 1]
 
 Internet-Draft                 hashtagbibs                September 2023
 
@@ -79,12 +79,14 @@ Table of Contents
    2.  hashtagbib mimetypes  . . . . . . . . . . . . . . . . . . . .   4
      2.1.  Example: an textual kanban using tags . . . . . . . . . .   5
      2.2.  Example javascript bibs expander  . . . . . . . . . . . .   5
-     2.3.  Merging (BibTagged) overlaps  . . . . . . . . . . . . . .   6
-   3.  What are bibs in a URI fragment . . . . . . . . . . . . . . .   7
-   4.  Rulers (microformats) . . . . . . . . . . . . . . . . . . . .   7
-   5.  Contact . . . . . . . . . . . . . . . . . . . . . . . . . . .   8
-   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   8
-   7.  Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .   8
+     2.3.  Bibs & BibTeX combo: lowest common denominator for linking
+           data  . . . . . . . . . . . . . . . . . . . . . . . . . .   6
+     2.4.  Merging (BibTagged) overlaps  . . . . . . . . . . . . . .   8
+   3.  What are bibs in a URI fragment . . . . . . . . . . . . . . .   9
+   4.  Rulers (microformats) . . . . . . . . . . . . . . . . . . . .   9
+   5.  Contact . . . . . . . . . . . . . . . . . . . . . . . . . . .  10
+   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  10
+   7.  Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .  10
 
 1.  What are bibs
 
@@ -107,9 +109,7 @@ Table of Contents
 
 
 
-
-
-van Kammen                Expires 11 March 2024                 [Page 2]
+van Kammen                Expires 14 March 2024                 [Page 2]
 
 Internet-Draft                 hashtagbibs                September 2023
 
@@ -117,14 +117,14 @@ Internet-Draft                 hashtagbibs                September 2023
 BibTeX             JSON                                   XML
 ======             ====                                   ===
 
-@john{john,        { "tag":"john", "match":"john"}        <tag name="john">john</tag>
+@john{john,        { "tag":"john", "match":"john"}        <tag name="john" match="john"/>
 
 }
 
-@chores{laundry,   { "tag":"chores", "match":"laundry"}   <tag name="chores">laundry</tag>
+@chores{laundry,   { "tag":"chores", "match":"laundry"}   <tag name="chores" match="laundry"/>
 
 }
-@todo{laundry,     { "tag":"todo", "match": "laundry"}    <tag name="todo">laundry</tag>
+@todo{laundry,     { "tag":"todo", "match": "laundry"}    <tag name="todo" match="laundry"/>
 
 }
 
@@ -165,7 +165,7 @@ BibTeX             JSON                                   XML
 
 
 
-van Kammen                Expires 11 March 2024                 [Page 3]
+van Kammen                Expires 14 March 2024                 [Page 3]
 
 Internet-Draft                 hashtagbibs                September 2023
 
@@ -221,7 +221,7 @@ Internet-Draft                 hashtagbibs                September 2023
 
 
 
-van Kammen                Expires 11 March 2024                 [Page 4]
+van Kammen                Expires 14 March 2024                 [Page 4]
 
 Internet-Draft                 hashtagbibs                September 2023
 
@@ -277,7 +277,7 @@ Internet-Draft                 hashtagbibs                September 2023
 
 
 
-van Kammen                Expires 11 March 2024                 [Page 5]
+van Kammen                Expires 14 March 2024                 [Page 5]
 
 Internet-Draft                 hashtagbibs                September 2023
 
@@ -315,7 +315,119 @@ t = expandBibs(`john, could you feed the cat?
     }
     @{some-scope}
 
-2.3.  Merging (BibTagged) overlaps
+2.3.  Bibs & BibTeX combo: lowest common denominator for linking data
+
+   Eventhough Bibs can expand to JSON and XML as well, it's worth noting
+   that Bibs & BibTex are closest to human thought:
+
+   Unlike XML or JSON, BibTex is typeless, unnested, and uncomplicated,
+   hence a great advantage for introspection.
+   It's a missing, lowbarrier, sensemaking precursor to extrospective
+   RDF.
+
+   |  "When a car breaks down, the ones *without* turbosupercharger are
+   |  easier to fix"
+
+
+
+
+
+
+van Kammen                Expires 14 March 2024                 [Page 6]
+
+Internet-Draft                 hashtagbibs                September 2023
+
+
+   BibTeX-appendices are already used in the digital AND physical world
+   (academic books, visual-meta (https://visual-meta.info)), perhaps due
+   to its terseness & simplicity.
+   In that sense, it's one step up from the .ini fileformat (which has
+   never leaked into the physical world like BibTex):
+
+   1.  <b id="frictionless-copy-paste">frictionless copy/pasting</b> (by
+       humans) of (unobtrusive) content AND metadata
+   2.  an introspective 'sketchpad' for metadata, which can (optionally)
+       mature into RDF later
+
+   +================+=====================================+===============+
+   |characteristic  |UTF8 Plain Text (with BibTeX)        |RDF            |
+   +================+=====================================+===============+
+   |perspective     |introspective                        |extrospective  |
+   +----------------+-------------------------------------+---------------+
+   |structure       |fuzzy (sensemaking)                  |precise        |
+   +----------------+-------------------------------------+---------------+
+   |space/scope     |local                                |world          |
+   +----------------+-------------------------------------+---------------+
+   |everything is   |yes                                  |no             |
+   |text (string)   |                                     |               |
+   +----------------+-------------------------------------+---------------+
+   |voice/paper-    |bibs                                 |no             |
+   |friendly        |(https://github.com/coderofsalvation/|               |
+   |                |hashtagbibs)                         |               |
+   +----------------+-------------------------------------+---------------+
+   |leaves          |yes                                  |no             |
+   |(dictated) text |                                     |               |
+   |intact          |                                     |               |
+   +----------------+-------------------------------------+---------------+
+   |markup language |just an appendix                     |~4 different   |
+   +----------------+-------------------------------------+---------------+
+   |polyglot format |no                                   |yes            |
+   +----------------+-------------------------------------+---------------+
+   |easy to copy/   |yes                                  |up to          |
+   |paste           |                                     |application    |
+   |content+metadata|                                     |               |
+   +----------------+-------------------------------------+---------------+
+   |easy to write/  |yes                                  |depends        |
+   |repair for      |                                     |               |
+   |layman          |                                     |               |
+   +----------------+-------------------------------------+---------------+
+   |easy to         |yes (fits on A4 paper)               |depends        |
+   |(de)serialize   |                                     |               |
+   +----------------+-------------------------------------+---------------+
+   |infrastructure  |selfcontained (plain text)           |(semi)networked|
+   +----------------+-------------------------------------+---------------+
+
+
+
+van Kammen                Expires 14 March 2024                 [Page 7]
+
+Internet-Draft                 hashtagbibs                September 2023
+
+
+   |freeform        |yes, terse                           |yes, verbose   |
+   |tagging/        |                                     |               |
+   |annotation      |                                     |               |
+   +----------------+-------------------------------------+---------------+
+   |can be appended |yes                                  |up to          |
+   |to text-content |                                     |application    |
+   +----------------+-------------------------------------+---------------+
+   |copy-paste text |yes                                  |up to          |
+   |preserves       |                                     |application    |
+   |metadata        |                                     |               |
+   +----------------+-------------------------------------+---------------+
+   |emoji           |yes                                  |depends on     |
+   |                |                                     |encoding       |
+   +----------------+-------------------------------------+---------------+
+   |predicates      |free                                 |semi pre-      |
+   |                |                                     |determined     |
+   +----------------+-------------------------------------+---------------+
+   |implementation/ |no                                   |depends        |
+   |network overhead|                                     |               |
+   +----------------+-------------------------------------+---------------+
+   |used in         |yes (visual-meta)                    |no             |
+   |(physical)      |                                     |               |
+   |books/PDF       |                                     |               |
+   +----------------+-------------------------------------+---------------+
+   |terse non-verb  |yes                                  |no             |
+   |predicates      |                                     |               |
+   +----------------+-------------------------------------+---------------+
+   |nested          |no (but: BibTex rulers)              |yes            |
+   |structures      |                                     |               |
+   +----------------+-------------------------------------+---------------+
+
+                                  Table 4
+
+2.4.  Merging (BibTagged) overlaps
 
    When a bib (#great+gatsby@book is copy-pasted into another document
    (a PDF or Textfile with a visual-meta (https://visual-meta.info)
@@ -333,7 +445,7 @@ t = expandBibs(`john, could you feed the cat?
 
 
 
-van Kammen                Expires 11 March 2024                 [Page 6]
+van Kammen                Expires 14 March 2024                 [Page 8]
 
 Internet-Draft                 hashtagbibs                September 2023
 
@@ -365,7 +477,7 @@ BibTex             JSON                                HTML
 ======             ====                                ====
 
 ${recipe-start}    { "ruler":"recipe-start" }          <ruler name="recipe-start"/>
-@todo{applepie,    { "tag":"todo", "match":applepie"}  <tag name="todo">applepie</tag>
+@todo{applepie,    { "tag":"todo", "match":applepie"}  <tag name="todo" match="applepie"/>
 
 }
 ${recipe-stop}     { "ruler":"recipe-stop" }           <ruler name="recipe-stop"/>
@@ -389,12 +501,13 @@ ${recipe-stop}     { "ruler":"recipe-stop" }           <ruler name="recipe-stop"
 
 
 
-van Kammen                Expires 11 March 2024                 [Page 7]
+van Kammen                Expires 14 March 2024                 [Page 9]
 
 Internet-Draft                 hashtagbibs                September 2023
 
 
-   This snippet would get decoded to this unnested array:
+   Eventhough it looks like 'nested data', this snippet would actually
+   get decoded to this unnested array:
 
 [
   { ruler: `{visual-meta-start}` },
@@ -415,7 +528,7 @@ Internet-Draft                 hashtagbibs                September 2023
    3.  they promote rather dumb, unnested, streamable lists (unlike
        HTML/XML/JSON) adhering to JSONLines/CSV
    4.  they are much faster/simpler to lookup, implement, (de)serialize
-       in low- and hihglevel languages.
+       across low- and highlevel languages.
 
 5.  Contact
 
@@ -444,5 +557,4 @@ Internet-Draft                 hashtagbibs                September 2023
 
 
 
-
-van Kammen                Expires 11 March 2024                 [Page 8]
+van Kammen                Expires 14 March 2024                [Page 10]

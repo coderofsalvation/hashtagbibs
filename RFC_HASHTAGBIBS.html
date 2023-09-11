@@ -52,14 +52,14 @@ They expand into multiple (reversed) <a href="https://en.wikipedia.org/wiki/BibT
 <pre><code>BibTeX             JSON                                   XML
 ======             ====                                   ===
 
-@john{john,        { &quot;tag&quot;:&quot;john&quot;, &quot;match&quot;:&quot;john&quot;}        &lt;tag name=&quot;john&quot;&gt;john&lt;/tag&gt;
+@john{john,        { &quot;tag&quot;:&quot;john&quot;, &quot;match&quot;:&quot;john&quot;}        &lt;tag name=&quot;john&quot; match=&quot;john&quot;/&gt;
                      
 }
 
-@chores{laundry,   { &quot;tag&quot;:&quot;chores&quot;, &quot;match&quot;:&quot;laundry&quot;}   &lt;tag name=&quot;chores&quot;&gt;laundry&lt;/tag&gt;
+@chores{laundry,   { &quot;tag&quot;:&quot;chores&quot;, &quot;match&quot;:&quot;laundry&quot;}   &lt;tag name=&quot;chores&quot; match=&quot;laundry&quot;/&gt;
   
 }
-@todo{laundry,     { &quot;tag&quot;:&quot;todo&quot;, &quot;match&quot;: &quot;laundry&quot;}    &lt;tag name=&quot;todo&quot;&gt;laundry&lt;/tag&gt;
+@todo{laundry,     { &quot;tag&quot;:&quot;todo&quot;, &quot;match&quot;: &quot;laundry&quot;}    &lt;tag name=&quot;todo&quot; match=&quot;laundry&quot;/&gt;
 
 }
 </code></pre>
@@ -256,6 +256,163 @@ t = expandBibs(`john, could you feed the cat?
  @{some-scope}
 </code></pre>
 
+<h2 id="bibs-bibtex-combo-lowest-common-denominator-for-linking-data">Bibs &amp; BibTeX combo: lowest common denominator for linking data</h2>
+
+<p>Eventhough Bibs can expand to JSON and XML as well, it&rsquo;s worth noting that Bibs &amp; BibTex are closest to human thought:</p>
+
+<p>Unlike XML or JSON, BibTex is typeless, unnested, and uncomplicated, hence a great advantage for introspection.<br>
+It&rsquo;s a missing, lowbarrier, sensemaking precursor to extrospective RDF.<br></p>
+
+<blockquote>
+<p>&ldquo;When a car breaks down, the ones <strong>without</strong> turbosupercharger are easier to fix&rdquo;</p>
+</blockquote>
+
+<p>BibTeX-appendices are already used in the digital AND physical world (academic books, <a href="https://visual-meta.info">visual-meta</a>), perhaps due to its terseness &amp; simplicity.<br>
+In that sense, it&rsquo;s one step up from the <code>.ini</code> fileformat (which has never leaked into the physical world like BibTex):</p>
+
+<ol>
+<li><b id="frictionless-copy-paste">frictionless copy/pasting</b> (by humans) of (unobtrusive) content AND metadata</li>
+<li>an introspective &lsquo;sketchpad&rsquo; for metadata, which can (optionally) mature into RDF later</li>
+</ol>
+
+<table>
+<thead>
+<tr>
+<th>characteristic</th>
+<th>UTF8 Plain Text (with BibTeX)</th>
+<th>RDF</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>perspective</td>
+<td>introspective</td>
+<td>extrospective</td>
+</tr>
+
+<tr>
+<td>structure</td>
+<td>fuzzy (sensemaking)</td>
+<td>precise</td>
+</tr>
+
+<tr>
+<td>space/scope</td>
+<td>local</td>
+<td>world</td>
+</tr>
+
+<tr>
+<td>everything is text (string)</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+
+<tr>
+<td>voice/paper-friendly</td>
+<td><a href="https://github.com/coderofsalvation/hashtagbibs">bibs</a></td>
+<td>no</td>
+</tr>
+
+<tr>
+<td>leaves (dictated) text intact</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+
+<tr>
+<td>markup language</td>
+<td>just an appendix</td>
+<td>~4 different</td>
+</tr>
+
+<tr>
+<td>polyglot format</td>
+<td>no</td>
+<td>yes</td>
+</tr>
+
+<tr>
+<td>easy to copy/paste content+metadata</td>
+<td>yes</td>
+<td>up to application</td>
+</tr>
+
+<tr>
+<td>easy to write/repair for layman</td>
+<td>yes</td>
+<td>depends</td>
+</tr>
+
+<tr>
+<td>easy to (de)serialize</td>
+<td>yes (fits on A4 paper)</td>
+<td>depends</td>
+</tr>
+
+<tr>
+<td>infrastructure</td>
+<td>selfcontained (plain text)</td>
+<td>(semi)networked</td>
+</tr>
+
+<tr>
+<td>freeform tagging/annotation</td>
+<td>yes, terse</td>
+<td>yes, verbose</td>
+</tr>
+
+<tr>
+<td>can be appended to text-content</td>
+<td>yes</td>
+<td>up to application</td>
+</tr>
+
+<tr>
+<td>copy-paste text preserves metadata</td>
+<td>yes</td>
+<td>up to application</td>
+</tr>
+
+<tr>
+<td>emoji</td>
+<td>yes</td>
+<td>depends on encoding</td>
+</tr>
+
+<tr>
+<td>predicates</td>
+<td>free</td>
+<td>semi pre-determined</td>
+</tr>
+
+<tr>
+<td>implementation/network overhead</td>
+<td>no</td>
+<td>depends</td>
+</tr>
+
+<tr>
+<td>used in (physical) books/PDF</td>
+<td>yes (visual-meta)</td>
+<td>no</td>
+</tr>
+
+<tr>
+<td>terse non-verb predicates</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+
+<tr>
+<td>nested structures</td>
+<td>no (but: BibTex rulers)</td>
+<td>yes</td>
+</tr>
+</tbody>
+</table>
+
 <h2 id="merging-bibtagged-overlaps">Merging (BibTagged) overlaps</h2>
 
 <p>When a bib (<code>#great+gatsby@book</code> is copy-pasted into another document (a PDF or Textfile with a <a href="https://visual-meta.info">visual-meta</a> appendix e.g.):</p>
@@ -302,7 +459,7 @@ t = expandBibs(`john, could you feed the cat?
 ======             ====                                ====
 
 ${recipe-start}    { &quot;ruler&quot;:&quot;recipe-start&quot; }          &lt;ruler name=&quot;recipe-start&quot;/&gt;
-@todo{applepie,    { &quot;tag&quot;:&quot;todo&quot;, &quot;match&quot;:applepie&quot;}  &lt;tag name=&quot;todo&quot;&gt;applepie&lt;/tag&gt;
+@todo{applepie,    { &quot;tag&quot;:&quot;todo&quot;, &quot;match&quot;:applepie&quot;}  &lt;tag name=&quot;todo&quot; match=&quot;applepie&quot;/&gt;
               
 }
 ${recipe-stop}     { &quot;ruler&quot;:&quot;recipe-stop&quot; }           &lt;ruler name=&quot;recipe-stop&quot;/&gt;
@@ -325,7 +482,7 @@ title = {The Future of Text ||},
 ...
 </code></pre>
 
-<p>This snippet would get decoded to this unnested array:</p>
+<p>Eventhough it looks like &lsquo;nested data&rsquo;, this snippet would actually get decoded to this unnested array:</p>
 
 <pre><code>[
   { ruler: `{visual-meta-start}` },
@@ -345,7 +502,7 @@ Don&rsquo;t forget that Bibrulers are simply rulers (not blocks):</p>
 <li>don&rsquo;t try to re-invent XML or JSON</li>
 <li>don&rsquo;t promote traversing graphs (instead: just a list with tags)</li>
 <li>they promote rather dumb, unnested, streamable lists (unlike HTML/XML/JSON) adhering to JSONLines/CSV</li>
-<li>they are much faster/simpler to lookup, implement, (de)serialize in low- and hihglevel languages.</li>
+<li>they are much faster/simpler to lookup, implement, (de)serialize across low- and highlevel languages.</li>
 </ol>
 
 <h1 id="contact">Contact</h1>

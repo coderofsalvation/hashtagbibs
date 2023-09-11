@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- name="GENERATOR" content="github.com/mmarkdown/mmark Mmark Markdown Processor - mmark.miek.nl" -->
+<rfc version="3" ipr="trust200902" docName="draft-hashtagbibs-leonvankammen-00" submissionType="IETF" category="info" xml:lang="en" xmlns:xi="http://www.w3.org/2001/XInclude" indexInclude="true" consensus="true">
+
+<front>
+<title>hashtagbibs</title><seriesInfo value="draft-hashtagbibs-leonvankammen-00" stream="IETF" status="informational" name="hashtagbibs"></seriesInfo>
+<author initials="L.R." surname="van Kammen" fullname="L.R. van Kammen"><organization></organization><address><postal><street></street>
+</postal></address></author><date/>
+<area>Internet</area>
+<workgroup>Internet</workgroup>
+
+<abstract>
+<t><strong>hashtagbibs</strong> (or simply: <strong>'bibs'</strong>) are tiny tags, allowing mere mortals to connect words to other words using pencil, voice or keyboard.<br />
+
+They expand into multiple (reversed) <eref target="https://en.wikipedia.org/wiki/BibTeX">BibTags</eref>, JSON or XML snippets.<br />
+</t>
+<t>For example, using OCR, scanned paper can now easily 'connect' with online graphs.<br />
+Think of it as the brother of hashtags: a command for tagging-this-with-that.</t>
+<t>The goal of this spec is three-fold:</t>
+
+<ul spacing="compact">
+<li>specify bibs: a plaintext tagging DSL which expands into various languages</li>
+<li>specify bibs as URI fragment: a way to hint browsers to filter a document on certain tag(s)</li>
+<li>specify bibrulers: to specify bibtags microformats like <eref target="https://visual-meta.info">visual-meta</eref></li>
+</ul>
+</abstract>
+
+</front>
+
+<middle>
+
+<section anchor="what-are-bibs"><name>What are bibs</name>
+<t>&lt;img src=&quot;postit.jpg&quot; style=&quot;max-width:400px&quot;/&gt;</t>
+<t>bibs allow non-technical humans to write (reversed) BibTags, JSON or XML, in a short-form (on paper):</t>
+
+<artwork>John please get out the laundry 
+
+#john
+#laundry@chores@todo
+</artwork>
+<blockquote><t>This basically means:</t>
+</blockquote>
+<ul spacing="compact">
+<li><strong>tag</strong> <tt>john</tt> with tagname <tt>john</tt></li>
+<li><strong>tag</strong> <tt>laundry</tt> with tagname <tt>chores</tt> and <tt>todo</tt></li>
+</ul>
+<t>and expands into the following formats:</t>
+
+<artwork>BibTeX             JSON                                   XML
+======             ====                                   ===
+
+@john{john,        { &quot;tag&quot;:&quot;john&quot;, &quot;match&quot;:&quot;john&quot;}        &lt;tag name=&quot;john&quot; match=&quot;john&quot;/&gt;
+                     
+}
+
+@chores{laundry,   { &quot;tag&quot;:&quot;chores&quot;, &quot;match&quot;:&quot;laundry&quot;}   &lt;tag name=&quot;chores&quot; match=&quot;laundry&quot;/&gt;
+  
+}
+@todo{laundry,     { &quot;tag&quot;:&quot;todo&quot;, &quot;match&quot;: &quot;laundry&quot;}    &lt;tag name=&quot;todo&quot; match=&quot;laundry&quot;/&gt;
+
+}
+</artwork>
+<blockquote><t>the word and <tt>john</tt> <tt>laundry</tt> can now be highlighted in the human text (or 3D object can be shown when their objectname matches). bibs are basically one step up from socialmedia hashtags, allowing mere mortals to connect words to other things using pencil, voice or keyboard.</t>
+</blockquote><t>There's no precise predicates or properties, just simply 'this points to that', which empowers citizen annotation (an essential precursor of RDF).</t>
+<blockquote><t>NOTE: in the rest of this article, we use focus on BibTex for convenience (as it is the most terse, easiest to write/repair/speak outputformat).</t>
+</blockquote>
+<section anchor="format"><name>format</name>
+
+<ul spacing="compact">
+<li><tt>#&lt;textpattern&gt;[@tag[@anothertag[...]]]</tt></li>
+</ul>
+<blockquote><t>syntactically, bibs are hashtags with (concatenated) emaildomains without an extension</t>
+</blockquote><table>
+<thead>
+<tr>
+<th>language</th>
+<th>example</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>javascript regex</td>
+<td><tt>/(#[a-zA-Z0-9_+@\-]+(#)?)/g</tt></td>
+</tr>
+
+<tr>
+<td>shell grep</td>
+<td><tt>cat textwithbibs.txt | grep -oE '/(#[a-zA-Z0-9_+@\-]+(#)?)/'</tt></td>
+</tr>
+
+<tr>
+<td>shell awk</td>
+<td><tt>cat textwithbibs.txt | xargs -n1 | awk '/(#[a-zA-Z0-9_+@\-]+(#)?)/ { print $0 }'</tt></td>
+</tr>
+</tbody>
+</table>
+<ol spacing="compact">
+<li>to qualify as a bib, a word should start with a hashtag, and (optionally) contain on or more <tt>@</tt> characters</li>
+<li>last bib wins: overlapping bibs overwrite eachother (last tag(s) win)</li>
+<li>spaces are not allowed, maximum by using <tt>+</tt> to represents spaces (<tt>the+bill@todo</tt> e.g.)</li>
+</ol>
+
+<artwork>#great+gatsby@book@readinglist
+#great+gatsby@book
+</artwork>
+<t>would only expand to:</t>
+
+<artwork>@book{great+gatsby
+
+}
+</artwork>
+</section>
+</section>
+
+<section anchor="hashtagbib-mimetypes"><name>hashtagbib mimetypes</name>
+<table>
+<thead>
+<tr>
+<th>mimetype</th>
+<th>expand bibs to format</th>
+<th>hides in document</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><tt>text/plain;charset=utf-8;bib=^@</tt></td>
+<td>BibTex</td>
+<td>any BibTex</td>
+</tr>
+
+<tr>
+<td><tt>text/plain;charset=utf-8;bib=^{</tt></td>
+<td>JSON</td>
+<td>any JSON</td>
+</tr>
+
+<tr>
+<td><tt>text/plain;charset=utf-8;bib=^&lt;</tt></td>
+<td>HTML</td>
+<td>any HTML</td>
+</tr>
+</tbody>
+</table><t>This mimetype indicates that bibs and their expanded format occuring in plain text, are automatically hidden and expanded by browsers.<br />
+</t>
+<blockquote><t>For example <tt>bib=^@</tt> means that lines matching regex <tt>^@</tt> (BibTex) will automatically get filtered out, in order for software to:</t>
+</blockquote>
+<ul spacing="compact">
+<li>automatically create/detect links between textual/spatial objects within the document (see <eref target="https://xfragment.org">XR Fragments</eref>)</li>
+<li>detect opiniated bibtag microformats (<eref target="https://visual-meta.info">visual-meta</eref> e.g.)</li>
+</ul>
+<blockquote><t>This significantly expands expressiveness and portability of human tagged text, by <strong>postponing machine-concerns to the end of the human text</strong> in contrast to literal interweaving of content and markupsymbols (like markdown/HTML/XML/JSON etc)</t>
+</blockquote>
+<section anchor="example-an-textual-kanban-using-tags"><name>Example: an textual kanban using tags</name>
+
+<artwork>buy milk
+finish paper
+contact John
+buy the great gatsby
+
+#milk@todo
+#contact@doing
+#contact@done
+#gatsby@done
+#finish+paper@doing
+</artwork>
+<t>If this text would be written on a paper, it could be scanned by a computer and represented spatially like so:</t>
+<table>
+<thead>
+<tr>
+<th>todo</th>
+<th>doing</th>
+<th>done</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>buy milk</td>
+<td>finish paper</td>
+<td>contact John</td>
+</tr>
+
+<tr>
+<td></td>
+<td>buy great gatsby</td>
+<td></td>
+</tr>
+</tbody>
+</table><blockquote><t>One could argue that tagging a word like <tt>buy</tt> would create conflicts, but for most purposes this is really easy to spot / workaround. For serious, large bodies of text use (unique) expanded BibTags instead.</t>
+</blockquote></section>
+
+<section anchor="example-javascript-bibs-expander"><name>Example javascript bibs expander</name>
+<t>Tiny but powerful implications:</t>
+
+<artwork>expandBibs = (text) =&gt; {
+    let bibs   = { regex: /(#[a-zA-Z0-9_+@\-]+(#)?)/g, tags: {}}
+    text.replace( bibs.regex , (m,k,v) =&gt; {
+       tok   = m.substr(1).split(&quot;@&quot;)
+       match = tok.shift()
+       if( tok.length ) tok.map( (t) =&gt; bibs.tags[t] = `@${t}{${match},\n}` ) 
+       else if( match.substr(-1) == '#' ) 
+          bibs.tags[match] = `@{${match.replace(/#/,'')}}`
+       else bibs.tags[match] = `@${match}{${match},\n}`
+    })
+    return text.replace( bibs.regex, '') + Object.values(bibs.tags).join('\n')
+}
+
+t = expandBibs(`john, could you feed the cat?
+
+  #john
+  #laundry@chores@todo
+  #some-scope#
+`)
+</artwork>
+<t>BibTeX OUTPUT:</t>
+
+<artwork> john, could you feed the cat?
+ 
+ 
+ @john{john,
+ }
+ @chores{laundry,
+ }
+ @todo{laundry,
+ }
+ @{some-scope}
+</artwork>
+</section>
+
+<section anchor="bibs-bibtex-combo-lowest-common-denominator-for-linking-data"><name>Bibs &amp; BibTeX combo: lowest common denominator for linking data</name>
+<t>Eventhough Bibs can expand to JSON and XML as well, it's worth noting that Bibs &amp; BibTex are closest to human thought:</t>
+<t>Unlike XML or JSON, BibTex is typeless, unnested, and uncomplicated, hence a great advantage for introspection.<br />
+
+It's a missing, lowbarrier, sensemaking precursor to extrospective RDF.<br />
+</t>
+<blockquote><t>&quot;When a car breaks down, the ones <strong>without</strong> turbosupercharger are easier to fix&quot;</t>
+</blockquote><t>BibTeX-appendices are already used in the digital AND physical world (academic books, <eref target="https://visual-meta.info">visual-meta</eref>), perhaps due to its terseness &amp; simplicity.<br />
+
+In that sense, it's one step up from the <tt>.ini</tt> fileformat (which has never leaked into the physical world like BibTex):</t>
+
+<ol spacing="compact">
+<li>&lt;b id=&quot;frictionless-copy-paste&quot;&gt;frictionless copy/pasting&lt;/b&gt; (by humans) of (unobtrusive) content AND metadata</li>
+<li>an introspective 'sketchpad' for metadata, which can (optionally) mature into RDF later</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>characteristic</th>
+<th>UTF8 Plain Text (with BibTeX)</th>
+<th>RDF</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>perspective</td>
+<td>introspective</td>
+<td>extrospective</td>
+</tr>
+
+<tr>
+<td>structure</td>
+<td>fuzzy (sensemaking)</td>
+<td>precise</td>
+</tr>
+
+<tr>
+<td>space/scope</td>
+<td>local</td>
+<td>world</td>
+</tr>
+
+<tr>
+<td>everything is text (string)</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+
+<tr>
+<td>voice/paper-friendly</td>
+<td><eref target="https://github.com/coderofsalvation/hashtagbibs">bibs</eref></td>
+<td>no</td>
+</tr>
+
+<tr>
+<td>leaves (dictated) text intact</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+
+<tr>
+<td>markup language</td>
+<td>just an appendix</td>
+<td>~4 different</td>
+</tr>
+
+<tr>
+<td>polyglot format</td>
+<td>no</td>
+<td>yes</td>
+</tr>
+
+<tr>
+<td>easy to copy/paste content+metadata</td>
+<td>yes</td>
+<td>up to application</td>
+</tr>
+
+<tr>
+<td>easy to write/repair for layman</td>
+<td>yes</td>
+<td>depends</td>
+</tr>
+
+<tr>
+<td>easy to (de)serialize</td>
+<td>yes (fits on A4 paper)</td>
+<td>depends</td>
+</tr>
+
+<tr>
+<td>infrastructure</td>
+<td>selfcontained (plain text)</td>
+<td>(semi)networked</td>
+</tr>
+
+<tr>
+<td>freeform tagging/annotation</td>
+<td>yes, terse</td>
+<td>yes, verbose</td>
+</tr>
+
+<tr>
+<td>can be appended to text-content</td>
+<td>yes</td>
+<td>up to application</td>
+</tr>
+
+<tr>
+<td>copy-paste text preserves metadata</td>
+<td>yes</td>
+<td>up to application</td>
+</tr>
+
+<tr>
+<td>emoji</td>
+<td>yes</td>
+<td>depends on encoding</td>
+</tr>
+
+<tr>
+<td>predicates</td>
+<td>free</td>
+<td>semi pre-determined</td>
+</tr>
+
+<tr>
+<td>implementation/network overhead</td>
+<td>no</td>
+<td>depends</td>
+</tr>
+
+<tr>
+<td>used in (physical) books/PDF</td>
+<td>yes (visual-meta)</td>
+<td>no</td>
+</tr>
+
+<tr>
+<td>terse non-verb predicates</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+
+<tr>
+<td>nested structures</td>
+<td>no (but: BibTex rulers)</td>
+<td>yes</td>
+</tr>
+</tbody>
+</table></section>
+
+<section anchor="merging-bibtagged-overlaps"><name>Merging (BibTagged) overlaps</name>
+<t>When a bib (<tt>#great+gatsby@book</tt> is copy-pasted into another document (a PDF or Textfile with a <eref target="https://visual-meta.info">visual-meta</eref> appendix e.g.):</t>
+
+<ol spacing="compact">
+<li>the editor should check for the existence of <tt>@book{great+gatsby</tt></li>
+<li>if exist: do nothing, leave target document as is</li>
+<li>if not: create the expanded BibTag</li>
+<li>optionally, the editor can offer to add properties (as bibs are propertyless)</li>
+</ol>
+<blockquote><t>propertyless bibs, are a great way as a 'process later'-medium (&quot;I wrote down <tt>great+gatsby@readinglist</tt> on a papertowel/email, to scan/copy-paste it later)</t>
+</blockquote></section>
+</section>
+
+<section anchor="what-are-bibs-in-a-uri-fragment"><name>What are bibs in a URI fragment</name>
+<t>Just like regular <eref target="https://en.wikipedia.org/wiki/URI_fragment">URI Fragments</eref> they hint the browser to focus anything (Bib)Tagged:</t>
+
+<ul spacing="compact">
+<li><tt>https://website.com#@chores@todo</tt></li>
+<li><tt>https://mastodon.io/myprofile/#@chores@todo</tt></li>
+<li><tt>://xrworld.org/3dscene.gltf#@chores@todo</tt></li>
+</ul>
+<blockquote><t>Format: <tt>#@&lt;bibtag&gt;[ + @&lt;bibtag&gt; + [ ... ] ]</tt></t>
+</blockquote></section>
+
+<section anchor="rulers-microformats"><name>Rulers (microformats)</name>
+<t>The following allows for microformats:</t>
+
+<artwork>Apples, cinnamon, sugar and dough make a great applepie.
+
+#recipe-start#
+#applepie@todo
+#recipe-stop#
+</artwork>
+<t>expands into the following:</t>
+
+<artwork>BibTex             JSON                                HTML
+======             ====                                ====
+
+${recipe-start}    { &quot;ruler&quot;:&quot;recipe-start&quot; }          &lt;ruler name=&quot;recipe-start&quot;/&gt;
+@todo{applepie,    { &quot;tag&quot;:&quot;todo&quot;, &quot;match&quot;:applepie&quot;}  &lt;tag name=&quot;todo&quot; match=&quot;applepie&quot;/&gt;
+              
+}
+${recipe-stop}     { &quot;ruler&quot;:&quot;recipe-stop&quot; }           &lt;ruler name=&quot;recipe-stop&quot;/&gt;
+</artwork>
+<t>BibTex rulers have been pioneered by the <eref target="https://visual-meta.info">visual-meta</eref> microformat as a means of organizing BibTags:</t>
+
+<artwork>@{visual-meta-start}
+@{visual-meta-header-start}
+@visual-meta{
+ version = {1.1},
+ generator = {Author 7.6.2 (1064)},
+}
+@{visual-meta-header-end}
+@{visual-meta-bibtex-self-citation-start}
+@book{2021-12-08T10:57:03Z/TheFutureo,
+author = {Frode Alexander Hegland},
+editor = {Frode Alexander Hegland},
+title = {The Future of Text ||},
+...
+</artwork>
+<t>Eventhough it looks like 'nested data', this snippet would actually get decoded to this unnested array:</t>
+
+<artwork>[
+  { ruler: `{visual-meta-start}` },
+  { ruler: `{visual-meta-header-start}` },
+  { k: &quot;visual-meta&quot;, v: { version: &quot;1.1&quot;, generator: &quot;Author 7.6.2 1064)&quot; } }
+  { ruler: `{visual-meta-header-end}` },
+  { ruler: `{visual-meta-bibgtex-self-citation-start}` },
+  { k: &quot;book{2021-12-08T10:56:03Z/TheFutureo&quot;, v: { author: &quot;Frode ...&quot;, ... } }
+  ...
+]
+</artwork>
+<t>Why not a nested tree-structure? This kneejerk reaction should always be considered 'a temporary option'.<br />
+
+Don't forget that Bibrulers are simply rulers (not blocks):</t>
+
+<ol spacing="compact">
+<li>don't try to re-invent XML or JSON</li>
+<li>don't promote traversing graphs (instead: just a list with tags)</li>
+<li>they promote rather dumb, unnested, streamable lists (unlike HTML/XML/JSON) adhering to JSONLines/CSV</li>
+<li>they are much faster/simpler to lookup, implement, (de)serialize across low- and highlevel languages.</li>
+</ol>
+</section>
+
+<section anchor="contact"><name>Contact</name>
+
+<ul spacing="compact">
+<li>leonvankammen|gmail.com</li>
+</ul>
+</section>
+
+<section anchor="iana-considerations"><name>IANA Considerations</name>
+<t>This document has no IANA actions.</t>
+</section>
+
+<section anchor="acknowledgments"><name>Acknowledgments</name>
+<t>TODO acknowledge.</t>
+</section>
+
+</middle>
+
+</rfc>
