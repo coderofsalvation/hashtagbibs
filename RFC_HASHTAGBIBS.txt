@@ -229,8 +229,11 @@ Internet-Draft                 hashtagbibs                September 2023
    This mimetype indicates that bibs and their expanded format occuring
    in plain text, are automatically hidden and expanded by browsers.
 
-   |  For example bib=^@ means that lines matching regex ^@ (BibTex)
-   |  will automatically get filtered out, in order for software to:
+   |  For example bib=^@ means that:
+
+   1.  lines matching regex ^@ (BibTex) will not be rendered verbatim by
+       default, in order for software to:
+   2.  expand bibs (starting with a hashtag) to BibTex
 
    *  automatically create/detect links between textual/spatial objects
       within the document (see XR Fragments (https://xfragment.org))
@@ -270,9 +273,6 @@ Internet-Draft                 hashtagbibs                September 2023
    #gatsby@done
    #finish+paper@doing
 
-   If this text would be written on a paper, it could be scanned by a
-   computer and represented spatially like so:
-
 
 
 
@@ -281,6 +281,9 @@ van Kammen                Expires 14 March 2024                 [Page 5]
 
 Internet-Draft                 hashtagbibs                September 2023
 
+
+   If this text would be written on a paper, it could be scanned by a
+   computer and represented spatially like so:
 
               +==========+==================+==============+
               | todo     | doing            | done         |
@@ -322,9 +325,6 @@ t = expandBibs(`john, could you feed the cat?
 `)
 
    BibTeX OUTPUT:
-
-
-
 
 
 

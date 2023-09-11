@@ -144,8 +144,13 @@ Think of it as the brother of hashtags: a command for tagging-this-with-that.</t
 </tbody>
 </table><t>This mimetype indicates that bibs and their expanded format occuring in plain text, are automatically hidden and expanded by browsers.<br />
 </t>
-<blockquote><t>For example <tt>bib=^@</tt> means that lines matching regex <tt>^@</tt> (BibTex) will automatically get filtered out, in order for software to:</t>
+<blockquote><t>For example <tt>bib=^@</tt> means that:</t>
 </blockquote>
+<ol spacing="compact">
+<li>lines matching regex <tt>^@</tt> (BibTex) will not be rendered verbatim by default, in order for software to:</li>
+<li>expand bibs (starting with a hashtag) to BibTex</li>
+</ol>
+
 <ul spacing="compact">
 <li>automatically create/detect links between textual/spatial objects within the document (see <eref target="https://xfragment.org">XR Fragments</eref>)</li>
 <li>detect opiniated bibtag microformats (<eref target="https://visual-meta.info">visual-meta</eref> e.g.)</li>

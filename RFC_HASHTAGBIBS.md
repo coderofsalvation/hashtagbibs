@@ -116,7 +116,10 @@ would only expand to:
 
 This mimetype indicates that bibs and their expanded format occuring in plain text, are automatically hidden and expanded by browsers.<br>
 
-> For example `bib=^@` means that lines matching regex `^@` (BibTex) will automatically get filtered out, in order for software to:
+> For example `bib=^@` means that:
+
+1. lines matching regex `^@` (BibTex) will not be rendered verbatim by default, in order for software to:
+1. expand bibs (starting with a hashtag) to BibTex
 
 * automatically create/detect links between textual/spatial objects within the document (see [XR Fragments](https://xfragment.org))
 * detect opiniated bibtag microformats ([visual-meta](https://visual-meta.info) e.g.)

@@ -161,8 +161,13 @@ They allow <strong>polyglot tagging</strong> by expanding into multiple (reverse
 <p>This mimetype indicates that bibs and their expanded format occuring in plain text, are automatically hidden and expanded by browsers.<br></p>
 
 <blockquote>
-<p>For example <code>bib=^@</code> means that lines matching regex <code>^@</code> (BibTex) will automatically get filtered out, in order for software to:</p>
+<p>For example <code>bib=^@</code> means that:</p>
 </blockquote>
+
+<ol>
+<li>lines matching regex <code>^@</code> (BibTex) will not be rendered verbatim by default, in order for software to:</li>
+<li>expand bibs (starting with a hashtag) to BibTex</li>
+</ol>
 
 <ul>
 <li>automatically create/detect links between textual/spatial objects within the document (see <a href="https://xfragment.org">XR Fragments</a>)</li>
