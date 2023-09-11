@@ -131,8 +131,8 @@ BibTeX             JSON                                   XML
    |  mortals to connect words to other things using pencil, voice or
    |  keyboard.
 
-   Bibs generalizes the BibTex author/title-semantics (author{title}) as
-   *this* points to *that* (this{that}).
+   Bibs generalizes the BibTex author/title-semantics (author{title})
+   into *this* points to *that* (this{that}).
    There's no precise predicates or properties, just simply 'this points
    to that', which empowers citizen annotation (an essential precursor
    of RDF).

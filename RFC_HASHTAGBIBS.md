@@ -69,7 +69,7 @@ BibTeX             JSON                                   XML
 
 > the word and `john` `laundry` can now be highlighted in the human text (or 3D object can be shown when their objectname matches). bibs are basically one step up from socialmedia hashtags, allowing mere mortals to connect words to other things using pencil, voice or keyboard. 
 
-Bibs generalizes the BibTex author/title-semantics (`author{title}`) as **this** points to **that** (`this{that}`).<br>
+Bibs generalizes the BibTex author/title-semantics (`author{title}`) into **this** points to **that** (`this{that}`).<br>
 There's no precise predicates or properties, just simply 'this points to that', which empowers citizen annotation (an essential precursor of RDF).
 
 > NOTE: in the rest of this article, we use focus on BibTex for convenience (as it is the most terse, easiest to write/repair/speak outputformat).

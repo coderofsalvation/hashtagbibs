@@ -56,7 +56,7 @@ In other words: compressed (reversed) BibTags, JSON or XML like so:</t>
 @todo{laundry}     { &quot;tag&quot;:&quot;todo&quot;,   &quot;match&quot;: &quot;laundry&quot;}    &lt;tag name=&quot;todo&quot; match=&quot;laundry&quot;/&gt;
 </artwork>
 <blockquote><t>the word and <tt>john</tt> <tt>laundry</tt> can now be highlighted in the human text (or 3D object can be shown when their objectname matches). bibs are basically one step up from socialmedia hashtags, allowing mere mortals to connect words to other things using pencil, voice or keyboard.</t>
-</blockquote><t>Bibs generalizes the BibTex author/title-semantics (<tt>author{title}</tt>) as <strong>this</strong> points to <strong>that</strong> (<tt>this{that}</tt>).<br />
+</blockquote><t>Bibs generalizes the BibTex author/title-semantics (<tt>author{title}</tt>) into <strong>this</strong> points to <strong>that</strong> (<tt>this{that}</tt>).<br />
 
 There's no precise predicates or properties, just simply 'this points to that', which empowers citizen annotation (an essential precursor of RDF).</t>
 <blockquote><t>NOTE: in the rest of this article, we use focus on BibTex for convenience (as it is the most terse, easiest to write/repair/speak outputformat).</t>
