@@ -173,6 +173,20 @@ They allow <strong>polyglot tagging</strong> by expanding into multiple (reverse
 <p>This significantly expands expressiveness and portability of human tagged text, by <strong>postponing machine-concerns to the end of the human text</strong> in contrast to literal interweaving of content and markupsymbols (like markdown/HTML/XML/JSON etc)</p>
 </blockquote>
 
+<h1 id="example-extra-properties">Example: extra properties</h1>
+
+<p>Properties are not the scope of bibs, as bibs are a <strong>one-way-street</strong> (from bibs to X).<br>
+However, its output can be further decorated with properties using the following notation:</p>
+
+<pre><code>BibTeX             JSON                XML
+======             ====                ===
+
+@john{john,        { &quot;tag&quot;:&quot;john&quot;,     &lt;tag name=&quot;john&quot;
+  note={foo}         &quot;match&quot;:&quot;john&quot;,        match=&quot;john&quot;    
+}                    &quot;note:&quot;foo&quot;            note=&quot;foo&quot;/&gt;
+                   }
+</code></pre>
+
 <h2 id="example-an-textual-kanban-using-tags">Example: an textual kanban using tags</h2>
 
 <pre><code>buy milk

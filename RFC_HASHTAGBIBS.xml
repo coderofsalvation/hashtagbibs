@@ -151,7 +151,22 @@ Think of it as the brother of hashtags: a command for tagging-this-with-that.</t
 <li>detect opiniated bibtag microformats (<eref target="https://visual-meta.info">visual-meta</eref> e.g.)</li>
 </ul>
 <blockquote><t>This significantly expands expressiveness and portability of human tagged text, by <strong>postponing machine-concerns to the end of the human text</strong> in contrast to literal interweaving of content and markupsymbols (like markdown/HTML/XML/JSON etc)</t>
-</blockquote>
+</blockquote></section>
+
+<section anchor="example-extra-properties"><name>Example: extra properties</name>
+<t>Properties are not the scope of bibs, as bibs are a <strong>one-way-street</strong> (from bibs to X).<br />
+
+However, its output can be further decorated with properties using the following notation:</t>
+
+<artwork>BibTeX             JSON                XML
+======             ====                ===
+
+@john{john,        { &quot;tag&quot;:&quot;john&quot;,     &lt;tag name=&quot;john&quot;
+  note={foo}         &quot;match&quot;:&quot;john&quot;,        match=&quot;john&quot;    
+}                    &quot;note:&quot;foo&quot;            note=&quot;foo&quot;/&gt;
+                   }
+</artwork>
+
 <section anchor="example-an-textual-kanban-using-tags"><name>Example: an textual kanban using tags</name>
 
 <artwork>buy milk

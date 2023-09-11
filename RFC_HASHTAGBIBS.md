@@ -123,6 +123,22 @@ This mimetype indicates that bibs and their expanded format occuring in plain te
 
 > This significantly expands expressiveness and portability of human tagged text, by **postponing machine-concerns to the end of the human text** in contrast to literal interweaving of content and markupsymbols (like markdown/HTML/XML/JSON etc)
 
+# Example: extra properties
+
+Properties are not the scope of bibs, as bibs are a **one-way-street** (from bibs to X).<br>
+However, its output can be further decorated with properties using the following notation:
+
+
+```
+BibTeX             JSON                XML
+======             ====                ===
+
+@john{john,        { "tag":"john",     <tag name="john"
+  note={foo}         "match":"john",        match="john"    
+}                    "note:"foo"            note="foo"/>
+                   }
+```
+
 ## Example: an textual kanban using tags
 
 ```

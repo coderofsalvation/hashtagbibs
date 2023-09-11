@@ -77,16 +77,17 @@ Table of Contents
    1.  What are bibs . . . . . . . . . . . . . . . . . . . . . . . .   2
      1.1.  format  . . . . . . . . . . . . . . . . . . . . . . . . .   3
    2.  hashtagbib mimetypes  . . . . . . . . . . . . . . . . . . . .   4
-     2.1.  Example: an textual kanban using tags . . . . . . . . . .   5
-     2.2.  Example javascript bibs expander  . . . . . . . . . . . .   5
-     2.3.  Bibs & BibTeX combo: lowest common denominator for linking
-           data  . . . . . . . . . . . . . . . . . . . . . . . . . .   6
-     2.4.  Merging (BibTagged) overlaps  . . . . . . . . . . . . . .   8
-   3.  What are bibs in a URI fragment . . . . . . . . . . . . . . .   9
-   4.  Rulers (microformats) . . . . . . . . . . . . . . . . . . . .   9
-   5.  Contact . . . . . . . . . . . . . . . . . . . . . . . . . . .  10
-   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  10
-   7.  Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .  10
+   3.  Example: extra properties . . . . . . . . . . . . . . . . . .   5
+     3.1.  Example: an textual kanban using tags . . . . . . . . . .   5
+     3.2.  Example javascript bibs expander  . . . . . . . . . . . .   6
+     3.3.  Bibs & BibTeX combo: lowest common denominator for linking
+           data  . . . . . . . . . . . . . . . . . . . . . . . . . .   7
+     3.4.  Merging (BibTagged) overlaps  . . . . . . . . . . . . . .   9
+   4.  What are bibs in a URI fragment . . . . . . . . . . . . . . .   9
+   5.  Rulers (microformats) . . . . . . . . . . . . . . . . . . . .   9
+   6.  Contact . . . . . . . . . . . . . . . . . . . . . . . . . . .  11
+   7.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  11
+   8.  Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .  11
 
 1.  What are bibs
 
@@ -105,7 +106,6 @@ Table of Contents
    *  *tag* john with tagname john
    *  *tag* laundry with tagname chores and todo
 
-   and expands into the following formats:
 
 
 
@@ -113,6 +113,8 @@ van Kammen                Expires 14 March 2024                 [Page 2]
 
 Internet-Draft                 hashtagbibs                September 2023
 
+
+   and expands into the following formats:
 
 BibTeX             JSON                                   XML
 ======             ====                                   ===
@@ -149,6 +151,25 @@ BibTeX             JSON                                   XML
    |  syntactically, bibs are hashtags with (concatenated) emaildomains
    |  without an extension
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+van Kammen                Expires 14 March 2024                 [Page 3]
+
+Internet-Draft                 hashtagbibs                September 2023
+
+
      +==================+===========================================+
      | language         | example                                   |
      +==================+===========================================+
@@ -162,13 +183,6 @@ BibTeX             JSON                                   XML
      +------------------+-------------------------------------------+
 
                                  Table 1
-
-
-
-van Kammen                Expires 14 March 2024                 [Page 3]
-
-Internet-Draft                 hashtagbibs                September 2023
-
 
    1.  to qualify as a bib, a word should start with a hashtag, and
        (optionally) contain on or more @ characters
@@ -204,6 +218,14 @@ Internet-Draft                 hashtagbibs                September 2023
 
                                   Table 2
 
+
+
+
+van Kammen                Expires 14 March 2024                 [Page 4]
+
+Internet-Draft                 hashtagbibs                September 2023
+
+
    This mimetype indicates that bibs and their expanded format occuring
    in plain text, are automatically hidden and expanded by browsers.
 
@@ -215,23 +237,27 @@ Internet-Draft                 hashtagbibs                September 2023
    *  detect opiniated bibtag microformats (visual-meta (https://visual-
       meta.info) e.g.)
 
-
-
-
-
-
-
-van Kammen                Expires 14 March 2024                 [Page 4]
-
-Internet-Draft                 hashtagbibs                September 2023
-
-
    |  This significantly expands expressiveness and portability of human
    |  tagged text, by *postponing machine-concerns to the end of the
    |  human text* in contrast to literal interweaving of content and
    |  markupsymbols (like markdown/HTML/XML/JSON etc)
 
-2.1.  Example: an textual kanban using tags
+3.  Example: extra properties
+
+   Properties are not the scope of bibs, as bibs are a *one-way-street*
+   (from bibs to X).
+   However, its output can be further decorated with properties using
+   the following notation:
+
+   BibTeX             JSON                XML
+   ======             ====                ===
+
+   @john{john,        { "tag":"john",     <tag name="john"
+     note={foo}         "match":"john",        match="john"
+   }                    "note:"foo"            note="foo"/>
+                      }
+
+3.1.  Example: an textual kanban using tags
 
    buy milk
    finish paper
@@ -246,6 +272,15 @@ Internet-Draft                 hashtagbibs                September 2023
 
    If this text would be written on a paper, it could be scanned by a
    computer and represented spatially like so:
+
+
+
+
+
+van Kammen                Expires 14 March 2024                 [Page 5]
+
+Internet-Draft                 hashtagbibs                September 2023
+
 
               +==========+==================+==============+
               | todo     | doing            | done         |
@@ -262,25 +297,9 @@ Internet-Draft                 hashtagbibs                September 2023
    |  workaround.  For serious, large bodies of text use (unique)
    |  expanded BibTags instead.
 
-2.2.  Example javascript bibs expander
+3.2.  Example javascript bibs expander
 
    Tiny but powerful implications:
-
-
-
-
-
-
-
-
-
-
-
-
-van Kammen                Expires 14 March 2024                 [Page 5]
-
-Internet-Draft                 hashtagbibs                September 2023
-
 
 expandBibs = (text) => {
     let bibs   = { regex: /(#[a-zA-Z0-9_+@\-]+(#)?)/g, tags: {}}
@@ -304,6 +323,21 @@ t = expandBibs(`john, could you feed the cat?
 
    BibTeX OUTPUT:
 
+
+
+
+
+
+
+
+
+
+
+van Kammen                Expires 14 March 2024                 [Page 6]
+
+Internet-Draft                 hashtagbibs                September 2023
+
+
     john, could you feed the cat?
 
 
@@ -315,7 +349,7 @@ t = expandBibs(`john, could you feed the cat?
     }
     @{some-scope}
 
-2.3.  Bibs & BibTeX combo: lowest common denominator for linking data
+3.3.  Bibs & BibTeX combo: lowest common denominator for linking data
 
    Eventhough Bibs can expand to JSON and XML as well, it's worth noting
    that Bibs & BibTex are closest to human thought:
@@ -327,16 +361,6 @@ t = expandBibs(`john, could you feed the cat?
 
    |  "When a car breaks down, the ones *without* turbosupercharger are
    |  easier to fix"
-
-
-
-
-
-
-van Kammen                Expires 14 March 2024                 [Page 6]
-
-Internet-Draft                 hashtagbibs                September 2023
-
 
    BibTeX-appendices are already used in the digital AND physical world
    (academic books, visual-meta (https://visual-meta.info)), perhaps due
@@ -362,6 +386,14 @@ Internet-Draft                 hashtagbibs                September 2023
    |text (string)   |                                     |               |
    +----------------+-------------------------------------+---------------+
    |voice/paper-    |bibs                                 |no             |
+
+
+
+van Kammen                Expires 14 March 2024                 [Page 7]
+
+Internet-Draft                 hashtagbibs                September 2023
+
+
    |friendly        |(https://github.com/coderofsalvation/|               |
    |                |hashtagbibs)                         |               |
    +----------------+-------------------------------------+---------------+
@@ -386,14 +418,6 @@ Internet-Draft                 hashtagbibs                September 2023
    +----------------+-------------------------------------+---------------+
    |infrastructure  |selfcontained (plain text)           |(semi)networked|
    +----------------+-------------------------------------+---------------+
-
-
-
-van Kammen                Expires 14 March 2024                 [Page 7]
-
-Internet-Draft                 hashtagbibs                September 2023
-
-
    |freeform        |yes, terse                           |yes, verbose   |
    |tagging/        |                                     |               |
    |annotation      |                                     |               |
@@ -418,6 +442,14 @@ Internet-Draft                 hashtagbibs                September 2023
    |(physical)      |                                     |               |
    |books/PDF       |                                     |               |
    +----------------+-------------------------------------+---------------+
+
+
+
+van Kammen                Expires 14 March 2024                 [Page 8]
+
+Internet-Draft                 hashtagbibs                September 2023
+
+
    |terse non-verb  |yes                                  |no             |
    |predicates      |                                     |               |
    +----------------+-------------------------------------+---------------+
@@ -427,7 +459,7 @@ Internet-Draft                 hashtagbibs                September 2023
 
                                   Table 4
 
-2.4.  Merging (BibTagged) overlaps
+3.4.  Merging (BibTagged) overlaps
 
    When a bib (#great+gatsby@book is copy-pasted into another document
    (a PDF or Textfile with a visual-meta (https://visual-meta.info)
@@ -443,14 +475,7 @@ Internet-Draft                 hashtagbibs                September 2023
    |  wrote down great+gatsby@readinglist on a papertowel/email, to
    |  scan/copy-paste it later)
 
-
-
-van Kammen                Expires 14 March 2024                 [Page 8]
-
-Internet-Draft                 hashtagbibs                September 2023
-
-
-3.  What are bibs in a URI fragment
+4.  What are bibs in a URI fragment
 
    Just like regular URI Fragments (https://en.wikipedia.org/wiki/
    URI_fragment) they hint the browser to focus anything (Bib)Tagged:
@@ -461,7 +486,7 @@ Internet-Draft                 hashtagbibs                September 2023
 
    |  Format: #@<bibtag>[ + @<bibtag> + [ ... ] ]
 
-4.  Rulers (microformats)
+5.  Rulers (microformats)
 
    The following allows for microformats:
 
@@ -472,6 +497,14 @@ Internet-Draft                 hashtagbibs                September 2023
    #recipe-stop#
 
    expands into the following:
+
+
+
+
+van Kammen                Expires 14 March 2024                 [Page 9]
+
+Internet-Draft                 hashtagbibs                September 2023
+
 
 BibTex             JSON                                HTML
 ======             ====                                ====
@@ -499,13 +532,6 @@ ${recipe-stop}     { "ruler":"recipe-stop" }           <ruler name="recipe-stop"
    title = {The Future of Text ||},
    ...
 
-
-
-van Kammen                Expires 14 March 2024                 [Page 9]
-
-Internet-Draft                 hashtagbibs                September 2023
-
-
    Eventhough it looks like 'nested data', this snippet would actually
    get decoded to this unnested array:
 
@@ -527,18 +553,27 @@ Internet-Draft                 hashtagbibs                September 2023
    2.  don't promote traversing graphs (instead: just a list with tags)
    3.  they promote rather dumb, unnested, streamable lists (unlike
        HTML/XML/JSON) adhering to JSONLines/CSV
+
+
+
+
+van Kammen                Expires 14 March 2024                [Page 10]
+
+Internet-Draft                 hashtagbibs                September 2023
+
+
    4.  they are much faster/simpler to lookup, implement, (de)serialize
        across low- and highlevel languages.
 
-5.  Contact
+6.  Contact
 
    *  leonvankammen|gmail.com
 
-6.  IANA Considerations
+7.  IANA Considerations
 
    This document has no IANA actions.
 
-7.  Acknowledgments
+8.  Acknowledgments
 
    TODO acknowledge.
 
@@ -557,4 +592,25 @@ Internet-Draft                 hashtagbibs                September 2023
 
 
 
-van Kammen                Expires 14 March 2024                [Page 10]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+van Kammen                Expires 14 March 2024                [Page 11]
