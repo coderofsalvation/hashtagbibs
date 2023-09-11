@@ -188,6 +188,45 @@ BibTeX OUTPUT:
  @{some-scope}
 ```
 
+## Bibs & BibTeX combo: lowest common denominator for linking data 
+
+Eventhough Bibs can expand to JSON and XML as well, it's worth noting that Bibs & BibTex are closest to human thought:
+
+Unlike XML or JSON, BibTex is typeless, unnested, and uncomplicated, hence a great advantage for introspection.<br>
+It's a missing, lowbarrier, sensemaking precursor to extrospective RDF.<br>
+
+> "When a car breaks down, the ones **without** turbosupercharger are easier to fix"
+
+BibTeX-appendices are already used in the digital AND physical world (academic books, [visual-meta](https://visual-meta.info)), perhaps due to its terseness & simplicity.<br> 
+In that sense, it's one step up from the `.ini` fileformat (which has never leaked into the physical world like BibTex):
+  
+1. <b id="frictionless-copy-paste">frictionless copy/pasting</b> (by humans) of (unobtrusive) content AND metadata
+1. an introspective 'sketchpad' for metadata, which can (optionally) mature into RDF later 
+  
+| characteristic                     | UTF8 Plain Text (with BibTeX) | RDF                       |
+|------------------------------------|-------------------------------|---------------------------|
+| perspective                        | introspective                 | extrospective             |   
+| structure                          | fuzzy (sensemaking)           | precise                   |   
+| space/scope                        | local                         | world                     |   
+| everything is text (string)        | yes                           | no                        |   
+| voice/paper-friendly               | [bibs](https://github.com/coderofsalvation/hashtagbibs) | no  |
+| leaves (dictated) text intact      | yes                           | no                        |   
+| markup language                    | just an appendix              | ~4 different              |                               
+| polyglot format                    | no                            | yes                       |   
+| easy to copy/paste content+metadata| yes                           | up to application         |   
+| easy to write/repair for layman    | yes                           | depends                   |   
+| easy to (de)serialize              | yes (fits on A4 paper)        | depends                   |   
+| infrastructure                     | selfcontained (plain text)    | (semi)networked           |   
+| freeform tagging/annotation        | yes, terse                    | yes, verbose              |   
+| can be appended to text-content    | yes                           | up to application         |   
+| copy-paste text preserves metadata | yes                           | up to application         |   
+| emoji                              | yes                           | depends on encoding       |   
+| predicates                         | free                          | semi pre-determined       |   
+| implementation/network overhead    | no                            | depends                   |   
+| used in (physical) books/PDF       | yes (visual-meta)             | no                        |   
+| terse non-verb predicates          | yes                           | no                        |   
+| nested structures                  | no (but: BibTex rulers)       | yes                       |   
+
 ## Merging (BibTagged) overlaps
 
 When a bib (`#great+gatsby@book` is copy-pasted into another document (a PDF or Textfile with a [visual-meta](https://visual-meta.info) appendix e.g.):
@@ -252,7 +291,7 @@ title = {The Future of Text ||},
 ...
 ```
 
-This snippet would get decoded to this unnested array:
+Eventhough it looks like 'nested data', this snippet would actually get decoded to this unnested array:
 
 ```
 [
@@ -272,7 +311,7 @@ Don't forget that Bibrulers are simply rulers (not blocks):
 1. don't try to re-invent XML or JSON
 1. don't promote traversing graphs (instead: just a list with tags)
 1. they promote rather dumb, unnested, streamable lists (unlike HTML/XML/JSON) adhering to JSONLines/CSV
-1. they are much faster/simpler to lookup, implement, (de)serialize in low- and hihglevel languages.
+1. they are much faster/simpler to lookup, implement, (de)serialize across low- and highlevel languages.
 
 # Contact
 
