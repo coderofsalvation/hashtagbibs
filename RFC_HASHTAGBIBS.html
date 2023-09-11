@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  
+  <title>hashtagbibs</title>
   <meta name="GENERATOR" content="github.com/mmarkdown/mmark Mmark Markdown Processor - mmark.miek.nl">
   <meta charset="utf-8">
 </head>
@@ -43,7 +43,7 @@ In other words: compressed (reversed) BibTags, JSON or XML like so:</p>
 </blockquote>
 
 <ul>
-<li><code>laundry</code> points to <code>chores</code> and <code>todo</code></li>
+<li><code>laundry</code> <strong>points to</strong> <code>chores</code> and <code>todo</code></li>
 </ul>
 
 <blockquote>
@@ -55,11 +55,11 @@ In other words: compressed (reversed) BibTags, JSON or XML like so:</p>
 <pre><code>BibTeX             JSON                                   XML
 ======             ====                                   ===
 
-@john{john}        { &quot;tag&quot;:&quot;john&quot;,   &quot;match&quot;:&quot;john&quot;}        &lt;tag name=&quot;john&quot; match=&quot;john&quot;/&gt;
-
-@chores{laundry}   { &quot;tag&quot;:&quot;chores&quot;, &quot;match&quot;:&quot;laundry&quot;}   &lt;tag name=&quot;chores&quot; match=&quot;laundry&quot;/&gt;
-  
-@todo{laundry}     { &quot;tag&quot;:&quot;todo&quot;,   &quot;match&quot;: &quot;laundry&quot;}    &lt;tag name=&quot;todo&quot; match=&quot;laundry&quot;/&gt;
+@john{john}        { &quot;this&quot;:&quot;john&quot;,   &quot;that&quot;:&quot;john&quot;, }   &lt;tag this=&quot;john&quot; that=&quot;john&quot;/&gt;
+                                                        
+@chores{laundry}   { &quot;this&quot;:&quot;laundry&quot;,&quot;that&quot;:&quot;chores&quot;}   &lt;tag this=&quot;laundry&quot; that=&quot;chores&quot;/&gt;
+                                                        
+@todo{laundry}     { &quot;this&quot;:&quot;laundry&quot;,&quot;that&quot;:&quot;todo&quot;  }   &lt;tag this=&quot;laundry&quot; that=&quot;todo&quot;/&gt;
 </code></pre>
 
 <blockquote>
@@ -185,9 +185,9 @@ However, its output can be further decorated with properties using the following
 <pre><code>BibTeX             JSON                XML
 ======             ====                ===
 
-@john{john,        { &quot;tag&quot;:&quot;john&quot;,     &lt;tag name=&quot;john&quot;
-  note={foo}         &quot;match&quot;:&quot;john&quot;,        match=&quot;john&quot;    
-}                    &quot;note:&quot;foo&quot;            note=&quot;foo&quot;/&gt;
+@article{john,     { &quot;that&quot;:&quot;john&quot;,     &lt;tag that=&quot;john&quot;
+  note={foo}         &quot;this&quot;:&quot;article&quot;,       this=&quot;article&quot;    
+}                    &quot;note:&quot;foo&quot;             note=&quot;foo&quot;/&gt;
                    }
 </code></pre>
 
@@ -476,11 +476,11 @@ In that sense, it&rsquo;s one step up from the <code>.ini</code> fileformat (whi
 <pre><code>BibTex             JSON                                HTML
 ======             ====                                ====
 
-${recipe-start}    { &quot;ruler&quot;:&quot;recipe-start&quot; }          &lt;ruler name=&quot;recipe-start&quot;/&gt;
-@todo{applepie,    { &quot;tag&quot;:&quot;todo&quot;, &quot;match&quot;:applepie&quot;}  &lt;tag name=&quot;todo&quot; match=&quot;applepie&quot;/&gt;
+${recipe-start}    { &quot;ruler&quot;:&quot;recipe-start&quot; }          &lt;ruler that=&quot;recipe-start&quot;/&gt;
+@todo{applepie,    { &quot;that&quot;:&quot;todo&quot;, &quot;this&quot;:applepie&quot;}  &lt;tag that=&quot;todo&quot; this=&quot;applepie&quot;/&gt;
               
 }
-${recipe-stop}     { &quot;ruler&quot;:&quot;recipe-stop&quot; }           &lt;ruler name=&quot;recipe-stop&quot;/&gt;
+${recipe-stop}     { &quot;ruler&quot;:&quot;recipe-stop&quot; }           &lt;ruler that=&quot;recipe-stop&quot;/&gt;
 </code></pre>
 
 <p>BibTex rulers have been pioneered by the <a href="https://visual-meta.info">visual-meta</a> microformat as a means of organizing BibTags:</p>

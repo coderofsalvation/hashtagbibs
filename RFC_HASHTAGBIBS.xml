@@ -4,7 +4,7 @@
 
 <front>
 <title>hashtagbibs</title><seriesInfo value="draft-hashtagbibs-leonvankammen-00" stream="IETF" status="informational" name="hashtagbibs"></seriesInfo>
-<author initials="L.R." surname="van Kammen" fullname="L.R. van Kammen"><organization></organization><address><postal><street></street>
+<author initials="L.R."><organization></organization><address><postal><street></street>
 </postal></address></author><date/>
 <area>Internet</area>
 <workgroup>Internet</workgroup>
@@ -41,7 +41,7 @@ In other words: compressed (reversed) BibTags, JSON or XML like so:</t>
 <blockquote><t>This basically means:</t>
 </blockquote>
 <ul spacing="compact">
-<li><tt>laundry</tt> points to <tt>chores</tt> and <tt>todo</tt></li>
+<li><tt>laundry</tt> <strong>points to</strong> <tt>chores</tt> and <tt>todo</tt></li>
 </ul>
 <blockquote><t>Or put in another way: <tt>laundry</tt> is tagged <strong>tag</strong> <tt>laundry</tt> and <strong>tag</strong> <tt>chores</tt></t>
 </blockquote><t>and expands into the following formats:</t>
@@ -49,11 +49,11 @@ In other words: compressed (reversed) BibTags, JSON or XML like so:</t>
 <artwork>BibTeX             JSON                                   XML
 ======             ====                                   ===
 
-@john{john}        { &quot;tag&quot;:&quot;john&quot;,   &quot;match&quot;:&quot;john&quot;}        &lt;tag name=&quot;john&quot; match=&quot;john&quot;/&gt;
-
-@chores{laundry}   { &quot;tag&quot;:&quot;chores&quot;, &quot;match&quot;:&quot;laundry&quot;}   &lt;tag name=&quot;chores&quot; match=&quot;laundry&quot;/&gt;
-  
-@todo{laundry}     { &quot;tag&quot;:&quot;todo&quot;,   &quot;match&quot;: &quot;laundry&quot;}    &lt;tag name=&quot;todo&quot; match=&quot;laundry&quot;/&gt;
+@john{john}        { &quot;this&quot;:&quot;john&quot;,   &quot;that&quot;:&quot;john&quot;, }   &lt;tag this=&quot;john&quot; that=&quot;john&quot;/&gt;
+                                                        
+@chores{laundry}   { &quot;this&quot;:&quot;laundry&quot;,&quot;that&quot;:&quot;chores&quot;}   &lt;tag this=&quot;laundry&quot; that=&quot;chores&quot;/&gt;
+                                                        
+@todo{laundry}     { &quot;this&quot;:&quot;laundry&quot;,&quot;that&quot;:&quot;todo&quot;  }   &lt;tag this=&quot;laundry&quot; that=&quot;todo&quot;/&gt;
 </artwork>
 <blockquote><t>the word and <tt>john</tt> <tt>laundry</tt> can now be highlighted in the human text (or 3D object can be shown when their objectname matches). bibs are basically one step up from socialmedia hashtags, allowing mere mortals to connect words to other things using pencil, voice or keyboard.</t>
 </blockquote><t>Bibs generalizes the BibTex author/title-semantics (<tt>author{title}</tt>) into <strong>this</strong> points to <strong>that</strong> (<tt>this{that}</tt>).<br />
@@ -163,9 +163,9 @@ However, its output can be further decorated with properties using the following
 <artwork>BibTeX             JSON                XML
 ======             ====                ===
 
-@john{john,        { &quot;tag&quot;:&quot;john&quot;,     &lt;tag name=&quot;john&quot;
-  note={foo}         &quot;match&quot;:&quot;john&quot;,        match=&quot;john&quot;    
-}                    &quot;note:&quot;foo&quot;            note=&quot;foo&quot;/&gt;
+@article{john,     { &quot;that&quot;:&quot;john&quot;,     &lt;tag that=&quot;john&quot;
+  note={foo}         &quot;this&quot;:&quot;article&quot;,       this=&quot;article&quot;    
+}                    &quot;note:&quot;foo&quot;             note=&quot;foo&quot;/&gt;
                    }
 </artwork>
 
@@ -437,11 +437,11 @@ In that sense, it's one step up from the <tt>.ini</tt> fileformat (which has nev
 <artwork>BibTex             JSON                                HTML
 ======             ====                                ====
 
-${recipe-start}    { &quot;ruler&quot;:&quot;recipe-start&quot; }          &lt;ruler name=&quot;recipe-start&quot;/&gt;
-@todo{applepie,    { &quot;tag&quot;:&quot;todo&quot;, &quot;match&quot;:applepie&quot;}  &lt;tag name=&quot;todo&quot; match=&quot;applepie&quot;/&gt;
+${recipe-start}    { &quot;ruler&quot;:&quot;recipe-start&quot; }          &lt;ruler that=&quot;recipe-start&quot;/&gt;
+@todo{applepie,    { &quot;that&quot;:&quot;todo&quot;, &quot;this&quot;:applepie&quot;}  &lt;tag that=&quot;todo&quot; this=&quot;applepie&quot;/&gt;
               
 }
-${recipe-stop}     { &quot;ruler&quot;:&quot;recipe-stop&quot; }           &lt;ruler name=&quot;recipe-stop&quot;/&gt;
+${recipe-stop}     { &quot;ruler&quot;:&quot;recipe-stop&quot; }           &lt;ruler that=&quot;recipe-stop&quot;/&gt;
 </artwork>
 <t>BibTex rulers have been pioneered by the <eref target="https://visual-meta.info">visual-meta</eref> microformat as a means of organizing BibTags:</t>
 

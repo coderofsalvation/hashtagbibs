@@ -13,8 +13,8 @@ date = 2022-08-01
 
 [[author]]
 initials="L.R."
-surname="van Kammen"
-fullname="L.R. van Kammen"
+surthat="van Kammen"
+fullthat="L.R. van Kammen"
 
 %%%
 
@@ -50,7 +50,7 @@ John please get out the laundry
 
 > This basically means: 
 
-* `laundry` points to `chores` and `todo`
+* `laundry` **points to** `chores` and `todo`
 
 > Or put in another way: `laundry` is tagged **tag** `laundry` and **tag** `chores`
 
@@ -60,11 +60,11 @@ and expands into the following formats:
 BibTeX             JSON                                   XML
 ======             ====                                   ===
 
-@john{john}        { "tag":"john",   "match":"john"}        <tag name="john" match="john"/>
-
-@chores{laundry}   { "tag":"chores", "match":"laundry"}   <tag name="chores" match="laundry"/>
-  
-@todo{laundry}     { "tag":"todo",   "match": "laundry"}    <tag name="todo" match="laundry"/>
+@john{john}        { "this":"john",   "that":"john", }   <tag this="john" that="john"/>
+                                                        
+@chores{laundry}   { "this":"laundry","that":"chores"}   <tag this="laundry" that="chores"/>
+                                                        
+@todo{laundry}     { "this":"laundry","that":"todo"  }   <tag this="laundry" that="todo"/>
 ```
 
 > the word and `john` `laundry` can now be highlighted in the human text (or 3D object can be shown when their objectname matches). bibs are basically one step up from socialmedia hashtags, allowing mere mortals to connect words to other things using pencil, voice or keyboard. 
@@ -133,9 +133,9 @@ However, its output can be further decorated with properties using the following
 BibTeX             JSON                XML
 ======             ====                ===
 
-@john{john,        { "tag":"john",     <tag name="john"
-  note={foo}         "match":"john",        match="john"    
-}                    "note:"foo"            note="foo"/>
+@article{john,     { "that":"john",     <tag that="john"
+  note={foo}         "this":"article",       this="article"    
+}                    "note:"foo"             note="foo"/>
                    }
 ```
 
@@ -282,11 +282,11 @@ expands into the following:
 BibTex             JSON                                HTML
 ======             ====                                ====
 
-${recipe-start}    { "ruler":"recipe-start" }          <ruler name="recipe-start"/>
-@todo{applepie,    { "tag":"todo", "match":applepie"}  <tag name="todo" match="applepie"/>
+${recipe-start}    { "ruler":"recipe-start" }          <ruler that="recipe-start"/>
+@todo{applepie,    { "that":"todo", "this":applepie"}  <tag that="todo" this="applepie"/>
               
 }
-${recipe-stop}     { "ruler":"recipe-stop" }           <ruler name="recipe-stop"/>
+${recipe-stop}     { "ruler":"recipe-stop" }           <ruler that="recipe-stop"/>
 ```
 
 BibTex rulers have been pioneered by the [visual-meta](https://visual-meta.info) microformat as a means of organizing BibTags:
