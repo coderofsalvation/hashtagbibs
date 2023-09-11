@@ -34,7 +34,6 @@ They allow <strong>polyglot tagging</strong> by expanding into multiple (reverse
 
 <pre><code>John please get out the laundry 
 
-#john
 #laundry@chores@todo
 </code></pre>
 
@@ -43,25 +42,23 @@ They allow <strong>polyglot tagging</strong> by expanding into multiple (reverse
 </blockquote>
 
 <ul>
-<li><strong>tag</strong> <code>john</code> with tagname <code>john</code></li>
-<li><strong>tag</strong> <code>laundry</code> with tagname <code>chores</code> and <code>todo</code></li>
+<li><code>laundry</code> points to <code>chores</code> and <code>todo</code></li>
 </ul>
+
+<blockquote>
+<p>Or put in another way: <code>laundry</code> is tagged <strong>tag</strong> <code>laundry</code> and <strong>tag</strong> <code>chores</code></p>
+</blockquote>
 
 <p>and expands into the following formats:</p>
 
 <pre><code>BibTeX             JSON                                   XML
 ======             ====                                   ===
 
-@john{john,        { &quot;tag&quot;:&quot;john&quot;, &quot;match&quot;:&quot;john&quot;}        &lt;tag name=&quot;john&quot; match=&quot;john&quot;/&gt;
-                     
-}
+@john{john}        { &quot;tag&quot;:&quot;john&quot;, &quot;match&quot;:&quot;john&quot;}        &lt;tag name=&quot;john&quot; match=&quot;john&quot;/&gt;
 
-@chores{laundry,   { &quot;tag&quot;:&quot;chores&quot;, &quot;match&quot;:&quot;laundry&quot;}   &lt;tag name=&quot;chores&quot; match=&quot;laundry&quot;/&gt;
+@chores{laundry}   { &quot;tag&quot;:&quot;chores&quot;, &quot;match&quot;:&quot;laundry&quot;}   &lt;tag name=&quot;chores&quot; match=&quot;laundry&quot;/&gt;
   
-}
-@todo{laundry,     { &quot;tag&quot;:&quot;todo&quot;, &quot;match&quot;: &quot;laundry&quot;}    &lt;tag name=&quot;todo&quot; match=&quot;laundry&quot;/&gt;
-
-}
+@todo{laundry}     { &quot;tag&quot;:&quot;todo&quot;, &quot;match&quot;: &quot;laundry&quot;}    &lt;tag name=&quot;todo&quot; match=&quot;laundry&quot;/&gt;
 </code></pre>
 
 <blockquote>
@@ -266,7 +263,7 @@ t = expandBibs(`john, could you feed the cat?
 <pre><code> john, could you feed the cat?
  
  
- @john{john,
+ @john{john
  }
  @chores{laundry,
  }

@@ -81,12 +81,12 @@ Table of Contents
      3.1.  Example: an textual kanban using tags . . . . . . . . . .   5
      3.2.  Example javascript bibs expander  . . . . . . . . . . . .   6
      3.3.  Bibs & BibTeX combo: lowest common denominator for linking
-           data  . . . . . . . . . . . . . . . . . . . . . . . . . .   7
-     3.4.  Merging (BibTagged) overlaps  . . . . . . . . . . . . . .   9
+           data  . . . . . . . . . . . . . . . . . . . . . . . . . .   6
+     3.4.  Merging (BibTagged) overlaps  . . . . . . . . . . . . . .   8
    4.  What are bibs in a URI fragment . . . . . . . . . . . . . . .   9
    5.  Rulers (microformats) . . . . . . . . . . . . . . . . . . . .   9
-   6.  Contact . . . . . . . . . . . . . . . . . . . . . . . . . . .  11
-   7.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  11
+   6.  Contact . . . . . . . . . . . . . . . . . . . . . . . . . . .  10
+   7.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  10
    8.  Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .  11
 
 1.  What are bibs
@@ -98,14 +98,14 @@ Table of Contents
 
    John please get out the laundry
 
-   #john
    #laundry@chores@todo
 
    |  This basically means:
 
-   *  *tag* john with tagname john
-   *  *tag* laundry with tagname chores and todo
+   *  laundry points to chores and todo
 
+   |  Or put in another way: laundry is tagged *tag* laundry and *tag*
+   |  chores
 
 
 
@@ -119,16 +119,11 @@ Internet-Draft                 hashtagbibs                September 2023
 BibTeX             JSON                                   XML
 ======             ====                                   ===
 
-@john{john,        { "tag":"john", "match":"john"}        <tag name="john" match="john"/>
+@john{john}        { "tag":"john", "match":"john"}        <tag name="john" match="john"/>
 
-}
+@chores{laundry}   { "tag":"chores", "match":"laundry"}   <tag name="chores" match="laundry"/>
 
-@chores{laundry,   { "tag":"chores", "match":"laundry"}   <tag name="chores" match="laundry"/>
-
-}
-@todo{laundry,     { "tag":"todo", "match": "laundry"}    <tag name="todo" match="laundry"/>
-
-}
+@todo{laundry}     { "tag":"todo", "match": "laundry"}    <tag name="todo" match="laundry"/>
 
    |  the word and john laundry can now be highlighted in the human text
    |  (or 3D object can be shown when their objectname matches). bibs
@@ -151,25 +146,6 @@ BibTeX             JSON                                   XML
    |  syntactically, bibs are hashtags with (concatenated) emaildomains
    |  without an extension
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-van Kammen                Expires 14 March 2024                 [Page 3]
-
-Internet-Draft                 hashtagbibs                September 2023
-
-
      +==================+===========================================+
      | language         | example                                   |
      +==================+===========================================+
@@ -186,6 +162,14 @@ Internet-Draft                 hashtagbibs                September 2023
 
    1.  to qualify as a bib, a word should start with a hashtag, and
        (optionally) contain on or more @ characters
+
+
+
+van Kammen                Expires 14 March 2024                 [Page 3]
+
+Internet-Draft                 hashtagbibs                September 2023
+
+
    2.  last bib wins: overlapping bibs overwrite eachother (last tag(s)
        win)
    3.  spaces are not allowed, maximum by using + to represents spaces
@@ -218,14 +202,6 @@ Internet-Draft                 hashtagbibs                September 2023
 
                                   Table 2
 
-
-
-
-van Kammen                Expires 14 March 2024                 [Page 4]
-
-Internet-Draft                 hashtagbibs                September 2023
-
-
    This mimetype indicates that bibs and their expanded format occuring
    in plain text, are automatically hidden and expanded by browsers.
 
@@ -239,6 +215,16 @@ Internet-Draft                 hashtagbibs                September 2023
       within the document (see XR Fragments (https://xfragment.org))
    *  detect opiniated bibtag microformats (visual-meta (https://visual-
       meta.info) e.g.)
+
+
+
+
+
+
+van Kammen                Expires 14 March 2024                 [Page 4]
+
+Internet-Draft                 hashtagbibs                September 2023
+
 
    |  This significantly expands expressiveness and portability of human
    |  tagged text, by *postponing machine-concerns to the end of the
@@ -273,15 +259,6 @@ Internet-Draft                 hashtagbibs                September 2023
    #gatsby@done
    #finish+paper@doing
 
-
-
-
-
-van Kammen                Expires 14 March 2024                 [Page 5]
-
-Internet-Draft                 hashtagbibs                September 2023
-
-
    If this text would be written on a paper, it could be scanned by a
    computer and represented spatially like so:
 
@@ -294,6 +271,16 @@ Internet-Draft                 hashtagbibs                September 2023
               +----------+------------------+--------------+
 
                                  Table 3
+
+
+
+
+
+
+van Kammen                Expires 14 March 2024                 [Page 5]
+
+Internet-Draft                 hashtagbibs                September 2023
+
 
    |  One could argue that tagging a word like buy would create
    |  conflicts, but for most purposes this is really easy to spot /
@@ -326,22 +313,10 @@ t = expandBibs(`john, could you feed the cat?
 
    BibTeX OUTPUT:
 
-
-
-
-
-
-
-
-van Kammen                Expires 14 March 2024                 [Page 6]
-
-Internet-Draft                 hashtagbibs                September 2023
-
-
     john, could you feed the cat?
 
 
-    @john{john,
+    @john{john
     }
     @chores{laundry,
     }
@@ -353,6 +328,15 @@ Internet-Draft                 hashtagbibs                September 2023
 
    Eventhough Bibs can expand to JSON and XML as well, it's worth noting
    that Bibs & BibTex are closest to human thought:
+
+
+
+
+
+van Kammen                Expires 14 March 2024                 [Page 6]
+
+Internet-Draft                 hashtagbibs                September 2023
+
 
    Unlike XML or JSON, BibTex is typeless, unnested, and uncomplicated,
    hence a great advantage for introspection.
@@ -386,14 +370,6 @@ Internet-Draft                 hashtagbibs                September 2023
    |text (string)   |                                     |               |
    +----------------+-------------------------------------+---------------+
    |voice/paper-    |bibs                                 |no             |
-
-
-
-van Kammen                Expires 14 March 2024                 [Page 7]
-
-Internet-Draft                 hashtagbibs                September 2023
-
-
    |friendly        |(https://github.com/coderofsalvation/|               |
    |                |hashtagbibs)                         |               |
    +----------------+-------------------------------------+---------------+
@@ -410,6 +386,14 @@ Internet-Draft                 hashtagbibs                September 2023
    |content+metadata|                                     |               |
    +----------------+-------------------------------------+---------------+
    |easy to write/  |yes                                  |depends        |
+
+
+
+van Kammen                Expires 14 March 2024                 [Page 7]
+
+Internet-Draft                 hashtagbibs                September 2023
+
+
    |repair for      |                                     |               |
    |layman          |                                     |               |
    +----------------+-------------------------------------+---------------+
@@ -442,14 +426,6 @@ Internet-Draft                 hashtagbibs                September 2023
    |(physical)      |                                     |               |
    |books/PDF       |                                     |               |
    +----------------+-------------------------------------+---------------+
-
-
-
-van Kammen                Expires 14 March 2024                 [Page 8]
-
-Internet-Draft                 hashtagbibs                September 2023
-
-
    |terse non-verb  |yes                                  |no             |
    |predicates      |                                     |               |
    +----------------+-------------------------------------+---------------+
@@ -466,6 +442,14 @@ Internet-Draft                 hashtagbibs                September 2023
    appendix e.g.):
 
    1.  the editor should check for the existence of @book{great+gatsby
+
+
+
+van Kammen                Expires 14 March 2024                 [Page 8]
+
+Internet-Draft                 hashtagbibs                September 2023
+
+
    2.  if exist: do nothing, leave target document as is
    3.  if not: create the expanded BibTag
    4.  optionally, the editor can offer to add properties (as bibs are
@@ -498,14 +482,6 @@ Internet-Draft                 hashtagbibs                September 2023
 
    expands into the following:
 
-
-
-
-van Kammen                Expires 14 March 2024                 [Page 9]
-
-Internet-Draft                 hashtagbibs                September 2023
-
-
 BibTex             JSON                                HTML
 ======             ====                                ====
 
@@ -517,6 +493,18 @@ ${recipe-stop}     { "ruler":"recipe-stop" }           <ruler name="recipe-stop"
 
    BibTex rulers have been pioneered by the visual-meta (https://visual-
    meta.info) microformat as a means of organizing BibTags:
+
+
+
+
+
+
+
+
+van Kammen                Expires 14 March 2024                 [Page 9]
+
+Internet-Draft                 hashtagbibs                September 2023
+
 
    @{visual-meta-start}
    @{visual-meta-header-start}
@@ -553,15 +541,6 @@ ${recipe-stop}     { "ruler":"recipe-stop" }           <ruler name="recipe-stop"
    2.  don't promote traversing graphs (instead: just a list with tags)
    3.  they promote rather dumb, unnested, streamable lists (unlike
        HTML/XML/JSON) adhering to JSONLines/CSV
-
-
-
-
-van Kammen                Expires 14 March 2024                [Page 10]
-
-Internet-Draft                 hashtagbibs                September 2023
-
-
    4.  they are much faster/simpler to lookup, implement, (de)serialize
        across low- and highlevel languages.
 
@@ -573,9 +552,30 @@ Internet-Draft                 hashtagbibs                September 2023
 
    This document has no IANA actions.
 
+
+
+
+
+
+van Kammen                Expires 14 March 2024                [Page 10]
+
+Internet-Draft                 hashtagbibs                September 2023
+
+
 8.  Acknowledgments
 
    TODO acknowledge.
+
+
+
+
+
+
+
+
+
+
+
 
 
 

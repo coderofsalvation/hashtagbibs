@@ -44,14 +44,14 @@ bibs allow non-technical humans to write (reversed) BibTags, JSON or XML, in a s
 ```
 John please get out the laundry 
 
-#john
 #laundry@chores@todo
 ```
 
 > This basically means: 
 
-* **tag** `john` with tagname `john`
-* **tag** `laundry` with tagname `chores` and `todo`
+* `laundry` points to `chores` and `todo`
+
+> Or put in another way: `laundry` is tagged **tag** `laundry` and **tag** `chores`
 
 and expands into the following formats:
 
@@ -59,16 +59,11 @@ and expands into the following formats:
 BibTeX             JSON                                   XML
 ======             ====                                   ===
 
-@john{john,        { "tag":"john", "match":"john"}        <tag name="john" match="john"/>
-                     
-}
+@john{john}        { "tag":"john", "match":"john"}        <tag name="john" match="john"/>
 
-@chores{laundry,   { "tag":"chores", "match":"laundry"}   <tag name="chores" match="laundry"/>
+@chores{laundry}   { "tag":"chores", "match":"laundry"}   <tag name="chores" match="laundry"/>
   
-}
-@todo{laundry,     { "tag":"todo", "match": "laundry"}    <tag name="todo" match="laundry"/>
-
-}
+@todo{laundry}     { "tag":"todo", "match": "laundry"}    <tag name="todo" match="laundry"/>
 ```
 
 > the word and `john` `laundry` can now be highlighted in the human text (or 3D object can be shown when their objectname matches). bibs are basically one step up from socialmedia hashtags, allowing mere mortals to connect words to other things using pencil, voice or keyboard. 
@@ -198,7 +193,7 @@ BibTeX OUTPUT:
  john, could you feed the cat?
  
  
- @john{john,
+ @john{john
  }
  @chores{laundry,
  }

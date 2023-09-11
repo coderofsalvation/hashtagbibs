@@ -35,30 +35,24 @@ Think of it as the brother of hashtags: a command for tagging-this-with-that.</t
 
 <artwork>John please get out the laundry 
 
-#john
 #laundry@chores@todo
 </artwork>
 <blockquote><t>This basically means:</t>
 </blockquote>
 <ul spacing="compact">
-<li><strong>tag</strong> <tt>john</tt> with tagname <tt>john</tt></li>
-<li><strong>tag</strong> <tt>laundry</tt> with tagname <tt>chores</tt> and <tt>todo</tt></li>
+<li><tt>laundry</tt> points to <tt>chores</tt> and <tt>todo</tt></li>
 </ul>
-<t>and expands into the following formats:</t>
+<blockquote><t>Or put in another way: <tt>laundry</tt> is tagged <strong>tag</strong> <tt>laundry</tt> and <strong>tag</strong> <tt>chores</tt></t>
+</blockquote><t>and expands into the following formats:</t>
 
 <artwork>BibTeX             JSON                                   XML
 ======             ====                                   ===
 
-@john{john,        { &quot;tag&quot;:&quot;john&quot;, &quot;match&quot;:&quot;john&quot;}        &lt;tag name=&quot;john&quot; match=&quot;john&quot;/&gt;
-                     
-}
+@john{john}        { &quot;tag&quot;:&quot;john&quot;, &quot;match&quot;:&quot;john&quot;}        &lt;tag name=&quot;john&quot; match=&quot;john&quot;/&gt;
 
-@chores{laundry,   { &quot;tag&quot;:&quot;chores&quot;, &quot;match&quot;:&quot;laundry&quot;}   &lt;tag name=&quot;chores&quot; match=&quot;laundry&quot;/&gt;
+@chores{laundry}   { &quot;tag&quot;:&quot;chores&quot;, &quot;match&quot;:&quot;laundry&quot;}   &lt;tag name=&quot;chores&quot; match=&quot;laundry&quot;/&gt;
   
-}
-@todo{laundry,     { &quot;tag&quot;:&quot;todo&quot;, &quot;match&quot;: &quot;laundry&quot;}    &lt;tag name=&quot;todo&quot; match=&quot;laundry&quot;/&gt;
-
-}
+@todo{laundry}     { &quot;tag&quot;:&quot;todo&quot;, &quot;match&quot;: &quot;laundry&quot;}    &lt;tag name=&quot;todo&quot; match=&quot;laundry&quot;/&gt;
 </artwork>
 <blockquote><t>the word and <tt>john</tt> <tt>laundry</tt> can now be highlighted in the human text (or 3D object can be shown when their objectname matches). bibs are basically one step up from socialmedia hashtags, allowing mere mortals to connect words to other things using pencil, voice or keyboard.</t>
 </blockquote><t>There's no precise predicates or properties, just simply 'this points to that', which empowers citizen annotation (an essential precursor of RDF).</t>
@@ -239,7 +233,7 @@ t = expandBibs(`john, could you feed the cat?
 <artwork> john, could you feed the cat?
  
  
- @john{john,
+ @john{john
  }
  @chores{laundry,
  }
