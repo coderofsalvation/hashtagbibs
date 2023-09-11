@@ -16,8 +16,8 @@ Abstract
    *hashtagbibs* (or simply: *'bibs'*) are tiny tags, allowing mere
    mortals to connect words to other words using pencil, voice or
    keyboard.
-   They expand into multiple (reversed) BibTags
-   (https://en.wikipedia.org/wiki/BibTeX), JSON or XML snippets.
+   They allow *polyglot tagging* by expanding into multiple (reversed)
+   BibTags (https://en.wikipedia.org/wiki/BibTeX), JSON or XML snippets.
 
    For example, using OCR, scanned paper can now easily 'connect' with
    online graphs.

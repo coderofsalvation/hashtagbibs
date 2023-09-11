@@ -23,7 +23,7 @@ fullname="L.R. van Kammen"
 .# Abstract
 
 **hashtagbibs** (or simply: **'bibs'**) are tiny tags, allowing mere mortals to connect words to other words using pencil, voice or keyboard.<br>
-They expand into multiple (reversed) [BibTags](https://en.wikipedia.org/wiki/BibTeX), JSON or XML snippets.<br>
+They allow **polyglot tagging** by expanding into multiple (reversed) [BibTags](https://en.wikipedia.org/wiki/BibTeX), JSON or XML snippets.<br>
 
 > For example, using OCR, scanned paper can now easily 'connect' with online graphs.<br>Think of it as the brother of hashtags: a command for tagging-this-with-that.
 
