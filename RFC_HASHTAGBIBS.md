@@ -29,7 +29,7 @@ They allow **polyglot tagging** by expanding into multiple (reversed) [BibTags](
 
 The goal of this spec is three-fold:
 
-* specify bibs: a plaintext tagging DSL which expands into various languages
+* specify bibs: a plaintext polyglot tag (DSL) which expands into various languages
 * specify bibs as URI fragment: a way to hint browsers to filter a document on certain tag(s)
 * specify bibrulers: to specify bibtags microformats like [visual-meta](https://visual-meta.info)
 
