@@ -60,8 +60,6 @@ and expands into the following formats:
 BibTeX             JSON                                   XML
 ======             ====                                   ===
 
-@john{john}        { "this":"john",   "that":"john", }   <tag this="john" that="john"/>
-                                                        
 @chores{laundry}   { "this":"laundry","that":"chores"}   <tag this="laundry" that="chores"/>
                                                         
 @todo{laundry}     { "this":"laundry","that":"todo"  }   <tag this="laundry" that="todo"/>
